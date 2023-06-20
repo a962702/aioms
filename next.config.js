@@ -5,7 +5,7 @@
  **/
 const nextConfig = {
   output: 'export',
-  basePath: '/gh-pages-test',
+  basePath: '/aioms',
   experimental: {
     appDir: true,
   },

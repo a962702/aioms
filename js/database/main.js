@@ -1,5 +1,5 @@
 // Layer for generic database access
-import { localDB } from 'js/database/local.js';
+import { localDB } from './js/database/local.js';
 
 class database {
     localDB = null;

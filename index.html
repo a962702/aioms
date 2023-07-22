@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>AIOMS - 整合式管理平台</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.min.js"
+        integrity="sha512-VYs2RuvWreNg7oouVhZ/9bEvdPgyd5L2iCPCB8+8Qks/PHbmnc82TQOEctYoEKPveJGML8s+3NGcUEZYJrFIqg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"
+        integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+        integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        integrity="sha512-ZnR2wlLbSbr8/c9AgLg3jQPAattCUImNsae6NHYnS9KrIwRdcY9DxFotXhNAKIKbAXlRnujIqUWoXXwqyFOeIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/main.css">
+    <script type="module" src="js/database/main.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-info">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AIOMS - 整合式管理平台</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            帳務系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="account_system.html#overview">總覽</a></li>
+                            <li><a class="dropdown-item" href="account_system.html#plan">計劃管理</a></li>
+                            <li><a class="dropdown-item" href="account_system.html#manage">借貸方管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            倉儲系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">總覽</a></li>
+                            <li><a class="dropdown-item" href="#">倉位管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            發票系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">總覽</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            資產系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">總覽</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-secondary m-1" href="#">系統設定</a>
+                        <button id="btn_dbsave" class="btn btn-success"><i class='bi bi-arrow-repeat'></i>立即儲存</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="" id="pages">
+        <p class="text-center fs-2">歡迎使用<br />AIOMS - 整合式管理平台</p>
+        <p class="text-center fs-3">目前版本：0.0.1<br />作者：Andy Yang</p>
+        <p class="text-center fs-2">請由上方選單開始!</p>
+    </div>
+    <script>
+        const db = new database();
+        db.init();
+        document.getElementById('btn_dbsave').addEventListener('click', () => {
+            db.save();
+            document.getElementById('btn_dbsave').innerHTML = "<i class='bi bi-check2'></i>　已儲存";
+            setTimeout(() => {
+                document.getElementById('btn_dbsave').innerHTML = "<i class='bi bi-arrow-repeat'></i>立即儲存";
+            }, 5000)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+html, body {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+#pages {
+    height: 100%;
+    background-color:skyblue;
+}

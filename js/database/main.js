@@ -7,8 +7,15 @@ class database {
 
     async init() {
         obj_localDB = new localDB();
-        if (!localStorage.getItem("AIOMS_INITDB")){
-            // TODO
+        obj_localDB.init();
+        if (!localStorage.getItem("AIOMS_DB_INIT")){
+            localStorage.setItem("AIOMS_DB_VER", "1");
+            localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
+            localStorage.setItem("AIOMS_DB_INIT", true);
+            obj_localDB.initDB();
+        }
+        else{
+            obj_localDB.load();
         }
     }
 
@@ -19,7 +26,7 @@ class database {
 
     // Get setup storage
     get_setup_storage(){
-        return Array('local');
+        return localStorage.getItem("AIOMS_DB_STORAGE");
     }
 
     // Execute SQL statement and return data
@@ -36,8 +43,10 @@ class database {
 
     // Save all DB
     save(){
-        setup_storage = localStorage.getItem("AIOMS_STORAGE");
-        // TODO
+        setup_storage = localStorage.getItem("AIOMS_DB_STORAGE");
+        for (storage in setup_storage){
+            console.log("[database] Saving ", storage)
+        }
     }
 
     // Export DB
@@ -56,4 +65,8 @@ class database {
 		};
 		a.click();
     }
+}
+
+export {
+    database
 }

@@ -39,14 +39,14 @@ class localDB {
 
     /***** Load Database *****/
     load() {
-        const binaryArray = localStorage.getItem("AIOMS_SqlDB");
+        const binaryArray = localStorage.getItem("AIOMS_DB_local_data");
         this.db = new this.SQL.Database(binaryArray);
     }
 
     /***** Save Database *****/
     save() {
         const binaryArray = this.db.export();
-        localStorage.setItem("AIOMS_SqlDB", binaryArray);
+        localStorage.setItem("AIOMS_DB_local_data", binaryArray);
     }
 
     /***** Get DB binaryArray *****/

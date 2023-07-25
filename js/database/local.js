@@ -1,4 +1,4 @@
-class localDB {
+export class localDB {
     SQL = null;
     db = null;
     /***** Init Database *****/
@@ -50,11 +50,7 @@ class localDB {
     }
 
     /***** Get DB binaryArray *****/
-    get_binaryArray(){
+    get_binaryArray() {
         return this.db.export();
     }
-}
-
-export {
-    localDB
 }

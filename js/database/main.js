@@ -1,38 +1,38 @@
-// Layer for generic database access
 import { localDB } from './local.js';
+import { GDDB } from './GD.js';
 
-class database {
+export class database {
     localDB = null;
     GDDB = null;
 
     async init() {
         obj_localDB = new localDB();
         obj_localDB.init();
-        if (!localStorage.getItem("AIOMS_DB_INIT")){
+        if (!localStorage.getItem("AIOMS_DB_INIT")) {
             localStorage.setItem("AIOMS_DB_VER", "1");
             localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
             localStorage.setItem("AIOMS_DB_INIT", true);
             obj_localDB.initDB();
         }
-        else{
+        else {
             obj_localDB.load();
         }
     }
 
     // Get available storage
-    get_available_storage(){
+    get_available_storage() {
         return Array('local', 'GD');
     }
 
     // Get setup storage
-    get_setup_storage(){
+    get_setup_storage() {
         return localStorage.getItem("AIOMS_DB_STORAGE");
     }
 
     // Execute SQL statement and return data
-    exec(stm){
+    exec(stm) {
         arr = Array();
-        if(this.localDB != null){
+        if (this.localDB != null) {
             arr['status'] = 'OK';
             arr['result'] = this.localDB.exec(stm);
             return arr;
@@ -42,15 +42,15 @@ class database {
     }
 
     // Save all DB
-    save(){
+    save() {
         setup_storage = localStorage.getItem("AIOMS_DB_STORAGE");
-        for (storage in setup_storage){
+        for (storage in setup_storage) {
             console.log("[database] Saving ", storage)
         }
     }
 
     // Export DB
-    export(){
+    export() {
         arraybuff = this.localDB.get_binaryArray();
         blob = new Blob([arraybuff]);
         a = document.createElement("a");
@@ -59,14 +59,10 @@ class database {
         a.href = window.URL.createObjectURL(blob);
         a.download = "sql.db";
         a.onclick = function () {
-			setTimeout(function () {
-				window.URL.revokeObjectURL(a.href);
-			}, 1000);
-		};
-		a.click();
+            setTimeout(function () {
+                window.URL.revokeObjectURL(a.href);
+            }, 1000);
+        };
+        a.click();
     }
-}
-
-export {
-    database
 }

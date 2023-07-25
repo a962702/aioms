@@ -37,9 +37,9 @@
                             帳務系統
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="account_system.html#overview">總覽</a></li>
-                            <li><a class="dropdown-item" href="account_system.html#plan">計劃管理</a></li>
-                            <li><a class="dropdown-item" href="account_system.html#manage">借貸方管理</a></li>
+                            <li><a class="dropdown-item" href="#">總覽</a></li>
+                            <li><a class="dropdown-item" href="#">計劃管理</a></li>
+                            <li><a class="dropdown-item" href="#">借貸方管理</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -77,11 +77,45 @@
             </div>
         </div>
     </nav>
-    <div class="" id="pages">
-        <p class="text-center fs-2">歡迎使用<br />AIOMS - 整合式管理平台</p>
-        <p class="text-center fs-3">目前版本：0.0.1<br />作者：Andy Yang</p>
-        <p class="text-center fs-2">請由上方選單開始!</p>
+    <div id="pages">
+        <div id="account_overview" class="page">
+            <div class="d-flex flex-row justify-content-center m-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">資產</h5>
+                        <p class="card-text">$0</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">負債</h5>
+                        <p class="card-text">$0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-center m-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">本月收入</h5>
+                        <p class="card-text">$0</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">本月支出</h5>
+                        <p class="card-text">$0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="account_plan" class="page"></div>
+        <div id="account_personnel" class="page"></div>
+        <div id="warehouse_overview" class="page"></div>
+        <div id="warehouse_position" class="page"></div>
+        <div id="invoice_overview" class="page"></div>
+        <div id="assets_overview" class="page"></div>
     </div>
+    <script type="module" src="js/account_system/main.mjs"></script>
 </body>
 
 </html>

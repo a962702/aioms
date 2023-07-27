@@ -4,8 +4,10 @@ import { manage } from './module/account_system/manage.mjs'
 
 let ov = new overview();
 ov.init();
-document.getElementById("overview_btn1").addEventListener('click', ()=>{
-    ov.addLog();
+document.getElementById("overview_modal_add_save").addEventListener('click', ()=>{
+    ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_source").value, document.getElementById("overview_modal_add_amount").value, document.getElementById("overview_modal_add_commit").value);
+    const modal = new bootstrap.Modal('#overview_modal_add');
+    modal.hide();
 });
 document.getElementById("overview_btn2").addEventListener('click', ()=>{
     ov.getDetails();

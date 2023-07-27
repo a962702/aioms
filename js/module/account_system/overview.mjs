@@ -12,7 +12,7 @@ export class overview {
         console.log(arr['status'], arr['result']);
     }
     getDetails(){
-        let arr = this.db.exec("SELECT `source`, `amount`, `commit` FROM `account_record`;");
+        let arr = this.db.exec("SELECT `id`, `source`, `amount`, `commit` FROM `account_record`;");
         console.log(arr['status'], arr['result']);
     }
     exec(stm){

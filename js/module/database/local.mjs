@@ -28,22 +28,6 @@ export class localDB {
                 'source' INTEGER NOT NULL,
                 'amount' INTEGER NOT NULL,
                 'commit' TEXT(50)
-            );
-            CREATE TABLE 'record' (
-                'id' INT(20) NOT NULL,
-                'source' INT NOT NULL,
-                'amount' INT NOT NULL,
-                'commit' TEXT(50),
-                PRIMARY KEY ('id')
-            );
-            CREATE TABLE 'overview' (
-                'name' TEXT(50) NOT NULL,
-                'updated_at' DATETIME NOT NULL
-            );
-            CREATE TABLE 'personnel' (
-                'id' INT(20) NOT NULL,
-                'name' INT(20) NOT NULL,
-                PRIMARY KEY ('id')
             );`
         this.db.run(command);
         this.save();

@@ -11,6 +11,7 @@ export class localDB {
 
     /***** Execute Command *****/
     exec(stm) {
+        while(!this.SQL);
         this.load();
         console.log("[localDB] exec: ", stm);
         let result = this.db.exec(stm);

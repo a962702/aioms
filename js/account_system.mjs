@@ -17,24 +17,22 @@ document.getElementById("overview_btn_update").addEventListener('click', ()=>{
     }
     document.getElementById('overview_tbody').innerHTML = "";
     let result = data['result'][0]['values'];
-    console.log(result);
     for (let row of result){
-        console.log("Adding row: ", row);
         let tr = document.createElement("tr");
         let td_id = document.createElement("td");
-        td_id.innerText = row['id'];
+        td_id.innerText = row[0];
         tr.appendChild(td_id);
         let td_date = document.createElement("td");
-        td_date.innerText = row['date'];
+        td_date.innerText = row[1];
         tr.appendChild(td_date);
         let td_source = document.createElement("td");
-        td_source.innerText = row['source'];
+        td_source.innerText = row[2];
         tr.appendChild(td_source);
         let td_amount = document.createElement("td");
-        td_amount.innerText = row['amount'];
+        td_amount.innerText = row[3];
         tr.appendChild(td_amount);
         let td_commit = document.createElement("td");
-        td_commit.innerText = row['commit'];
+        td_commit.innerText = row[4];
         tr.appendChild(td_commit);
         document.getElementById('overview_tbody').appendChild(tr);
     }

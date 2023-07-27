@@ -8,7 +8,7 @@ export class overview {
     }
 
     addLog(date, source, amount, commit){
-        let arr = this.db.exec("INSERT INTO `account_record` (`source`, `amount`, `commit`) VALUES ('" + str(date) + "', '" + str(source) + "', '" + str(amount) + "', '" + str(commit) + "';");
+        let arr = this.db.exec("INSERT INTO `account_record` (`source`, `amount`, `commit`) VALUES ('" + date + "', '" + source + "', '" + amount + "', '" + commit + "');");
         console.log(arr['status'], arr['result']);
     }
     getDetails(){

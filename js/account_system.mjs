@@ -18,21 +18,22 @@ document.getElementById("overview_btn_update").addEventListener('click', ()=>{
     document.getElementById('overview_tbody').innerHTML = "";
     let result = data['result'];
     for (let row of result){
+        console.log("Adding row: ", row);
         let tr = document.createElement("tr");
         let td_id = document.createElement("td");
-        td_id.innerText = row[0];
+        td_id.innerText = row['id'];
         tr.appendChild(td_id);
         let td_date = document.createElement("td");
-        td_date.innerText = row[1];
+        td_date.innerText = row['date'];
         tr.appendChild(td_date);
         let td_source = document.createElement("td");
-        td_source.innerText = row[2];
+        td_source.innerText = row['source'];
         tr.appendChild(td_source);
         let td_amount = document.createElement("td");
-        td_amount.innerText = row[3];
+        td_amount.innerText = row['amount'];
         tr.appendChild(td_amount);
         let td_commit = document.createElement("td");
-        td_commit.innerText = row[4];
+        td_commit.innerText = row['commit'];
         tr.appendChild(td_commit);
         document.getElementById('overview_tbody').appendChild(tr);
     }

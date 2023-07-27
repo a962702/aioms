@@ -17,7 +17,7 @@ document.getElementById("overview_btn_update").addEventListener('click', ()=>{
     }
     document.getElementById('overview_tbody').innerHTML = "";
     let result = data['result'];
-    for (row in result){
+    for (let row in result){
         let th = document.createElement("th");
         let td_id = document.createElement("td");
         td_id.innerText = row['id'];

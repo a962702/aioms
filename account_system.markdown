@@ -54,4 +54,4 @@ layout: base
 <hr />
 <input type="text" class="form-control" id="sql_statement">
 <button class="btn" id="overview_btn3">RUN COMMAND</button>
-<script type="module" src="js/account_system.mjs"></script>
+<script type="module" src="assets/js/account_system.mjs"></script>

@@ -4,6 +4,7 @@ export class overview {
     db = null;
     async init() {
         this.db = new database();
+        await this.db.init();
     }
 
     addLog(){

@@ -4,5 +4,6 @@ export class plan {
     db = null;
     async init() {
         this.db = new database();
+        await this.db.init();
     }
 }

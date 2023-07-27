@@ -4,5 +4,6 @@ export class manage {
     db = null;
     async init() {
         this.db = new database();
+        await this.db.init();
     }
 }

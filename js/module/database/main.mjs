@@ -1,5 +1,5 @@
-import { GDDB } from './module/GD.mjs';
-import { localDB } from './module/local.mjs';
+import { GDDB } from './GD.mjs';
+import { localDB } from './local.mjs';
 
 export class database {
     obj_localDB = null;

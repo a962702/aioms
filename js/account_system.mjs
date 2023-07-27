@@ -16,7 +16,7 @@ document.getElementById("overview_btn_update").addEventListener('click', ()=>{
         return;
     }
     document.getElementById('overview_tbody').innerHTML = "";
-    let result = data['result'].values;
+    let result = data['result']['values'];
     console.log(result);
     for (let row of result){
         console.log("Adding row: ", row);

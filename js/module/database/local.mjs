@@ -58,7 +58,6 @@ export class localDB {
         }
         const binaryArray = new Uint8Array(JSON.parse(localStorage.getItem("AIOMS_DB_local_data")));
         this.db = new this.SQL.Database(binaryArray);
-        console.log(this.exec("SHOW TABLES;")['result']);
     }
 
     /***** Save Database *****/

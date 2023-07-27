@@ -15,4 +15,8 @@ export class overview {
         let arr = this.db.exec("SELECT `source`, `amount`, `commit` FROM `account_record`;");
         console.log(arr['status'], arr['result']);
     }
+    showTables(){
+        let arr = this.db.exec("SHOW TABLES;");
+        console.log(arr['status'], arr['result']);
+    }
 }

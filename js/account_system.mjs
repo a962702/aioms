@@ -10,6 +10,9 @@ document.getElementById("overview_btn1").addEventListener('click', ()=>{
 document.getElementById("overview_btn2").addEventListener('click', ()=>{
     ov.getDetails();
 });
+document.getElementById("overview_btn3").addEventListener('click', ()=>{
+    ov.showTables();
+});
 console.log("overview OK");
 
 let pla = new plan();

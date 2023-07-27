@@ -11,8 +11,10 @@ export class localDB {
 
     /***** Execute Command *****/
     exec(stm) {
+        this.load();
         console.log("[localDB] exec: ", stm);
         this.db.run(stm);
+        this.save();
     }
 
     /***** Init Database *****/

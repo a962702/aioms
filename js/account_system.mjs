@@ -4,6 +4,12 @@ import { manage } from './module/account_system/manage.mjs'
 
 let ov = new overview();
 ov.init();
+document.getElementById("overview_btn1").addEventListener('click', ()=>{
+    ov.addLog();
+});
+document.getElementById("overview_btn2").addEventListener('click', ()=>{
+    ov.getDetails();
+});
 console.log("overview OK");
 
 let pla = new plan();

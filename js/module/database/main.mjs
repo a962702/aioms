@@ -15,9 +15,6 @@ export class database {
             localStorage.setItem("AIOMS_DB_INIT", true);
             this.obj_localDB.initDB();
         }
-        else {
-            this.obj_localDB.load();
-        }
     }
 
     // Get available storage

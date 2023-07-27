@@ -18,23 +18,23 @@ document.getElementById("overview_btn_update").addEventListener('click', ()=>{
     document.getElementById('overview_tbody').innerHTML = "";
     let result = data['result'];
     for (let row in result){
-        let th = document.createElement("th");
+        let tr = document.createElement("tr");
         let td_id = document.createElement("td");
-        td_id.innerText = row['id'];
-        th.appendChild(td_id);
+        td_id.innerText = row[0];
+        tr.appendChild(td_id);
         let td_date = document.createElement("td");
-        td_date.innerText = row['date'];
-        th.appendChild(td_date);
+        td_date.innerText = row[1];
+        tr.appendChild(td_date);
         let td_source = document.createElement("td");
-        td_source.innerText = row['source'];
-        th.appendChild(td_source);
+        td_source.innerText = row[2];
+        tr.appendChild(td_source);
         let td_amount = document.createElement("td");
-        td_amount.innerText = row['amount'];
-        th.appendChild(td_amount);
+        td_amount.innerText = row[3];
+        tr.appendChild(td_amount);
         let td_commit = document.createElement("td");
-        td_commit.innerText = row['commit'];
-        th.appendChild(td_commit);
-        document.getElementById('overview_tbody').appendChild(th);
+        td_commit.innerText = row[4];
+        tr.appendChild(td_commit);
+        document.getElementById('overview_tbody').appendChild(tr);
     }
 });
 document.getElementById("overview_btn3").addEventListener('click', ()=>{

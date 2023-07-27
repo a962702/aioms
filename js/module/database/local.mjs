@@ -64,7 +64,7 @@ export class localDB {
     save() {
         console.log("[localDB] save");
         const binaryArray = this.db.export();
-        localStorage.setItem("AIOMS_DB_local_data", JSON.stringify(binaryArray));
+        localStorage.setItem("AIOMS_DB_local_data", JSON.stringify(Array.from(binaryArray)));
     }
 
     /***** Get DB binaryArray *****/

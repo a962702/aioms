@@ -11,7 +11,7 @@ document.getElementById("overview_btn2").addEventListener('click', ()=>{
     ov.getDetails();
 });
 document.getElementById("overview_btn3").addEventListener('click', ()=>{
-    ov.showTables();
+    ov.exec(document.getElementById('sql_statement').value);
 });
 console.log("overview OK");
 

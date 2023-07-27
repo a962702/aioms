@@ -1,6 +1,6 @@
 import { database } from '../database/main.mjs';
 
-export class account_system {
+export class manage {
     db = null;
     async init() {
         this.db = new database();

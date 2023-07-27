@@ -25,6 +25,7 @@ export class localDB {
         let command = `
             CREATE TABLE 'account_record' (
                 'id' INTEGER NOT NULL PRIMARY KEY,
+                'date' TEXT NOT NULL,
                 'source' INTEGER NOT NULL,
                 'amount' INTEGER NOT NULL,
                 'commit' TEXT(50)

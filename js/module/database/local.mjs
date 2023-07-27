@@ -56,8 +56,7 @@ export class localDB {
             console.log("[localDB] load: Error while getItem('AIOMS_DB_local_data')");
             return;
         }
-        const binaryArray = localStorage.getItem("AIOMS_DB_local_data");
-        console.log("typeof: ", typeof binaryArray);
+        const binaryArray = JSON.parse(localStorage.getItem("AIOMS_DB_local_data"));
         this.db = new this.SQL.Database(binaryArray);
     }
 
@@ -65,8 +64,7 @@ export class localDB {
     save() {
         console.log("[localDB] save");
         const binaryArray = this.db.export();
-        console.log("typeof: ", typeof binaryArray);
-        localStorage.setItem("AIOMS_DB_local_data", binaryArray);
+        localStorage.setItem("AIOMS_DB_local_data", JSON.stringify(binaryArray));
     }
 
     /***** Get DB binaryArray *****/

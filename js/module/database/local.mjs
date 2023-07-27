@@ -13,8 +13,9 @@ export class localDB {
     exec(stm) {
         this.load();
         console.log("[localDB] exec: ", stm);
-        this.db.run(stm);
+        let result = this.db.run(stm);
         this.save();
+        return result;
     }
 
     /***** Init Database *****/
@@ -23,11 +24,10 @@ export class localDB {
         this.db = new this.SQL.Database();
         let command = `
             CREATE TABLE 'account_record' (
-                'id' INT(20) NOT NULL,
-                'source' INT NOT NULL,
-                'amount' INT NOT NULL,
-                'commit' TEXT(50),
-                PRIMARY KEY ('id')
+                'id' INTEGER NOT NULL PRIMARY KEY,
+                'source' INTEGER NOT NULL,
+                'amount' INTEGER NOT NULL,
+                'commit' TEXT(50)
             );
             CREATE TABLE 'record' (
                 'id' INT(20) NOT NULL,

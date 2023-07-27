@@ -56,8 +56,9 @@ export class localDB {
             console.log("[localDB] load: Error while getItem('AIOMS_DB_local_data')");
             return;
         }
-        const binaryArray = JSON.parse(localStorage.getItem("AIOMS_DB_local_data"));
+        const binaryArray = new Uint8Array(JSON.parse(localStorage.getItem("AIOMS_DB_local_data")));
         this.db = new this.SQL.Database(binaryArray);
+        console.log(this.exec("SHOW TABLES;")['result']);
     }
 
     /***** Save Database *****/

@@ -37,6 +37,7 @@ layout: base
                 <label for="overview_modal_add_commit">備註</label>
                 <input type="text" class="text ui-widget-content ui-corner-all" id="overview_modal_add_commit" style="width: 100%; height: 100%;">
             </div>
+        </div>
     </fieldset>
 </div>
 <button class="btn" id="overview_btn_update">更新</button>

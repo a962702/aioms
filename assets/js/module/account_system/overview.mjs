@@ -1,10 +1,7 @@
-import { database } from '../database/main.mjs';
-
 export class overview {
     db = null;
-    async init() {
-        this.db = new database();
-        await this.db.init();
+    constructor(db){
+        this.db = db;
     }
 
     addLog(date, source, amount, commit){

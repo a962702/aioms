@@ -1,12 +1,15 @@
+import { database } from './module/database/main.mjs'
 import { overview } from './module/account_system/overview.mjs'
 import { plan } from './module/account_system/plan.mjs'
 import { manage } from './module/account_system/manage.mjs'
 
-let ov = new overview();
-ov.init();
+db = new database();
+await this.db.init();
+
+let ov = new overview(db);
+const modal = new bootstrap.Modal('#overview_modal_add');
 document.getElementById("overview_modal_add_save").addEventListener('click', ()=>{
     ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_source").value, document.getElementById("overview_modal_add_amount").value, document.getElementById("overview_modal_add_commit").value);
-    const modal = new bootstrap.Modal('#overview_modal_add');
     modal.hide();
 });
 document.getElementById("overview_btn_update").addEventListener('click', ()=>{
@@ -42,10 +45,8 @@ document.getElementById("overview_btn3").addEventListener('click', ()=>{
 });
 console.log("overview OK");
 
-let pla = new plan();
-pla.init();
+let pla = new plan(db);
 console.log("plan OK");
 
-let manag = new manage();
-manag.init();
+let manag = new manage(db);
 console.log("manage OK");

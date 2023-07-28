@@ -13,8 +13,4 @@ export class overview {
         console.log(arr['status'], arr['result']);
         return arr;
     }
-    exec(stm){
-        let arr = this.db.exec(stm);
-        console.log(arr['status'], arr['result']);
-    }
 }

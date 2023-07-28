@@ -40,9 +40,6 @@ document.getElementById("overview_btn_update").addEventListener('click', ()=>{
         document.getElementById('overview_tbody').appendChild(tr);
     }
 });
-document.getElementById("overview_btn3").addEventListener('click', ()=>{
-    ov.exec(document.getElementById('sql_statement').value);
-});
 console.log("overview OK");
 
 let pla = new plan(db);

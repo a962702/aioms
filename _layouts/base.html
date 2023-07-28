@@ -67,12 +67,35 @@
           </li>
         </ul>
         <div class="d-flex">
-          <span>Build: {{ site.time }}</span>
           <button class="btn btn-secondary" href="#">系統設定</button>
         </div>
       </div>
     </div>
   </nav>
+  <div class="modal fade" id="setting_modal" tabindex="-1" aria-labelledby="setting_modal_label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="setting_modal_label">新增紀錄</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Build: {{ site.time }}</p>
+          <hr />
+          <div class="mb-3">
+            <label for="sql_statement" class="form-label">SQL指令執行</label>
+            <textarea  class="form-control" id="sql_statement"></textarea>
+            <button class="btn" id="setting_btn_runcommand">RUN COMMAND</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="assets/js/account_system.mjs"></script>
   <div class="" id="pages">
     {{ content }}
   </div>

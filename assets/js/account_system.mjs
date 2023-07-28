@@ -12,7 +12,7 @@ $(function () {
         ov.addLog($("#overview_modal_add_date").val(), $("#overview_modal_add_source").val(), $("#overview_modal_add_amount").val(), $("#overview_modal_add_commit").val());
         dialog.dialog("close");
     };
-    let dialog = $("#dialog-form").dialog({
+    let dialog = $("#overview_modal_add").dialog({
         autoOpen: false,
         height: 400,
         width: 350,

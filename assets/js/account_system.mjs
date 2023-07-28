@@ -3,7 +3,7 @@ import { overview } from './module/account_system/overview.mjs'
 import { plan } from './module/account_system/plan.mjs'
 import { manage } from './module/account_system/manage.mjs'
 
-db = new database();
+let db = new database();
 await this.db.init();
 
 let ov = new overview(db);

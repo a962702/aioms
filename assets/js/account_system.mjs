@@ -4,7 +4,7 @@ import { plan } from './module/account_system/plan.mjs'
 import { manage } from './module/account_system/manage.mjs'
 
 let db = new database();
-await this.db.init();
+await db.init();
 
 let ov = new overview(db);
 const modal = new bootstrap.Modal('#overview_modal_add');

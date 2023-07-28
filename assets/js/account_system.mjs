@@ -14,8 +14,8 @@ $(function () {
     };
     let dialog = $("#overview_modal_add").dialog({
         autoOpen: false,
-        height: 400,
-        width: 350,
+        height: 600,
+        width: 1000,
         modal: true,
         buttons: {
             "儲存": overview_modal_submit,
@@ -24,6 +24,7 @@ $(function () {
             }
         }
     });
+    $("#overview_modal_add_type").selectmenu();
     $("#overview_btn_add").button().on("click", function () {
         dialog.dialog("open");
     });

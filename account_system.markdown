@@ -7,13 +7,13 @@ layout: base
 <div id="overview_modal_add" title="新增紀錄">
     <fieldset>
         <label for="overview_modal_add_date" class="form-label">日期</label>
-        <input type="date" class="form-control" id="overview_modal_add_date">
+        <input type="date" class="text ui-widget-content ui-corner-all" id="overview_modal_add_date">
         <label for="overview_modal_add_source" class="form-label">來源</label>
-        <input type="text" class="form-control" id="overview_modal_add_source">
+        <input type="text" class="text ui-widget-content ui-corner-all" id="overview_modal_add_source">
         <label for="overview_modal_add_amount" class="form-label">金額</label>
-        <input type="number" class="form-control" id="overview_modal_add_amount">
+        <input type="number" class="text ui-widget-content ui-corner-all" id="overview_modal_add_amount">
         <label for="overview_modal_add_commit" class="form-label">備註</label>
-        <input type="text" class="form-control" id="overview_modal_add_commit">
+        <input type="text" class="text ui-widget-content ui-corner-all" id="overview_modal_add_commit">
     </fieldset>
 </div>
 <button class="btn" id="overview_btn_update">更新</button>

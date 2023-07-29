@@ -29,7 +29,6 @@ layout: base
                     <input type="text" class="form-control" id="overview_modal_add_description">
                 </div>
                 <div class="mb-3">
-                    <p>總金額：<span id="overview_add_modal_total">0</span></p>
                     <table class="table">
                         <thead>
                             <tr>
@@ -42,6 +41,7 @@ layout: base
                         </tbody>
                     </table>
                     <button type="button" class="btn btn-info" id="overview_add_modal_add_btn"><i class="bi bi-plus-circle"></i>新增</button>
+                    <p>總金額：<span id="overview_add_modal_total">0</span></p>
                 </div>
                 <div class="mb-3">
                     <label for="overview_modal_add_commit" class="form-label">備註</label>

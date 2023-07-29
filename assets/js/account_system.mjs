@@ -19,8 +19,21 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     tr.appendChild(td_source);
     let td_amount = document.createElement("td");
     td_amount.setAttribute("contenteditable", true);
+    td_amount.addEventListener('click', () => {
+        overview_update_total();
+    });
     tr.appendChild(td_amount);
     let td_delete = document.createElement("td");
+    btn_del = document.createElement("button");
+    btn_del.setAttribute("type", "button");
+    btn_del.className = "btn btn-danger";
+    btn_del.innerHTML = "<i class='bi bi-x-square'></i>";
+    btn_del.addEventListener('click', (e) => {
+        let tr = e.target.parentNode.parentNode;
+        tr.remove();
+        overview_update_total();
+    });
+    td_delete.appendChild(btn_del);
     tr.appendChild(td_delete);
     document.getElementById("overview_add_modal_tbody").appendChild(tr);
 })
@@ -56,8 +69,16 @@ document.getElementById("overview_btn_update").addEventListener('click', () => {
         td_commit.innerText = row[4];
         tr.appendChild(td_commit);
         document.getElementById('overview_tbody').appendChild(tr);
-    }
+    };
 });
+function overview_update_total(){
+    let nodes = document.getElementsByClassName("overview_modal_add_tr");
+    let total = 0;
+    for (let node in nodes){
+        total += parseInt(node.childNodes[1].innerText);
+    };
+    document.getElementById("overview_add_modal_total").innerText = total;
+}
 console.log("overview OK");
 
 let pla = new plan(db);

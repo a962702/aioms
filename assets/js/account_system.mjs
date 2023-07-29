@@ -103,7 +103,7 @@ function overview_update_total() {
     document.getElementById("overview_add_modal_total").innerText = total;
 }
 
-$("#account_btn_update").addEventListener( () => {
+document.getElementById("account_btn_update").addEventListener( () => {
     let data = acc.getLists();
     if (data['status'] != 'OK') {
         window.alert("取得資料發生錯誤");

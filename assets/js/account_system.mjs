@@ -18,16 +18,19 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     td_source.appendChild(sel);
     tr.appendChild(td_source);
     let td_amount = document.createElement("td");
-    td_amount.setAttribute("contenteditable", true);
-    td_amount.addEventListener('input', () => {
+    let input_amount = document.createElement("input");
+    input_amount.className = "form-control";
+    input_amount.setAttribute("type", "number");
+    input_amount.addEventListener('change', () => {
         overview_update_total();
     });
+    td_amount.appendChild(input_amount);
     tr.appendChild(td_amount);
     let td_delete = document.createElement("td");
     let btn_del = document.createElement("button");
     btn_del.setAttribute("type", "button");
     btn_del.className = "btn btn-danger";
-    btn_del.innerHTML = "<i class='bi bi-x-square'></i>";
+    btn_del.innerHTML = "<i class='bi bi-trash'></i>";
     btn_del.addEventListener('click', (e) => {
         let t = e.target;
         while(t.localName != "tr"){
@@ -79,12 +82,13 @@ function overview_update_total() {
     let nodes = document.getElementsByClassName("overview_modal_add_tr");
     let total = 0;
     for (let node of nodes) {
-        console.log("Get ", node.childNodes[1].innerText);
         if (node.childNodes[1].innerText != "") {
-            try {
-                total += parseInt(node.childNodes[1].innerText);
-            } catch (e) {
-                window.alert("輸入資料 '", node.childNodes[1].innerText , "' 非有效數字!");
+            let num = parseInt(node.childNodes[1].childNodes[0].innerText);
+            if (isNaN(num)){
+                window.alert("輸入資料 '", node.childNodes[1].childNodes[0].innerText , "' 非有效數字!");
+            }
+            else{
+                total += num;
             }
         }
     };

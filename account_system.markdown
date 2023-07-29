@@ -29,6 +29,10 @@ layout: base
                     <input type="text" class="form-control" id="overview_modal_add_description">
                 </div>
                 <div class="mb-3">
+                    <label for="overview_modal_add_invoice" class="form-label">發票號碼</label>
+                    <input type="text" class="form-control" id="overview_modal_add_invoice">
+                </div>
+                <div class="mb-3">
                     <table class="table">
                         <thead>
                             <tr>

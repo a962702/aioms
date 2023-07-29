@@ -7,27 +7,27 @@ let db = new database();
 await db.init();
 
 let ov = new overview(db);
-$(function () {
-    function overview_modal_submit() {
-        ov.addLog($("#overview_modal_add_date").val(), $("#overview_modal_add_source").val(), $("#overview_modal_add_amount").val(), $("#overview_modal_add_commit").val());
-        dialog.dialog("close");
-    };
-    let dialog = $("#overview_modal_add").dialog({
-        autoOpen: false,
-        height: 600,
-        width: 1000,
-        modal: true,
-        buttons: {
-            "儲存": overview_modal_submit,
-            "取消": function () {
-                dialog.dialog("close");
-            }
-        }
-    });
-    $("#overview_modal_add_type").selectmenu();
-    $("#overview_btn_add").button().on("click", function () {
-        dialog.dialog("open");
-    });
+const modal = new bootstrap.Modal('#overview_modal_add');
+
+document.getElementById("overview_add_modal_add_btn").addEventListener('click', () => {
+    let tr = document.createElement("tr");
+    tr.className = "overview_modal_add_tr";
+    let td_source = document.createElement("td");
+    let sel = document.createElement("select");
+    sel.className = "form-select";
+    td_source.appendChild(sel);
+    tr.appendChild(td_source);
+    let td_amount = document.createElement("td");
+    td_amount.setAttribute("contenteditable", true);
+    tr.appendChild(td_amount);
+    let td_delete = document.createElement("td");
+    tr.appendChild(td_delete);
+    document.getElementById("overview_add_modal_tbody").appendChild(tr);
+})
+
+document.getElementById("overview_modal_add_save").addEventListener('click', () => {
+    ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_source").value, document.getElementById("overview_modal_add_amount").value, document.getElementById("overview_modal_add_commit").value);
+    modal.hide();
 });
 
 document.getElementById("overview_btn_update").addEventListener('click', () => {

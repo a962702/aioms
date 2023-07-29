@@ -4,7 +4,18 @@ layout: base
 
 <p class="fs-2 text-center">帳務系統</p>
 <hr />
-<div id="overview" class="pages container">
+<div class="pages">
+    <div class="spinner-border text-center" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <p id="loading_text" class="fs-2 text-center">準備中...</p>
+    <script>
+        setTimeout(() => {
+            document.getElementById("loading_text").innerText += ".";
+        }, 500);
+    </script>
+</div>
+<div id="overview" class="pages container" style="display: none">
     <p class="fs-3 text-center">總覽</p>
     <button class="btn btn-primary" id="overview_btn_add" data-bs-toggle="modal"
         data-bs-target="#overview_modal_add">新增紀錄</button>
@@ -77,7 +88,7 @@ layout: base
         </div>
     </div>
 </div>
-<div id="account" class="pages container">
+<div id="account" class="pages container" style="display: none">
     <p class="fs-3 text-center">帳戶管理</p>
     <button class="btn btn-primary" id="account_btn_add" data-bs-toggle="modal"
         data-bs-target="#account_modal_add">新增帳戶</button>

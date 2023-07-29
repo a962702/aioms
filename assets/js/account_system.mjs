@@ -82,14 +82,8 @@ function overview_update_total() {
     let nodes = document.getElementsByClassName("overview_modal_add_tr");
     let total = 0;
     for (let node of nodes) {
-        if (node.childNodes[1].innerText != "") {
-            let num = parseInt(node.childNodes[1].childNodes[0].innerText);
-            if (isNaN(num)){
-                window.alert("輸入資料 '", node.childNodes[1].childNodes[0].innerText , "' 非有效數字!");
-            }
-            else{
-                total += num;
-            }
+        if (node.childNodes[1].childNodes[0].value != "") {
+            total += parseInt(node.childNodes[1].childNodes[0].value);
         }
     };
     document.getElementById("overview_add_modal_total").innerText = total;

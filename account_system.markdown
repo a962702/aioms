@@ -3,9 +3,25 @@ layout: base
 ---
 
 <p class="fs-2 text-center">帳務系統</p>
-<div id="overview" class="pages">
+<hr />
+<div id="overview" class="pages container">
+    <p class="fs-3 text-center">總覽</p>
     <button class="btn btn-primary" id="overview_btn_add" data-bs-toggle="modal"
         data-bs-target="#overview_modal_add">新增紀錄</button>
+    <button class="btn btn-success" id="overview_btn_update">重新整理</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">日期</th>
+                <th scope="col">來源</th>
+                <th scope="col">金額</th>
+                <th scope="col">備註</th>
+            </tr>
+        </thead>
+        <tbody id="overview_tbody">
+        </tbody>
+    </table>
     <div class="modal fade" id="overview_modal_add" tabindex="-1" aria-labelledby="overview_modal_add_label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -60,23 +76,12 @@ layout: base
             </div>
         </div>
     </div>
-    <button class="btn" id="overview_btn_update">更新</button>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">日期</th>
-                <th scope="col">來源</th>
-                <th scope="col">金額</th>
-                <th scope="col">備註</th>
-            </tr>
-        </thead>
-        <tbody id="overview_tbody">
-        </tbody>
-    </table>
 </div>
-<div id="account" class="pages">
-    <button class="btn" id="account_btn_update">更新</button>
+<div id="account" class="pages container">
+    <p class="fs-3 text-center">帳戶管理</p>
+    <button class="btn btn-primary" id="account_btn_add" data-bs-toggle="modal"
+        data-bs-target="#account_modal_add">新增帳戶</button>
+    <button class="btn btn-success" id="account_btn_update">重新整理</button>
     <table class="table">
         <thead>
             <tr>

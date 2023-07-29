@@ -19,7 +19,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     tr.appendChild(td_source);
     let td_amount = document.createElement("td");
     td_amount.setAttribute("contenteditable", true);
-    td_amount.addEventListener('change', () => {
+    td_amount.addEventListener('input', () => {
         overview_update_total();
     });
     tr.appendChild(td_amount);

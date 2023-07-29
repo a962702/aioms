@@ -29,6 +29,9 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     btn_del.className = "btn btn-danger";
     btn_del.innerHTML = "<i class='bi bi-x-square'></i>";
     btn_del.addEventListener('click', (e) => {
+        console.log(e.target);
+        console.log(e.target.parentNode);
+        console.log(e.target.parentNode.parentNode);
         let tr = e.target.parentNode.parentNode;
         tr.remove();
         overview_update_total();
@@ -72,9 +75,11 @@ document.getElementById("overview_btn_update").addEventListener('click', () => {
     };
 });
 function overview_update_total() {
+    console.log("overview_update_total()");
     let nodes = document.getElementsByClassName("overview_modal_add_tr");
     let total = 0;
     for (let node of nodes) {
+        console.log("Get ", node.childNodes[1].innerText);
         if (node.childNodes[1].innerText != "") {
             try {
                 total += parseInt(node.childNodes[1].innerText);

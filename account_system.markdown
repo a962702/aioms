@@ -5,15 +5,12 @@ layout: base
 <p class="fs-2 text-center">帳務系統</p>
 <hr />
 <div class="pages">
-    <div class="spinner-border text-center" role="status">
-        <span class="visually-hidden">Loading...</span>
+    <div class="text-center">
+        <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="fs-2">準備中...</p>
     </div>
-    <p id="loading_text" class="fs-2 text-center">準備中...</p>
-    <script>
-        setTimeout(() => {
-            document.getElementById("loading_text").innerText += ".";
-        }, 500);
-    </script>
 </div>
 <div id="overview" class="pages container" style="display: none">
     <p class="fs-3 text-center">總覽</p>

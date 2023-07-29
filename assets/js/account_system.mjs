@@ -17,7 +17,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     let sel = document.createElement("select");
     sel.className = "form-select";
     let result = acc.getLists();
-    if (!result['result']) {
+    if (!result['result'][0]) {
         window.alert("尚未建立帳戶\n請先至 帳務系統 - 帳戶管理 進行設定");
     }
     else {

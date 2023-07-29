@@ -17,10 +17,15 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     let sel = document.createElement("select");
     sel.className = "form-select";
     let result = acc.getLists();
-    for(let acc of result['result'][0]['values']){
-        let opt = document.createElement("option");
-        opt.innerText = acc[1];
-        sel.appendChild(opt);
+    if (!result['result']) {
+        window.alert("尚未建立帳戶\n請先至 帳務系統 - 帳戶管理 進行設定");
+    }
+    else {
+        for (let acc of result['result'][0]['values']) {
+            let opt = document.createElement("option");
+            opt.innerText = acc[1];
+            sel.appendChild(opt);
+        }
     }
     td_source.appendChild(sel);
     tr.appendChild(td_source);
@@ -40,7 +45,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     btn_del.innerHTML = "<i class='bi bi-trash'></i>";
     btn_del.addEventListener('click', (e) => {
         let t = e.target;
-        while(t.localName != "tr"){
+        while (t.localName != "tr") {
             t = t.parentNode;
         }
         t.remove();

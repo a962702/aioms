@@ -122,10 +122,10 @@ document.getElementById("account_btn_update").addEventListener('click', () => {
     for (let row of result) {
         let tr = document.createElement("tr");
         let td_name = document.createElement("td");
-        td_name.innerText = row[0];
+        td_name.innerText = row[1];
         tr.appendChild(td_name);
         let td_description = document.createElement("td");
-        td_description.innerText = row[1];
+        td_description.innerText = row[2];
         tr.appendChild(td_description);
         let td_action = document.createElement("td");
         tr.appendChild(td_action);

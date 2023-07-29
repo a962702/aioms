@@ -19,7 +19,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     tr.appendChild(td_source);
     let td_amount = document.createElement("td");
     td_amount.setAttribute("contenteditable", true);
-    td_amount.addEventListener('onchange', () => {
+    td_amount.addEventListener('change', () => {
         overview_update_total();
     });
     tr.appendChild(td_amount);
@@ -29,11 +29,11 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     btn_del.className = "btn btn-danger";
     btn_del.innerHTML = "<i class='bi bi-x-square'></i>";
     btn_del.addEventListener('click', (e) => {
-        console.log(e.target);
-        console.log(e.target.parentNode);
-        console.log(e.target.parentNode.parentNode);
-        let tr = e.target.parentNode.parentNode;
-        tr.remove();
+        let t = e.target;
+        while(t.localName != "tr"){
+            t = t.parentNode;
+        }
+        t.remove();
         overview_update_total();
     });
     td_delete.appendChild(btn_del);

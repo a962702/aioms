@@ -8,7 +8,8 @@ await db.init();
 
 let ov = new overview(db);
 let acc = new account(db);
-const modal = new bootstrap.Modal('#overview_modal_add');
+const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
+const account_modal_add = new bootstrap.Modal('#account_modal_add');
 
 document.getElementById("overview_add_modal_add_btn").addEventListener('click', () => {
     let tr = document.createElement("tr");
@@ -58,7 +59,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
 
 document.getElementById("overview_modal_add_save").addEventListener('click', () => {
     ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_source").value, document.getElementById("overview_modal_add_amount").value, document.getElementById("overview_modal_add_commit").value);
-    modal.hide();
+    overview_modal_add.hide();
 });
 
 document.getElementById("overview_btn_update").addEventListener('click', () => {
@@ -102,6 +103,11 @@ function overview_update_total() {
     };
     document.getElementById("overview_add_modal_total").innerText = total;
 }
+
+document.getElementById("account_modal_add_save").addEventListener('click', () => {
+    acc.add(document.getElementById("account_modal_add_name").value, document.getElementById("account_modal_add_description").value);
+    account_modal_add.hide();
+});
 
 document.getElementById("account_btn_update").addEventListener('click', () => {
     let data = acc.getLists();

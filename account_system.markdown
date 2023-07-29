@@ -101,5 +101,29 @@ layout: base
         <tbody id="account_tbody">
         </tbody>
     </table>
+    <div class="modal fade" id="account_modal_add" tabindex="-1" aria-labelledby="account_modal_add_label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="account_modal_add_label">新增帳戶</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="account_modal_add_name" class="form-label">名稱</label>
+                        <input type="text" class="form-control" id="account_modal_add_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="account_modal_add_description" class="form-label">說明</label>
+                        <input type="text" class="form-control" id="account_modal_add_description">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="account_modal_add_save">儲存</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="module" src="assets/js/account_system.mjs"></script>

@@ -11,6 +11,6 @@ export class account {
     }
 
     add(name, description) {
-        let arr = this.db.exec("INSERT INTO `accountsys_account` (`name`, `description`) VALUES ('" + name + "', '" + description + "';");
+        let arr = this.db.exec("INSERT INTO `accountsys_account` (`name`, `description`) VALUES ('" + name + "', '" + description + "');");
     }
 }

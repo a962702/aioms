@@ -24,12 +24,24 @@ export class localDB {
         console.log("[localDB] initDB");
         this.db = new this.SQL.Database();
         let command = `
-            CREATE TABLE 'account_record' (
+            CREATE TABLE 'accountsys_record' (
                 'id' INTEGER NOT NULL PRIMARY KEY,
                 'date' TEXT NOT NULL,
-                'source' INTEGER NOT NULL,
-                'amount' INTEGER NOT NULL,
-                'commit' TEXT(50)
+                'type' INTEGER NOT NULL,
+                'description' INTEGER NOT NULL,
+                'invoice' TEXT,
+                'commit' TEXT
+            );
+            CREATE TABLE 'accountsys_account' (
+                'id' INTEGER NOT NULL PRIMARY KEY,
+                'name' TEXT NOT NULL,
+                'commit' TEXT
+            );
+            CREATE TABLE 'accountsys_account_transaction' (
+                'id' INTEGER NOT NULL PRIMARY KEY,
+                'account_id' INTEGER NOT NULL,
+                'type' INTEGER NOT NULL,
+                'amount' INTEGER NOT NULL
             );`
         this.db.run(command);
         this.save();

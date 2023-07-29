@@ -1,12 +1,13 @@
 import { database } from './module/database/main.mjs'
 import { overview } from './module/account_system/overview.mjs'
 import { plan } from './module/account_system/plan.mjs'
-import { manage } from './module/account_system/manage.mjs'
+import { account } from './module/account_system/account.mjs'
 
 let db = new database();
 await db.init();
 
 let ov = new overview(db);
+let acc = new account(db);
 const modal = new bootstrap.Modal('#overview_modal_add');
 
 document.getElementById("overview_add_modal_add_btn").addEventListener('click', () => {
@@ -15,6 +16,12 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     let td_source = document.createElement("td");
     let sel = document.createElement("select");
     sel.className = "form-select";
+    result = acc.getLists();
+    for(let acc of result['result'][0]['values']){
+        let opt = document.createElement("option");
+        opt.innerText = acc[1];
+        sel.appendChild(opt);
+    }
     td_source.appendChild(sel);
     tr.appendChild(td_source);
     let td_amount = document.createElement("td");
@@ -89,9 +96,3 @@ function overview_update_total() {
     document.getElementById("overview_add_modal_total").innerText = total;
 }
 console.log("overview OK");
-
-let pla = new plan(db);
-console.log("plan OK");
-
-let manag = new manage(db);
-console.log("manage OK");

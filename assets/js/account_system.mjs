@@ -21,7 +21,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     let input_amount = document.createElement("input");
     input_amount.className = "form-control";
     input_amount.setAttribute("type", "number");
-    input_amount.addEventListener('change', () => {
+    input_amount.addEventListener('input', () => {
         overview_update_total();
     });
     td_amount.appendChild(input_amount);

@@ -35,7 +35,7 @@ export class localDB {
             CREATE TABLE 'accountsys_account' (
                 'id' INTEGER NOT NULL PRIMARY KEY,
                 'name' TEXT NOT NULL,
-                'commit' TEXT
+                'description' TEXT
             );
             CREATE TABLE 'accountsys_account_transaction' (
                 'id' INTEGER NOT NULL PRIMARY KEY,

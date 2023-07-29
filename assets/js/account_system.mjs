@@ -68,6 +68,8 @@ document.getElementById("overview_btn_update").addEventListener('click', () => {
         return;
     }
     document.getElementById('overview_tbody').innerHTML = "";
+    if (!data['result'][0])
+        return;
     let result = data['result'][0]['values'];
     for (let row of result) {
         let tr = document.createElement("tr");
@@ -100,4 +102,44 @@ function overview_update_total() {
     };
     document.getElementById("overview_add_modal_total").innerText = total;
 }
-console.log("overview OK");
+
+$("#account_btn_update").addEventListener( () => {
+    let data = acc.getLists();
+    if (data['status'] != 'OK') {
+        window.alert("取得資料發生錯誤");
+        return;
+    }
+    document.getElementById('account_tbody').innerHTML = "";
+    if (!data['result'][0])
+        return;
+    let result = data['result'][0]['values'];
+    for (let row of result) {
+        let tr = document.createElement("tr");
+        let td_name = document.createElement("td");
+        td_name.innerText = row[0];
+        tr.appendChild(td_name);
+        let td_description = document.createElement("td");
+        td_description.innerText = row[1];
+        tr.appendChild(td_description);
+        let td_action = document.createElement("td");
+        tr.appendChild(td_action);
+        document.getElementById('account_tbody').appendChild(tr);
+    };
+});
+
+function chg_page(){
+    if (location.hash === "#" || location.hash === "")
+        return;
+    $(".pages").css("display", "none");
+    if (location.hash === "#overview"){
+        $("#overview").css("display", "block");
+    }
+    else if(location.hash === "#account"){
+        $("#account").css("display", "block");
+    }
+}
+chg_page();
+
+window.addEventListener('hashchange', () => {
+    chg_page();
+});

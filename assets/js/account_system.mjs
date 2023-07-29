@@ -19,7 +19,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     tr.appendChild(td_source);
     let td_amount = document.createElement("td");
     td_amount.setAttribute("contenteditable", true);
-    td_amount.addEventListener('click', () => {
+    td_amount.addEventListener('onchange', () => {
         overview_update_total();
     });
     tr.appendChild(td_amount);
@@ -71,11 +71,17 @@ document.getElementById("overview_btn_update").addEventListener('click', () => {
         document.getElementById('overview_tbody').appendChild(tr);
     };
 });
-function overview_update_total(){
+function overview_update_total() {
     let nodes = document.getElementsByClassName("overview_modal_add_tr");
     let total = 0;
-    for (let node in nodes){
-        total += parseInt(node.childNodes[1].innerText);
+    for (let node of nodes) {
+        if (node.childNodes[1].innerText != "") {
+            try {
+                total += parseInt(node.childNodes[1].innerText);
+            } catch (e) {
+                window.alert("輸入資料 '", node.childNodes[1].innerText , "' 非有效數字!");
+            }
+        }
     };
     document.getElementById("overview_add_modal_total").innerText = total;
 }

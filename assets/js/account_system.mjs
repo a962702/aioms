@@ -24,7 +24,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     });
     tr.appendChild(td_amount);
     let td_delete = document.createElement("td");
-    btn_del = document.createElement("button");
+    let btn_del = document.createElement("button");
     btn_del.setAttribute("type", "button");
     btn_del.className = "btn btn-danger";
     btn_del.innerHTML = "<i class='bi bi-x-square'></i>";

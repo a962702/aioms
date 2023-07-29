@@ -9,7 +9,7 @@ export class overview {
         console.log(arr['status'], arr['result']);
     }
     update(){
-        let arr = this.db.exec("SELECT `id`, `date`, `source`, `amount`, `commit` FROM `accountsys_record`;");
+        let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `invoice`, `commit` FROM `accountsys_record`;");
         console.log(arr['status'], arr['result']);
         return arr;
     }

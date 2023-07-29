@@ -16,7 +16,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     let td_source = document.createElement("td");
     let sel = document.createElement("select");
     sel.className = "form-select";
-    result = acc.getLists();
+    let result = acc.getLists();
     for(let acc of result['result'][0]['values']){
         let opt = document.createElement("option");
         opt.innerText = acc[1];

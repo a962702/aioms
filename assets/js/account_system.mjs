@@ -103,7 +103,7 @@ function overview_update_total() {
     document.getElementById("overview_add_modal_total").innerText = total;
 }
 
-document.getElementById("account_btn_update").addEventListener( () => {
+document.getElementById("account_btn_update").addEventListener('click', () => {
     let data = acc.getLists();
     if (data['status'] != 'OK') {
         window.alert("取得資料發生錯誤");
@@ -127,14 +127,14 @@ document.getElementById("account_btn_update").addEventListener( () => {
     };
 });
 
-function chg_page(){
+function chg_page() {
     if (location.hash === "#" || location.hash === "")
         return;
     $(".pages").css("display", "none");
-    if (location.hash === "#overview"){
+    if (location.hash === "#overview") {
         $("#overview").css("display", "block");
     }
-    else if(location.hash === "#account"){
+    else if (location.hash === "#account") {
         $("#account").css("display", "block");
     }
 }

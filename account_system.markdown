@@ -20,11 +20,11 @@ layout: base
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">日期</th>
-                <th scope="col">來源</th>
+                <th scope="col">類型</th>
+                <th scope="col">說明</th>
                 <th scope="col">金額</th>
-                <th scope="col">備註</th>
+                <th scope="col">動作</th>
             </tr>
         </thead>
         <tbody id="overview_tbody">

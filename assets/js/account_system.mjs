@@ -11,7 +11,7 @@ let acc = new account(db);
 const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
 const account_modal_add = new bootstrap.Modal('#account_modal_add');
 
-document.getElementById("overview_add_modal_add_btn").addEventListener('click', () => {
+$("#overview_add_modal_add_btn").on('click', () => {
     let tr = document.createElement("tr");
     tr.className = "overview_modal_add_tr";
     let td_source = document.createElement("td");
@@ -57,18 +57,18 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
     document.getElementById("overview_add_modal_tbody").appendChild(tr);
 })
 
-document.getElementById("overview_modal_add_save").addEventListener('click', () => {
-    ov.add(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_type").value, document.getElementById("overview_modal_add_description").value, document.getElementById("overview_modal_add_invoice").value, document.getElementById("overview_add_modal_total").innerText, document.getElementById("overview_modal_add_commit").value);
+$("#overview_modal_add_save").on('click', () => {
+    ov.add($("#overview_modal_add_date").val(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
     overview_modal_add.hide();
 });
 
-document.getElementById("overview_btn_update").addEventListener('click', () => {
+$("#overview_btn_update").on('click', () => {
     let data = ov.getLists();
     if (data['status'] != 'OK') {
         window.alert("取得資料發生錯誤");
         return;
     }
-    document.getElementById('overview_tbody').innerHTML = "";
+    $('#overview_tbody').html("");
     if (!data['result'][0])
         return;
     let result = data['result'][0]['values'];
@@ -92,7 +92,6 @@ document.getElementById("overview_btn_update").addEventListener('click', () => {
     };
 });
 function overview_update_total() {
-    console.log("overview_update_total()");
     let nodes = document.getElementsByClassName("overview_modal_add_tr");
     let total = 0;
     for (let node of nodes) {
@@ -103,18 +102,18 @@ function overview_update_total() {
     document.getElementById("overview_add_modal_total").innerText = total;
 }
 
-document.getElementById("account_modal_add_save").addEventListener('click', () => {
-    acc.add(document.getElementById("account_modal_add_name").value, document.getElementById("account_modal_add_description").value,  document.getElementById("account_modal_add_amount").value);
+$("#account_modal_add_save").on('click', () => {
+    acc.add($("#account_modal_add_name").val(), $("#account_modal_add_description").val(),  $("#account_modal_add_amount").val());
     account_modal_add.hide();
 });
 
-document.getElementById("account_btn_update").addEventListener('click', () => {
+$("#account_btn_update").on('click', () => {
     let data = acc.getLists();
     if (data['status'] != 'OK') {
         window.alert("取得資料發生錯誤");
         return;
     }
-    document.getElementById('account_tbody').innerHTML = "";
+    $('#account_tbody').html("");
     if (!data['result'][0])
         return;
     let result = data['result'][0]['values'];

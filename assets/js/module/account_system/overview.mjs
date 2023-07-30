@@ -4,11 +4,11 @@ export class overview {
         this.db = db;
     }
 
-    addLog(date, source, amount, commit){
-        let arr = this.db.exec("INSERT INTO `accountsys_record` (`date`, `source`, `amount`, `commit`) VALUES ('" + date + "', '" + source + "', '" + amount + "', '" + commit + "');");
+    add(date, type, description, invoice, amount, commit){
+        let arr = this.db.exec("INSERT INTO `accountsys_record` (`date`, `type`, `description`, `invoice`, `amount`, `commit`) VALUES ('" + date + "', '" + type + "', '" + description + "', '" + invoice + "', '" + amount + "', '" + commit + "');");
         console.log(arr['status'], arr['result']);
     }
-    update(){
+    getLists(){
         let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `invoice`, `commit` FROM `accountsys_record`;");
         console.log(arr['status'], arr['result']);
         return arr;

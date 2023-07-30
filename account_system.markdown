@@ -95,6 +95,7 @@ layout: base
             <tr>
                 <th scope="col">名稱</th>
                 <th scope="col">備註</th>
+                <th scope="col">可用金額</th>
                 <th scope="col">動作</th>
             </tr>
         </thead>
@@ -116,6 +117,10 @@ layout: base
                     <div class="mb-3">
                         <label for="account_modal_add_description" class="form-label">說明</label>
                         <input type="text" class="form-control" id="account_modal_add_description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="account_modal_add_amount" class="form-label">起始金額</label>
+                        <input type="number" class="form-control" id="account_modal_add_amount">
                     </div>
                 </div>
                 <div class="modal-footer">

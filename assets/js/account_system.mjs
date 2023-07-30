@@ -58,12 +58,12 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
 })
 
 document.getElementById("overview_modal_add_save").addEventListener('click', () => {
-    ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_source").value, document.getElementById("overview_modal_add_amount").value, document.getElementById("overview_modal_add_commit").value);
+    ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_type").value, document.getElementById("overview_modal_add_description").value, document.getElementById("overview_modal_add_invoice").value, document.getElementById("overview_modal_add_amount").value, document.getElementById("overview_modal_add_commit").value);
     overview_modal_add.hide();
 });
 
 document.getElementById("overview_btn_update").addEventListener('click', () => {
-    let data = ov.update();
+    let data = ov.getLists();
     if (data['status'] != 'OK') {
         window.alert("取得資料發生錯誤");
         return;
@@ -105,7 +105,7 @@ function overview_update_total() {
 }
 
 document.getElementById("account_modal_add_save").addEventListener('click', () => {
-    acc.add(document.getElementById("account_modal_add_name").value, document.getElementById("account_modal_add_description").value);
+    acc.add(document.getElementById("account_modal_add_name").value, document.getElementById("account_modal_add_description").value,  document.getElementById("account_modal_add_amount").value);
     account_modal_add.hide();
 });
 
@@ -127,6 +127,9 @@ document.getElementById("account_btn_update").addEventListener('click', () => {
         let td_description = document.createElement("td");
         td_description.innerText = row[2];
         tr.appendChild(td_description);
+        let td_amount = document.createElement("td");
+        td_amount.innerText = row[3];
+        tr.appendChild(td_amount);
         let td_action = document.createElement("td");
         tr.appendChild(td_action);
         document.getElementById('account_tbody').appendChild(tr);

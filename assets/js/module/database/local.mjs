@@ -30,6 +30,7 @@ export class localDB {
                 'type' INTEGER NOT NULL,
                 'description' INTEGER NOT NULL,
                 'invoice' TEXT,
+                'amount' INTEGER NOT NULL,
                 'commit' TEXT
             );
             CREATE TABLE 'accountsys_account' (

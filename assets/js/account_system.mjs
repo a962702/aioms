@@ -58,7 +58,7 @@ document.getElementById("overview_add_modal_add_btn").addEventListener('click', 
 })
 
 document.getElementById("overview_modal_add_save").addEventListener('click', () => {
-    ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_type").value, document.getElementById("overview_modal_add_description").value, document.getElementById("overview_modal_add_invoice").value, document.getElementById("overview_modal_add_amount").value, document.getElementById("overview_modal_add_commit").value);
+    ov.addLog(document.getElementById("overview_modal_add_date").value, document.getElementById("overview_modal_add_type").value, document.getElementById("overview_modal_add_description").value, document.getElementById("overview_modal_add_invoice").value, document.getElementById("overview_add_modal_total").innerText, document.getElementById("overview_modal_add_commit").value);
     overview_modal_add.hide();
 });
 

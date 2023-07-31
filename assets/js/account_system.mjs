@@ -140,6 +140,6 @@ function chg_page() {
 }
 chg_page();
 
-$("window").on('hashchange', () => {
+$(window).on('hashchange', () => {
     chg_page();
 });

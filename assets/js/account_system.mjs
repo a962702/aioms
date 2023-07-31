@@ -28,7 +28,7 @@ $("#overview_add_modal_add_btn").on('click', () => {
                 })
             ),
             $("<td>").append(
-                $("<button>").addClass("btn btn-danger").attr("type", "button").html("<i class='bi bi-trash'></i>").on("click", () => {
+                $("<button>").addClass("btn btn-danger").attr("type", "button").html("<i class='bi bi-trash'></i>").on("click", (e) => {
                     let t = e.target;
                     while (t.localName != "tr") {
                         t = t.parentNode;
@@ -40,7 +40,7 @@ $("#overview_add_modal_add_btn").on('click', () => {
         )
     );
     jQuery.each(acc_lists['result'][0]['values'], (index, value) => {
-        $("#overview_add_modal_tbody tr:last td:first select").append($("<option>").text(value));
+        $("#overview_add_modal_tbody tr:last td:first select").append($("<option>").text(value[1]));
     })
 })
 

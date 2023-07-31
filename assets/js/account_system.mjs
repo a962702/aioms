@@ -18,17 +18,17 @@ $("#overview_add_modal_add_btn").on('click', () => {
         return;
     }
     $("#overview_add_modal_tbody").append(
-        $("tr" ).addClass("overview_modal_add_tr").append(
-            $("td").append(
-                $("select").addClass("form-select")
+        $("<tr>" ).addClass("overview_modal_add_tr").append(
+            $("<td>").append(
+                $("<select>").addClass("form-select")
             ),
-            $("td").append(
-                $("input").addClass("form-control").attr("type", "number").on("input", () => {
+            $("<td>").append(
+                $("<input>").addClass("form-control").attr("type", "number").on("input", () => {
                     overview_update_total();
                 })
             ),
-            $("td").append(
-                $("button").addClass("btn btn-danger").attr("type", "button").html("<i class='bi bi-trash'></i>").on("click", () => {
+            $("<td>").append(
+                $("<button>").addClass("btn btn-danger").attr("type", "button").html("<i class='bi bi-trash'></i>").on("click", () => {
                     let t = e.target;
                     while (t.localName != "tr") {
                         t = t.parentNode;
@@ -39,8 +39,8 @@ $("#overview_add_modal_add_btn").on('click', () => {
             )
         )
     );
-    jQuery.each(result['result'][0]['values'], (index, value) => {
-        $("#overview_add_modal_tbody tr:last td:first select").append($("option").text(value));
+    jQuery.each(acc_lists['result'][0]['values'], (index, value) => {
+        $("#overview_add_modal_tbody tr:last td:first select").append($("<option>").text(value));
     })
 })
 

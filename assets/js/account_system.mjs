@@ -12,49 +12,36 @@ const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
 const account_modal_add = new bootstrap.Modal('#account_modal_add');
 
 $("#overview_add_modal_add_btn").on('click', () => {
-    let tr = document.createElement("tr");
-    tr.className = "overview_modal_add_tr";
-    let td_source = document.createElement("td");
-    let sel = document.createElement("select");
-    sel.className = "form-select";
-    let result = acc.getLists();
-    if (!result['result'][0]) {
+    let acc_lists = acc.getLists();
+    if (!acc_lists['result'][0]) {
         window.alert("尚未建立帳戶\n請先至 帳務系統 - 帳戶管理 進行設定");
+        return;
     }
-    else {
-        for (let acc of result['result'][0]['values']) {
-            let opt = document.createElement("option");
-            opt.innerText = acc[1];
-            sel.appendChild(opt);
-        }
-    }
-    td_source.appendChild(sel);
-    tr.appendChild(td_source);
-    let td_amount = document.createElement("td");
-    let input_amount = document.createElement("input");
-    input_amount.className = "form-control";
-    input_amount.setAttribute("type", "number");
-    input_amount.addEventListener('input', () => {
-        overview_update_total();
-    });
-    td_amount.appendChild(input_amount);
-    tr.appendChild(td_amount);
-    let td_delete = document.createElement("td");
-    let btn_del = document.createElement("button");
-    btn_del.setAttribute("type", "button");
-    btn_del.className = "btn btn-danger";
-    btn_del.innerHTML = "<i class='bi bi-trash'></i>";
-    btn_del.addEventListener('click', (e) => {
-        let t = e.target;
-        while (t.localName != "tr") {
-            t = t.parentNode;
-        }
-        t.remove();
-        overview_update_total();
-    });
-    td_delete.appendChild(btn_del);
-    tr.appendChild(td_delete);
-    document.getElementById("overview_add_modal_tbody").appendChild(tr);
+    $("#overview_add_modal_tbody").append(
+        $("tr" ).addClass("overview_modal_add_tr").append(
+            $("td").append(
+                $("select").addClass("form-select")
+            ),
+            $("td").append(
+                $("input").addClass("form-control").attr("type", "number").on("input", () => {
+                    overview_update_total();
+                })
+            ),
+            $("td").append(
+                $("button").addClass("btn btn-danger").attr("type", "button").html("<i class='bi bi-trash'></i>").on("click", () => {
+                    let t = e.target;
+                    while (t.localName != "tr") {
+                        t = t.parentNode;
+                    }
+                    t.remove();
+                    overview_update_total();
+                })
+            )
+        )
+    );
+    jQuery.each(result['result'][0]['values'], (index, value) => {
+        $("#overview_add_modal_tbody tr:last td:first select").append($("option").text(value));
+    })
 })
 
 $("#overview_modal_add_save").on('click', () => {

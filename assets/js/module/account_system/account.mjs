@@ -5,7 +5,11 @@ export class account {
     }
 
     add(name, description, amount) {
-        let arr = this.db.exec("INSERT INTO `accountsys_account` (`name`, `description`, `amount`) VALUES ('" + name + "', '" + description + "', '" + amount + "');");
+        this.db.exec("INSERT INTO `accountsys_account` (`name`, `description`, `amount`) VALUES ('" + name + "', '" + description + "', '" + amount + "');");
+    }
+
+    add_transaction(account_id, record_id, type, amount){
+        this.db.exec("INSERT INTO `accountsys_account_transaction` (`account_id`, `record_id`, `type`, `amount`) VALUES ('" + account_id + "', '" + record_id + "', '" + type + "', '" + amount + "');");
     }
 
     getLists() {

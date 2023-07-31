@@ -42,6 +42,7 @@ export class localDB {
             CREATE TABLE 'accountsys_account_transaction' (
                 'id' INTEGER NOT NULL PRIMARY KEY,
                 'account_id' INTEGER NOT NULL,
+                'record_id' INTEGER NOT NULL,
                 'type' INTEGER NOT NULL,
                 'amount' INTEGER NOT NULL
             );`

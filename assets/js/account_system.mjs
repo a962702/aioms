@@ -47,9 +47,8 @@ $("#overview_add_modal_add_btn").on('click', () => {
 $("#overview_modal_add_save").on('click', () => {
     ov.add($("#overview_modal_add_date").val(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
     $(".overview_modal_add_tr").each((index, element) => {
-        //ov.add_transaction(element.children().eq(0).children().val(), element.children().eq(1).children().val());
+        //acc.add_transaction(element.children().eq(0).children().val(), element.children().eq(1).children().val());
     });
-    ov.add_transaction();
     overview_modal_add.hide();
     overview_update();
 });

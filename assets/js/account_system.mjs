@@ -84,7 +84,7 @@ function overview_add_modal_update_total() {
     let total = 0;
     $(".overview_modal_add_tr").each((index, element) => {
         if (element.children().eq(1).children().val() != ""){
-            total += parseInt(element.children().eq(1).children().val());
+            total += parseInt(element.childNodes[1].childNodes[0].value);
         }
     });
     $("#overview_add_modal_total").text(total);

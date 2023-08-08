@@ -49,4 +49,30 @@ export class GDDB {
         });
         console.log(response);
     }
+
+    async create(){
+        let response = await gapi.client.drive.files.create({
+            'name': 'AIOMS.db'
+        });
+        console.log(response);
+    }
+
+    async load(){
+        let response = await gapi.client.drive.files.get({
+            'fileId': '13d62lfGR37KFei7zIwZQOtiUf_k3hVvE',
+            'alt': 'media'
+        });
+        console.log(response);
+    }
+
+    async save(){
+        $.ajax({
+            method: "PATCH",
+            url: "https://www.googleapis.com/upload/drive/v3/files/13d62lfGR37KFei7zIwZQOtiUf_k3hVvE",
+            data: "TEST_HELLO_WORLD"
+          })
+            .done(function( msg ) {
+              alert( "Data Saved: " + msg );
+            });
+    }
 }

@@ -79,4 +79,14 @@ export class database {
     async GD_list(){
         await this.obj_GDDB.list();
     }
+
+    // Google Drive - Load
+    async GD_load(){
+        await this.obj_GDDB.load();
+    }
+
+    // Google Drive - Save
+    async GD_save(){
+        await this.obj_GDDB.save();
+    }
 }

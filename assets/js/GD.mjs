@@ -14,3 +14,11 @@ $("#authorize_button").on("click", async () => {
 $("#signout_button").on("click", () => {
     db.GD_signout();
 })
+
+$("#load_button").on("click", () => {
+    db.GD_load();
+})
+
+$("#save_button").on("click", () => {
+    db.GD_save();
+})

@@ -67,7 +67,7 @@ export class database {
 
     // Google Drive - Auth
     GD_auth() {
-        this.obj_GDDB.auth();
+        return this.obj_GDDB.auth();
     }
 
     // Google Drive - Signout
@@ -76,7 +76,7 @@ export class database {
     }
 
     // Google Drive - List
-    GD_list(){
-        this.obj_GDDB.list();
+    async GD_list(){
+        await this.obj_GDDB.list();
     }
 }

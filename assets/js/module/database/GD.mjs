@@ -35,7 +35,7 @@ export class GDDB {
     }
 
     signout() {
-        token = gapi.client.getToken();
+        let token = gapi.client.getToken();
         if (token !== null) {
             google.accounts.oauth2.revoke(token.access_token);
             gapi.client.setToken('');
@@ -43,7 +43,7 @@ export class GDDB {
     }
 
     async list() {
-        response = await gapi.client.drive.files.list({
+        let response = await gapi.client.drive.files.list({
             'pageSize': 10,
             'fields': 'files(id, name)',
         });

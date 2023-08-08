@@ -3,11 +3,11 @@ import { database } from './module/database/main.mjs'
 let db = new database();
 await db.init();
 
-$("#authorize_button").on("click", () => {
+$("#authorize_button").on("click", async () => {
     if (db.GD_auth()) {
         document.getElementById('signout_button').style.visibility = 'visible';
         document.getElementById('authorize_button').innerText = 'Refresh';
-        db.GD_list();
+        await db.GD_list();
     }
 })
 

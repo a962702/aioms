@@ -9,6 +9,7 @@ export class database {
         this.obj_localDB = new localDB();
         this.obj_GDDB = new GDDB();
         await this.obj_localDB.init();
+        await this.obj_GDDB.init();
         if (!localStorage.getItem("AIOMS_DB_INIT")) {
             localStorage.setItem("AIOMS_DB_VER", "1");
             localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
@@ -62,5 +63,20 @@ export class database {
             }, 1000);
         };
         a.click();
+    }
+
+    // Google Drive - Auth
+    GD_auth() {
+        obj_GDDB.auth();
+    }
+
+    // Google Drive - Signout
+    GD_signout(){
+        obj_GDDB.signout();
+    }
+
+    // Google Drive - List
+    GD_list(){
+        obj_GDDB.list();
     }
 }

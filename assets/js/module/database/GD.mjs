@@ -71,7 +71,7 @@ export class GDDB {
             method: "PATCH",
             url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
             headers: {
-                'Authorization': gapi.client.getToken().access_token
+                'Authorization': 'Bearer ' + gapi.client.getToken().access_token
             },
             data: data,
             processData: false

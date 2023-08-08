@@ -25,7 +25,7 @@ layout: base
 
     // Authorization scopes required by the API; multiple scopes can be
     // included, separated by spaces.
-    const SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+    const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
     let tokenClient;
     let gapiInited = false;

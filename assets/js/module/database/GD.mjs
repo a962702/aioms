@@ -74,6 +74,7 @@ export class GDDB {
                 'Authorization': 'Bearer ' + gapi.client.getToken().access_token
             },
             data: data,
+            contentType: 'text/plain',
             processData: false
           })
             .done(function( msg ) {

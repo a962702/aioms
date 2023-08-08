@@ -67,16 +67,16 @@ export class database {
 
     // Google Drive - Auth
     GD_auth() {
-        obj_GDDB.auth();
+        this.obj_GDDB.auth();
     }
 
     // Google Drive - Signout
     GD_signout(){
-        obj_GDDB.signout();
+        this.obj_GDDB.signout();
     }
 
     // Google Drive - List
     GD_list(){
-        obj_GDDB.list();
+        this.obj_GDDB.list();
     }
 }

@@ -9,13 +9,13 @@ export class GDDB {
         while (!gapi || !google);
         await gapi.load('client', async () => {
             await gapi.client.init({
-                apiKey: API_KEY,
-                discoveryDocs: [DISCOVERY_DOC]
+                apiKey: this.API_KEY,
+                discoveryDocs: [this.DISCOVERY_DOC]
             });
         });
         this.tokenClient = google.accounts.oauth2.initTokenClient({
-            client_id: CLIENT_ID,
-            scope: SCOPES
+            client_id: this.CLIENT_ID,
+            scope: this.SCOPES
         });
     }
 

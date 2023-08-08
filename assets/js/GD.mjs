@@ -22,3 +22,7 @@ $("#load_button").on("click", () => {
 $("#save_button").on("click", () => {
     db.GD_save();
 })
+
+function signin_callback() {
+    window.alert('Callback hit!');
+}

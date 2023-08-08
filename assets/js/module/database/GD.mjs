@@ -51,22 +51,24 @@ export class GDDB {
         console.log(response);
     }
 
-    async create(){
+    async create() {
         let response = await gapi.client.drive.files.create({
             'name': 'AIOMS.db'
         });
         console.log(response);
     }
 
-    async load(){
-        let response = await gapi.client.drive.files.get({
-            'fileId': this.fileId,
-            'alt': 'media'
-        });
-        console.log(response);
+    async load() {
+        $.ajax({
+            method: "GET",
+            url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
+            headers: {
+                'Authorization': 'Bearer ' + gapi.client.getToken().access_token
+            }
+        })
     }
 
-    async save(data){
+    async save(data) {
         $.ajax({
             method: "PATCH",
             url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
@@ -76,9 +78,6 @@ export class GDDB {
             data: data,
             contentType: 'text/plain',
             processData: false
-          })
-            .done(function( msg ) {
-              alert( "Data Saved: " + msg );
-            });
+        })
     }
 }

@@ -4,6 +4,7 @@ export class GDDB {
     DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
     SCOPES = 'https://www.googleapis.com/auth/drive.file';
     tokenClient = null;
+    fileId = "13d62lfGR37KFei7zIwZQOtiUf_k3hVvE"; //TODO
 
     async init() {
         while (!gapi || !google);
@@ -59,17 +60,21 @@ export class GDDB {
 
     async load(){
         let response = await gapi.client.drive.files.get({
-            'fileId': '13d62lfGR37KFei7zIwZQOtiUf_k3hVvE',
+            'fileId': this.fileId,
             'alt': 'media'
         });
         console.log(response);
     }
 
-    async save(){
+    async save(data){
         $.ajax({
             method: "PATCH",
-            url: "https://www.googleapis.com/upload/drive/v3/files/13d62lfGR37KFei7zIwZQOtiUf_k3hVvE",
-            data: "TEST_HELLO_WORLD"
+            url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
+            headers: {
+                'Authorization': gapi.client.getToken()
+            },
+            data: data,
+            processData: false
           })
             .done(function( msg ) {
               alert( "Data Saved: " + msg );

@@ -87,6 +87,6 @@ export class database {
 
     // Google Drive - Save
     async GD_save(){
-        await this.obj_GDDB.save();
+        await this.obj_GDDB.save(new Date().toString());
     }
 }

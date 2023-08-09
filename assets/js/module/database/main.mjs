@@ -37,9 +37,9 @@ export class database {
         if (this.obj_localDB != null) {
             arr['status'] = 'OK';
             arr['result'] = this.obj_localDB.exec(stm);
-            return arr;
+        } else {
+            arr['status'] = 'ERROR_UNINITIALIZED';
         }
-        arr['status'] = 'ERROR_UNINITIALIZED';
         this.save();
         return arr;
     }

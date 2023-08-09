@@ -5,6 +5,7 @@ export class GDDB {
     SCOPES = 'https://www.googleapis.com/auth/drive.file';
     tokenClient = null;
     fileId = "";
+    token = "";
 
     async init() {
         while (!gapi || !google);
@@ -18,6 +19,12 @@ export class GDDB {
             client_id: this.CLIENT_ID,
             scope: this.SCOPES
         });
+        if(localStorage.getItem("AIOMS_GDDB_token") && localStorage.getItem("AIOMS_GDDB_token") != ""){
+            this.token = localStorage.getItem("AIOMS_GDDB_token");
+        }
+        if(localStorage.getItem("AIOMS_GDDB_fileId") && localStorage.getItem("AIOMS_GDDB_fileId") != ""){
+            this.fileId = localStorage.getItem("AIOMS_GDDB_fileId");
+        }
     }
 
     auth() {
@@ -25,6 +32,9 @@ export class GDDB {
             if (resp.error !== undefined) {
                 console.log(resp);
                 return false;
+            } else {
+                this.token = gapi.client.getToken().access_token;
+                localStorage.setItem("AIOMS_GDDB_token", this.token);
             }
         };
         if (gapi.client.getToken() === null) {
@@ -36,25 +46,26 @@ export class GDDB {
     }
 
     signout() {
-        let token = gapi.client.getToken();
-        if (token !== null) {
-            google.accounts.oauth2.revoke(token.access_token);
+        if (this.token != "") {
+            google.accounts.oauth2.revoke(this.token);
             gapi.client.setToken('');
+            this.token = "";
+            localStorage.setItem("AIOMS_GDDB_token", "");
         }
     }
 
     setId(id) {
         this.fileId = id;
+        localStorage.setItem("AIOMS_GDDB_fileId", this.fileId);
     }
 
     exist() {
-        let token = gapi.client.getToken();
-        if (token !== null) {
+        if (this.token != "") {
             $.ajax({
                 method: "GET",
                 url: "https://www.googleapis.com/drive/v3/files?q=name = 'AIOMS.db'&trashed=false",
                 headers: {
-                    'Authorization': 'Bearer ' + token.access_token
+                    'Authorization': 'Bearer ' + this.token
                 }
             }).done((data) => {
                 let arr = Array();
@@ -79,19 +90,19 @@ export class GDDB {
     }
 
     create() {
-        let token = gapi.client.getToken();
-        if (token !== null) {
+        if (this.token != "") {
             $.ajax({
                 method: "POST",
                 url: "https://www.googleapis.com/drive/v3/files",
                 headers: {
-                    'Authorization': 'Bearer ' + token.access_token
+                    'Authorization': 'Bearer ' + this.token
                 },
                 data: JSON.stringify({
                     name: "AIOMS.db"
                 }),
                 contentType: "application/json"
             }).done((data) => {
+                this.setId(data.id);
                 let arr = Array();
                 arr['status'] = "OK";
                 arr['id'] = data.id;
@@ -105,13 +116,12 @@ export class GDDB {
     }
 
     load() {
-        let token = gapi.client.getToken();
-        if (token !== null && this.fileId != "") {
+        if (this.token != "" && this.fileId != "") {
             $.ajax({
                 method: "GET",
                 url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
                 headers: {
-                    'Authorization': 'Bearer ' + token.access_token
+                    'Authorization': 'Bearer ' + this.token
                 }
             }).done((data) => {
                 console.log("[GDDB] Load: " + data);
@@ -128,8 +138,7 @@ export class GDDB {
     }
 
     save(data) {
-        let token = gapi.client.getToken();
-        if (token !== null && this.fileId != "") {
+        if (this.token != "" && this.fileId != "") {
             console.log("[GDDB] Save: " + data);
             $.ajax({
                 method: "PATCH",

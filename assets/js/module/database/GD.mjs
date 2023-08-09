@@ -65,7 +65,7 @@ export class GDDB {
         if (token !== null) {
             $.ajax({
                 method: "POST",
-                url: "https://www.googleapis.com/upload/drive/v3/files",
+                url: "https://www.googleapis.com/drive/v3/files",
                 headers: {
                     'Authorization': 'Bearer ' + token.access_token
                 },

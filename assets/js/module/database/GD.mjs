@@ -129,22 +129,16 @@ export class GDDB {
                     'Authorization': 'Bearer ' + this.token
                 },
                 async: false,
-                success: () => {
+                success: (data) => {
                     console.log("[GDDB] Load: " + data);
                     let arr = Array();
                     arr['status'] = "OK";
                     arr['data'] = data;
+                },
+                error: () => {
+                    let arr = Array();
+                    arr['status'] = "ERROR";
                 }
-            }).done((data) => {
-                console.log("[GDDB] Load: " + data);
-                let arr = Array();
-                arr['status'] = "OK";
-                arr['data'] = data;
-                return arr;
-            }).fail(() => {
-                let arr = Array();
-                arr['status'] = "ERROR";
-                return arr;
             })
             return arr;
         }

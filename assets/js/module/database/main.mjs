@@ -46,6 +46,7 @@ export class database {
 
     // Save all DB
     save() {
+        console.log(get_setup_storage(), get_setup_storage().includes('local'), get_setup_storage().includes('GD'));
         if (get_setup_storage().includes('local')){
             this.obj_localDB.save(this.obj_localDB.get_binaryArray());
         }

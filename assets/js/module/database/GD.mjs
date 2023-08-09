@@ -71,25 +71,28 @@ export class GDDB {
                 headers: {
                     'Authorization': 'Bearer ' + this.token
                 }
-            }).done((data) => {
-                let arr = Array();
-                arr['status'] = "OK";
-                if (data.files.length == 0) {
-                    arr['result'] = "NO";
+            }).then(
+                (data) => {
+                    let arr = Array();
+                    arr['status'] = "OK";
+                    if (data.files.length == 0) {
+                        arr['result'] = "NO";
+                    }
+                    else if (data.files.length == 1) {
+                        arr['result'] = "YES";
+                        this.setId(data.files[0].id);
+                    }
+                    else {
+                        arr['result'] = "MULTI";
+                    }
+                    return arr;
+                },
+                () => {
+                    let arr = Array();
+                    arr['status'] = "ERROR";
+                    return arr;
                 }
-                else if (data.files.length == 1) {
-                    arr['result'] = "YES";
-                    this.setId(data.files[0].id);
-                }
-                else {
-                    arr['result'] = "MULTI";
-                }
-                return arr;
-            }).fail(() => {
-                let arr = Array();
-                arr['status'] = "ERROR";
-                return arr;
-            })
+            )
         }
     }
 

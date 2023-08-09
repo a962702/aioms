@@ -62,12 +62,12 @@ export class localDB {
     /***** Save Database *****/
     save(data) {
         console.log("[localDB] Save: " + data);
-        localStorage.setItem("AIOMS_DB_local_data", JSON.stringify(Array.from(data)));
+        localStorage.setItem("AIOMS_DB_local_data", data);
     }
 
     /***** Get DB binaryArray *****/
     get_binaryArray() {
         console.log("[localDB] get_binaryArray");
-        return this.db.export();
+        return JSON.stringify(Array.from(this.db.export()));
     }
 }

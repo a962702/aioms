@@ -10,15 +10,19 @@ $("#setting_btn_runcommand").on('click', ()=>{
 });
 
 $("#btn_GDDB_auth").on("click", async () => {
-    if (db.GD_auth()) {
-        document.getElementById('signout_button').style.visibility = 'visible';
-        document.getElementById('authorize_button').innerText = 'Refresh';
-        await db.GD_list();
-    }
+    db.GD_auth();
 })
 
 $("#btn_GDDB_signout").on("click", () => {
     db.GD_signout();
+})
+
+$("#btn_GDDB_exist").on("click", () => {
+    db.GD_exist();
+})
+
+$("#btn_GDDB_create").on("click", () => {
+    db.GD_create();
 })
 
 $("#btn_GDDB_load").on("click", () => {

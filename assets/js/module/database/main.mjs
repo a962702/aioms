@@ -76,8 +76,13 @@ export class database {
     }
 
     // Google Drive - List
-    async GD_list(){
-        await this.obj_GDDB.list();
+    async GD_exist(){
+        await this.obj_GDDB.exist();
+    }
+
+    // Google Drive - Create
+    async GD_create(){
+        await this.obj_GDDB.create();
     }
 
     // Google Drive - Load

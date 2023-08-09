@@ -43,41 +43,76 @@ export class GDDB {
         }
     }
 
-    async list() {
-        let response = await gapi.client.drive.files.list({
-            'pageSize': 10,
-            'fields': 'files(id, name)',
-        });
-        console.log(response);
+    exist() {
+        let token = gapi.client.getToken();
+        if (token !== null) {
+            $.ajax({
+                method: "GET",
+                url: "https://www.googleapis.com/drive/v3/files?q=name%3DAIOMS.db&trashed=false",
+                headers: {
+                    'Authorization': 'Bearer ' + token.access_token
+                }
+            }).done((data) => {
+                console.log(data);
+            }).fail(() => {
+                window.alert("[GDDB] Error when create");
+            })
+        }
     }
 
-    async create() {
-        let response = await gapi.client.drive.files.create({
-            'name': 'AIOMS.db'
-        });
-        console.log(response);
+    create() {
+        let token = gapi.client.getToken();
+        if (token !== null) {
+            $.ajax({
+                method: "POST",
+                url: "https://www.googleapis.com/upload/drive/v3/files",
+                headers: {
+                    'Authorization': 'Bearer ' + token.access_token
+                },
+                data: {
+                    name: "AIOMS.db"
+                }
+            }).done((data) => {
+                console.log(data);
+            }).fail(() => {
+                window.alert("[GDDB] Error when create");
+            })
+        }
     }
 
-    async load() {
-        $.ajax({
-            method: "GET",
-            url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
-            headers: {
-                'Authorization': 'Bearer ' + gapi.client.getToken().access_token
-            }
-        })
+    load() {
+        let token = gapi.client.getToken();
+        if (token !== null) {
+            $.ajax({
+                method: "GET",
+                url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
+                headers: {
+                    'Authorization': 'Bearer ' + token.access_token
+                }
+            }).done((data) => {
+                console.log(data);
+                return data;
+            }).fail(() => {
+                window.alert("[GDDB] Error when load");
+            })
+        }
     }
 
-    async save(data) {
-        $.ajax({
-            method: "PATCH",
-            url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
-            headers: {
-                'Authorization': 'Bearer ' + gapi.client.getToken().access_token
-            },
-            data: data,
-            contentType: 'text/plain',
-            processData: false
-        })
+    save(data) {
+        let token = gapi.client.getToken();
+        if (token !== null) {
+            $.ajax({
+                method: "PATCH",
+                url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
+                headers: {
+                    'Authorization': 'Bearer ' + token.access_token
+                },
+                data: data,
+                contentType: 'text/plain',
+                processData: false
+            }).fail(()=>{
+                window.alert("[GDDB] Error when save");
+            })
+        }
     }
 }

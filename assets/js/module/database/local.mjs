@@ -45,7 +45,7 @@ export class localDB {
                 'amount' INTEGER NOT NULL
             );`
         this.db.run(command);
-        this.save();
+        this.save(this.get_binaryArray());
     }
 
     /***** Load Database *****/

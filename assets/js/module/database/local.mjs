@@ -12,10 +12,8 @@ export class localDB {
     /***** Execute Command *****/
     exec(stm) {
         while(!this.SQL);
-        this.load();
         console.log("[localDB] exec: ", stm);
         let result = this.db.exec(stm);
-        this.save();
         return result;
     }
 
@@ -62,10 +60,9 @@ export class localDB {
     }
 
     /***** Save Database *****/
-    save() {
-        console.log("[localDB] save");
-        const binaryArray = this.db.export();
-        localStorage.setItem("AIOMS_DB_local_data", JSON.stringify(Array.from(binaryArray)));
+    save(data) {
+        console.log("[localDB] Save: " + data);
+        localStorage.setItem("AIOMS_DB_local_data", JSON.stringify(Array.from(data)));
     }
 
     /***** Get DB binaryArray *****/

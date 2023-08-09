@@ -28,13 +28,15 @@ export class GDDB {
     }
 
     auth() {
+        localStorage.setItem("AIOMS_GDDB_AuthStatus", "WAIT");
         this.tokenClient.callback = async (resp) => {
             if (resp.error !== undefined) {
                 console.log(resp);
-                return false;
+                localStorage.setItem("AIOMS_GDDB_AuthStatus", "FAIL");
             } else {
                 this.token = gapi.client.getToken().access_token;
                 localStorage.setItem("AIOMS_GDDB_token", this.token);
+                localStorage.setItem("AIOMS_GDDB_AuthStatus", "SUCCESS");
             }
         };
         if (gapi.client.getToken() === null) {
@@ -42,7 +44,6 @@ export class GDDB {
         } else {
             this.tokenClient.requestAccessToken({ prompt: '' });
         }
-        return true;
     }
 
     signout() {

@@ -37,14 +37,17 @@ export class database {
             return arr;
         }
         arr['status'] = 'ERROR_UNINITIALIZED';
+        this.save();
         return arr;
     }
 
     // Save all DB
     save() {
-        let setup_storage = localStorage.getItem("AIOMS_DB_STORAGE");
-        for (storage in setup_storage) {
-            console.log("[database] Saving ", storage)
+        if (get_setup_storage().contains('local')){
+            this.obj_localDB.save(this.obj_localDB.get_binaryArray());
+        }
+        if (get_setup_storage().contains('GD')){
+            this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
         }
     }
 
@@ -65,33 +68,33 @@ export class database {
         a.click();
     }
 
-    // Google Drive - Auth
-    GD_auth() {
-        return this.obj_GDDB.auth();
+    // Google Drive - Connect
+    GD_connect() {
+        localStorage.setItem("AIOMS_GDDB_AuthStatus", "START");
+        this.obj_GDDB.auth();
+        while(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" && localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT");
+        if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
+            arr = this.obj_GDDB.exist();
+            if(arr['status'] == "OK"){
+                if (arr['result'] == "MULTI"){
+                window.alert("FIXME! exist return MULTI");
+                } else {
+                    if(arr['result'] == "NO"){
+                        this.obj_GDDB.create();
+                    } else {
+                        if(window.confirm("Google 雲端硬碟中存有資料庫，是否載入?\n[是] 使用Google 雲端硬碟中的資料庫\n[否] 使用本地資料庫")){
+                            this.obj_localDB.save(this.obj_GDDB.load());
+                        }
+                    }
+                    localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
+                }
+            }
+        }
     }
 
     // Google Drive - Signout
     GD_signout(){
         this.obj_GDDB.signout();
-    }
-
-    // Google Drive - List
-    async GD_exist(){
-        await this.obj_GDDB.exist();
-    }
-
-    // Google Drive - Create
-    async GD_create(){
-        await this.obj_GDDB.create();
-    }
-
-    // Google Drive - Load
-    async GD_load(){
-        await this.obj_GDDB.load();
-    }
-
-    // Google Drive - Save
-    async GD_save(){
-        await this.obj_GDDB.save(new Date().toString());
+        localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
     }
 }

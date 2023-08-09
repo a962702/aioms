@@ -72,26 +72,31 @@ export class database {
     GD_connect() {
         localStorage.setItem("AIOMS_GDDB_AuthStatus", "START");
         this.obj_GDDB.auth();
-        while(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" || localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT");
-        if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
-            arr = this.obj_GDDB.exist();
-            if(arr['status'] == "OK"){
-                if (arr['result'] == "MULTI"){
-                window.alert("FIXME! exist return MULTI");
-                } else {
-                    if(arr['result'] == "NO"){
-                        this.obj_GDDB.create();
+        let auth_check = setInterval(() => {
+            if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" || localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT")
+                return;
+            if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
+                clearInterval(auth_check);
+                arr = this.obj_GDDB.exist();
+                if(arr['status'] == "OK"){
+                    if (arr['result'] == "MULTI"){
+                    window.alert("FIXME! exist return MULTI");
                     } else {
-                        if(window.confirm("Google 雲端硬碟中存有資料庫，是否載入?\n[是] 使用Google 雲端硬碟中的資料庫\n[否] 使用本地資料庫")){
-                            this.obj_localDB.save(this.obj_GDDB.load());
+                        if(arr['result'] == "NO"){
+                            this.obj_GDDB.create();
+                        } else {
+                            if(window.confirm("Google 雲端硬碟中存有資料庫，是否載入?\n[是] 使用Google 雲端硬碟中的資料庫\n[否] 使用本地資料庫")){
+                                this.obj_localDB.save(this.obj_GDDB.load());
+                            }
                         }
+                        localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
                     }
-                    localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
                 }
+            } else {
+                clearInterval(auth_check);
+                window.alert("「連結 Google 雲端硬碟」操作已被取消");
             }
-        } else {
-            window.alert("「連結 Google 雲端硬碟」操作已被取消");
-        }
+        }, 500);
     }
 
     // Google Drive - Signout

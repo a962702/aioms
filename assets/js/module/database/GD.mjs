@@ -29,7 +29,7 @@ export class GDDB {
 
     auth() {
         localStorage.setItem("AIOMS_GDDB_AuthStatus", "WAIT");
-        this.tokenClient.callback = async (resp) => {
+        this.tokenClient.callback = (resp) => {
             if (resp.error !== undefined) {
                 console.log(resp);
                 localStorage.setItem("AIOMS_GDDB_AuthStatus", "FAIL");
@@ -39,6 +39,9 @@ export class GDDB {
                 localStorage.setItem("AIOMS_GDDB_AuthStatus", "SUCCESS");
             }
         };
+        this.tokenClient.error_callback = () => {
+            localStorage.setItem("AIOMS_GDDB_AuthStatus", "FAIL");
+        }
         if (gapi.client.getToken() === null) {
             this.tokenClient.requestAccessToken({ prompt: 'consent' });
         } else {

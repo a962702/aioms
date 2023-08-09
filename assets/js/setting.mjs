@@ -9,7 +9,7 @@ $("#setting_btn_runcommand").on('click', ()=>{
     s.exec(document.getElementById('sql_statement').value);
 });
 
-$("#btn_GDDB_connect").on("click", async () => {
+$("#btn_GDDB_connect").on("click", () => {
     db.GD_connect();
 })
 

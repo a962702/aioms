@@ -72,7 +72,7 @@ export class database {
     GD_connect() {
         localStorage.setItem("AIOMS_GDDB_AuthStatus", "START");
         this.obj_GDDB.auth();
-        while(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" && localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT");
+        while(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" || localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT");
         if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
             arr = this.obj_GDDB.exist();
             if(arr['status'] == "OK"){

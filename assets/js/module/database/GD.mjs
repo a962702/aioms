@@ -65,6 +65,7 @@ export class GDDB {
 
     async exist() {
         if (this.token != "") {
+            let arr = Array();
             $.ajax({
                 method: "GET",
                 url: "https://www.googleapis.com/drive/v3/files?q=name = 'AIOMS.db'&trashed=false",
@@ -73,7 +74,7 @@ export class GDDB {
                 },
                 async: false,
                 success: (data) => {
-                    let arr = Array();
+                    console.log("success start");
                     arr['status'] = "OK";
                     if (data.files.length == 0) {
                         arr['result'] = "NO";
@@ -85,14 +86,15 @@ export class GDDB {
                     else {
                         arr['result'] = "MULTI";
                     }
-                    return arr;
+                    console.log("success end");
                 },
                 error: () => {
-                    let arr = Array();
+                    console.log("error start");
                     arr['status'] = "ERROR";
-                    return arr;
+                    console.log("error start");
                 }
             })
+            return arr;
         }
     }
 

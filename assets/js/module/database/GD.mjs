@@ -122,6 +122,7 @@ export class GDDB {
 
     load() {
         if (this.token != "" && this.fileId != "") {
+            let arr = Array();
             $.ajax({
                 method: "GET",
                 url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
@@ -131,12 +132,10 @@ export class GDDB {
                 async: false,
                 success: (data) => {
                     console.log("[GDDB] Load: " + data);
-                    let arr = Array();
                     arr['status'] = "OK";
                     arr['data'] = data;
                 },
                 error: () => {
-                    let arr = Array();
                     arr['status'] = "ERROR";
                 }
             })

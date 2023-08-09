@@ -69,9 +69,9 @@ export class GDDB {
                 headers: {
                     'Authorization': 'Bearer ' + token.access_token
                 },
-                data: {
+                data: JSON.stringify({
                     name: "AIOMS.db"
-                },
+                }),
                 contentType: "application/json"
             }).done((data) => {
                 console.log(data);

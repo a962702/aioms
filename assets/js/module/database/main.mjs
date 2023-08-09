@@ -43,10 +43,10 @@ export class database {
 
     // Save all DB
     save() {
-        if (get_setup_storage().contains('local')){
+        if (get_setup_storage().includes('local')){
             this.obj_localDB.save(this.obj_localDB.get_binaryArray());
         }
-        if (get_setup_storage().contains('GD')){
+        if (get_setup_storage().includes('GD')){
             this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
         }
     }

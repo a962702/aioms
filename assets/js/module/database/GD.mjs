@@ -70,29 +70,27 @@ export class GDDB {
                 url: "https://www.googleapis.com/drive/v3/files?q=name = 'AIOMS.db'&trashed=false",
                 headers: {
                     'Authorization': 'Bearer ' + this.token
-                }
-            }).then(
-                (data) => {
-                    let arr = Array();
-                    arr['status'] = "OK";
-                    if (data.files.length == 0) {
-                        arr['result'] = "NO";
-                    }
-                    else if (data.files.length == 1) {
-                        arr['result'] = "YES";
-                        this.setId(data.files[0].id);
-                    }
-                    else {
-                        arr['result'] = "MULTI";
-                    }
-                    return arr;
                 },
-                () => {
-                    let arr = Array();
-                    arr['status'] = "ERROR";
-                    return arr;
+                async: false
+            }).done((data) => {
+                let arr = Array();
+                arr['status'] = "OK";
+                if (data.files.length == 0) {
+                    arr['result'] = "NO";
                 }
-            )
+                else if (data.files.length == 1) {
+                    arr['result'] = "YES";
+                    this.setId(data.files[0].id);
+                }
+                else {
+                    arr['result'] = "MULTI";
+                }
+                return arr;
+            }).fail(() => {
+                let arr = Array();
+                arr['status'] = "ERROR";
+                return arr;
+            })
         }
     }
 

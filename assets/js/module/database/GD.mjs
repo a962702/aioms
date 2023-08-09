@@ -144,7 +144,7 @@ export class GDDB {
                 method: "PATCH",
                 url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
                 headers: {
-                    'Authorization': 'Bearer ' + token.access_token
+                    'Authorization': 'Bearer ' + this.token
                 },
                 data: data,
                 contentType: 'text/plain',

@@ -4,7 +4,7 @@ export class GDDB {
     DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
     SCOPES = 'https://www.googleapis.com/auth/drive.file';
     tokenClient = null;
-    fileId = "13d62lfGR37KFei7zIwZQOtiUf_k3hVvE"; //TODO
+    fileId = "";
 
     async init() {
         while (!gapi || !google);
@@ -43,6 +43,10 @@ export class GDDB {
         }
     }
 
+    setId(id) {
+        this.fileId = id;
+    }
+
     exist() {
         let token = gapi.client.getToken();
         if (token !== null) {
@@ -53,9 +57,23 @@ export class GDDB {
                     'Authorization': 'Bearer ' + token.access_token
                 }
             }).done((data) => {
-                console.log(data);
+                let arr = Array();
+                arr['status'] = "OK";
+                if (data.files.length == 0) {
+                    arr['result'] = "NO";
+                }
+                else if (data.files.length == 1) {
+                    arr['result'] = "YES";
+                    this.setId(data.files[0].id);
+                }
+                else {
+                    arr['result'] = "MULTI";
+                }
+                return arr;
             }).fail(() => {
-                window.alert("[GDDB] Error when exist");
+                let arr = Array();
+                arr['status'] = "ERROR";
+                return arr;
             })
         }
     }
@@ -74,16 +92,21 @@ export class GDDB {
                 }),
                 contentType: "application/json"
             }).done((data) => {
-                console.log(data);
+                let arr = Array();
+                arr['status'] = "OK";
+                arr['id'] = data.id;
+                return arr;
             }).fail(() => {
-                window.alert("[GDDB] Error when create");
+                let arr = Array();
+                arr['status'] = "ERROR";
+                return arr;
             })
         }
     }
 
     load() {
         let token = gapi.client.getToken();
-        if (token !== null) {
+        if (token !== null && this.fileId != "") {
             $.ajax({
                 method: "GET",
                 url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
@@ -91,17 +114,23 @@ export class GDDB {
                     'Authorization': 'Bearer ' + token.access_token
                 }
             }).done((data) => {
-                console.log(data);
-                return data;
+                console.log("[GDDB] Load: " + data);
+                let arr = Array();
+                arr['status'] = "OK";
+                arr['data'] = data;
+                return arr;
             }).fail(() => {
-                window.alert("[GDDB] Error when load");
+                let arr = Array();
+                arr['status'] = "ERROR";
+                return arr;
             })
         }
     }
 
     save(data) {
         let token = gapi.client.getToken();
-        if (token !== null) {
+        if (token !== null && this.fileId != "") {
+            console.log("[GDDB] Save: " + data);
             $.ajax({
                 method: "PATCH",
                 url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
@@ -111,8 +140,14 @@ export class GDDB {
                 data: data,
                 contentType: 'text/plain',
                 processData: false
-            }).fail(()=>{
-                window.alert("[GDDB] Error when save");
+            }).done(() => {
+                let arr = Array();
+                arr['status'] = "OK";
+                return arr;
+            }).fail(() => {
+                let arr = Array();
+                arr['status'] = "ERROR";
+                return arr;
             })
         }
     }

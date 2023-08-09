@@ -72,12 +72,12 @@ export class database {
     GD_connect() {
         localStorage.setItem("AIOMS_GDDB_AuthStatus", "START");
         this.obj_GDDB.auth();
-        let auth_check = setInterval(async () => {
+        let auth_check = setInterval(() => {
             if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" || localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT")
                 return;
             if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
                 clearInterval(auth_check);
-                let arr = await this.obj_GDDB.exist();
+                let arr = this.obj_GDDB.exist();
                 if(arr['status'] == "OK"){
                     if (arr['result'] == "MULTI"){
                     window.alert("FIXME! exist return MULTI");
@@ -86,7 +86,13 @@ export class database {
                             this.obj_GDDB.create();
                         } else {
                             if(window.confirm("Google 雲端硬碟中存有資料庫，是否載入?\n[是] 使用Google 雲端硬碟中的資料庫\n[否] 使用本地資料庫")){
-                                this.obj_localDB.save(this.obj_GDDB.load());
+                                let res = this.obj_GDDB.load();
+                                if(res['status'] == "OK"){
+                                    this.obj_localDB.save(res['data']);
+                                }
+                                else if (res['status'] == "ERROR"){
+                                    window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
+                                }
                             }
                         }
                         localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));

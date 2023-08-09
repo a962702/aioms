@@ -63,7 +63,7 @@ export class GDDB {
         localStorage.setItem("AIOMS_GDDB_fileId", this.fileId);
     }
 
-    async exist() {
+    exist() {
         if (this.token != "") {
             let arr = Array();
             $.ajax({
@@ -74,7 +74,6 @@ export class GDDB {
                 },
                 async: false,
                 success: (data) => {
-                    console.log("success start");
                     arr['status'] = "OK";
                     if (data.files.length == 0) {
                         arr['result'] = "NO";
@@ -86,12 +85,9 @@ export class GDDB {
                     else {
                         arr['result'] = "MULTI";
                     }
-                    console.log("success end");
                 },
                 error: () => {
-                    console.log("error start");
                     arr['status'] = "ERROR";
-                    console.log("error start");
                 }
             })
             return arr;
@@ -131,6 +127,13 @@ export class GDDB {
                 url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
                 headers: {
                     'Authorization': 'Bearer ' + this.token
+                },
+                async: false,
+                success: () => {
+                    console.log("[GDDB] Load: " + data);
+                    let arr = Array();
+                    arr['status'] = "OK";
+                    arr['data'] = data;
                 }
             }).done((data) => {
                 console.log("[GDDB] Load: " + data);
@@ -143,6 +146,7 @@ export class GDDB {
                 arr['status'] = "ERROR";
                 return arr;
             })
+            return arr;
         }
     }
 

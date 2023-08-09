@@ -77,7 +77,7 @@ export class database {
                 return;
             if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
                 clearInterval(auth_check);
-                arr = this.obj_GDDB.exist();
+                let arr = this.obj_GDDB.exist();
                 if(arr['status'] == "OK"){
                     if (arr['result'] == "MULTI"){
                     window.alert("FIXME! exist return MULTI");

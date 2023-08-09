@@ -89,6 +89,8 @@ export class database {
                     localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
                 }
             }
+        } else {
+            window.alert("「連結 Google 雲端硬碟」操作已被取消");
         }
     }
 

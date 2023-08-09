@@ -48,14 +48,14 @@ export class GDDB {
         if (token !== null) {
             $.ajax({
                 method: "GET",
-                url: "https://www.googleapis.com/drive/v3/files?q=name%3DAIOMS.db&trashed=false",
+                url: "https://www.googleapis.com/drive/v3/files?q=name = 'AIOMS.db'&trashed=false",
                 headers: {
                     'Authorization': 'Bearer ' + token.access_token
                 }
             }).done((data) => {
                 console.log(data);
             }).fail(() => {
-                window.alert("[GDDB] Error when create");
+                window.alert("[GDDB] Error when exist");
             })
         }
     }
@@ -71,7 +71,8 @@ export class GDDB {
                 },
                 data: {
                     name: "AIOMS.db"
-                }
+                },
+                contentType: "application/json"
             }).done((data) => {
                 console.log(data);
             }).fail(() => {

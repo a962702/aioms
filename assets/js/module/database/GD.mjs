@@ -63,7 +63,7 @@ export class GDDB {
         localStorage.setItem("AIOMS_GDDB_fileId", this.fileId);
     }
 
-    exist() {
+    async exist() {
         if (this.token != "") {
             $.ajax({
                 method: "GET",

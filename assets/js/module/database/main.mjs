@@ -72,12 +72,12 @@ export class database {
     GD_connect() {
         localStorage.setItem("AIOMS_GDDB_AuthStatus", "START");
         this.obj_GDDB.auth();
-        let auth_check = setInterval(() => {
+        let auth_check = setInterval(async () => {
             if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" || localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT")
                 return;
             if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
                 clearInterval(auth_check);
-                let arr = this.obj_GDDB.exist();
+                let arr = await this.obj_GDDB.exist();
                 if(arr['status'] == "OK"){
                     if (arr['result'] == "MULTI"){
                     window.alert("FIXME! exist return MULTI");

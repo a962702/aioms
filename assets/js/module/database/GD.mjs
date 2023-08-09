@@ -72,7 +72,7 @@ export class GDDB {
                     'Authorization': 'Bearer ' + this.token
                 },
                 async: false,
-                success: () => {
+                success: (data) => {
                     let arr = Array();
                     arr['status'] = "OK";
                     if (data.files.length == 0) {

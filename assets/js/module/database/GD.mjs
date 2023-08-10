@@ -186,6 +186,7 @@ export class GDDB {
 
     getRemoteRevisionsValue() {
         this.getItemsFromLocalStorage();
+        let rev_id = "";
         $.ajax({
             method: "GET",
             url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '/revisions',
@@ -195,14 +196,11 @@ export class GDDB {
             async: false,
             success: (data) => {
                 let rev_list = data['revisions'];
-                let rev_id = rev_list[rev_list.length - 1]['id'];
+                rev_id = rev_list[rev_list.length - 1]['id'];
                 console.log("[GDDB] getRemoteRevisionsValue:", rev_id);
-                return rev_id;
-            },
-            error: () => {
-                return "";
             }
         })
+        return rev_id;
     }
 
     isRevisionsChanged() {

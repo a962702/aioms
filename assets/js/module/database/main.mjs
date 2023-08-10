@@ -133,7 +133,7 @@ export class database {
         this.obj_GDDB.signout();
         localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
         if (this.GD_sync_inverv !== null){
-            clearInterval(GD_sync_inverv);
+            clearInterval(this.GD_sync_inverv);
         }
         window.alert("已中斷連結Google");
     }

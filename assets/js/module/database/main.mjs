@@ -20,6 +20,7 @@ export class database {
         else {
             this.obj_localDB.load();
             if(this.get_setup_storage().includes('GD')){
+                this.obj_GDDB.setLocalRevisionsValue(this.obj_GDDB.getRemoteRevisionsValue()); // FIXME! Should detect version changed
                 this.GD_sync();
             }
         }

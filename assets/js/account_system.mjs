@@ -70,7 +70,6 @@ $("#overview_modal_add_save").on('click', () => {
             $(".overview_modal_add_tr").each((index, element) => {
                 //acc.add_transaction(element.children().eq(0).children().val(), element.children().eq(1).children().val());
             });
-            overview_modal_add.hide();
             uploading_modal.hide();
             overview_update();
         })

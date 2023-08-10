@@ -106,7 +106,7 @@ export class database {
                                     this.obj_localDB.save(res['data']);
                                     this.obj_localDB.load();
                                     window.alert("從Google 雲端硬碟載入資料庫成功");
-                                    GD_sync();
+                                    this.GD_sync();
                                 }
                                 else if (res['status'] == "ERROR"){
                                     window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
@@ -115,6 +115,7 @@ export class database {
                         }
                         localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
                         this.save();
+                        this.GD_sync();
                     }
                 }
             } else {

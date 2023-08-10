@@ -4,6 +4,7 @@ import { localDB } from './local.mjs';
 export class database {
     obj_localDB = null;
     obj_GDDB = null;
+    GD_sync_inverv = null;
 
     async init() {
         this.obj_localDB = new localDB();
@@ -38,6 +39,7 @@ export class database {
             arr['status'] = 'OK';
             arr['result'] = this.obj_localDB.exec(stm);
             if (isUpdate){
+                this.obj_localDB.exec("UPDATE `system` SET `ModifiedTime` = '" + Date.now() + "'");
                 this.save();
             }
         } else {
@@ -53,7 +55,14 @@ export class database {
             this.obj_localDB.save(this.obj_localDB.get_binaryArray());
         }
         if (this.get_setup_storage().includes('GD')){
-            this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
+            arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
+            if (arr['result'] == "ERROR"){
+                this.obj_GDDB.auth();
+                arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
+                if (arr['result'] == "ERROR"){
+                    window.alert("上傳資料庫至Google 雲端硬碟時發生錯誤");
+                }
+            }
         }
     }
 
@@ -96,6 +105,8 @@ export class database {
                                 if(res['status'] == "OK"){
                                     this.obj_localDB.save(res['data']);
                                     this.obj_localDB.load();
+                                    window.alert("從Google 雲端硬碟載入資料庫成功");
+                                    GD_sync();
                                 }
                                 else if (res['status'] == "ERROR"){
                                     window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
@@ -103,6 +114,7 @@ export class database {
                             }
                         }
                         localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
+                        this.save();
                     }
                 }
             } else {
@@ -116,6 +128,20 @@ export class database {
     GD_signout(){
         this.obj_GDDB.signout();
         localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
+        if (this.GD_sync_inverv !== null){
+            clearInterval(GD_sync_inverv);
+        }
         window.alert("已中斷連結Google");
+    }
+
+    // Google Drive - Sync
+    GD_sync() {
+        this.GD_sync_inverv = setInterval(() => {
+            if(this.obj_GDDB.isRevisionsChanged()){
+                let res = this.obj_GDDB.load();
+                this.obj_localDB.save(res['data']);
+                this.obj_localDB.load();
+            }
+        }, 5000);
     }
 }

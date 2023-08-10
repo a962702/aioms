@@ -43,7 +43,12 @@ export class localDB {
                 'record_id' INTEGER NOT NULL,
                 'type' INTEGER NOT NULL,
                 'amount' INTEGER NOT NULL
-            );`
+            );
+            CREATE TABLE 'system' (
+                'ModifiedTime' INTEGER NOT NULL
+            );
+            INSERT INTO 'system' ('ModifiedTime') VALUES ('0');
+            `
         this.db.run(command);
         this.save(this.get_binaryArray());
     }

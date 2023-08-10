@@ -6,6 +6,7 @@ export class GDDB {
     tokenClient = null;
     fileId = "";
     token = "";
+    revisions = "";
 
     async init() {
         while (!gapi || !google);
@@ -19,6 +20,9 @@ export class GDDB {
             client_id: this.CLIENT_ID,
             scope: this.SCOPES
         });
+    }
+
+    getItemsFromLocalStorage() {
         if(localStorage.getItem("AIOMS_GDDB_token") && localStorage.getItem("AIOMS_GDDB_token") != ""){
             this.token = localStorage.getItem("AIOMS_GDDB_token");
         }
@@ -50,6 +54,7 @@ export class GDDB {
     }
 
     signout() {
+        this.getItemsFromLocalStorage();
         if (this.token != "") {
             google.accounts.oauth2.revoke(this.token);
             gapi.client.setToken('');
@@ -64,6 +69,7 @@ export class GDDB {
     }
 
     exist() {
+        this.getItemsFromLocalStorage();
         if (this.token != "") {
             let arr = Array();
             $.ajax({
@@ -95,6 +101,7 @@ export class GDDB {
     }
 
     create() {
+        this.getItemsFromLocalStorage();
         if (this.token != "") {
             $.ajax({
                 method: "POST",
@@ -121,6 +128,7 @@ export class GDDB {
     }
 
     load() {
+        this.getItemsFromLocalStorage();
         if (this.token != "" && this.fileId != "") {
             let arr = Array();
             $.ajax({
@@ -144,8 +152,11 @@ export class GDDB {
     }
 
     save(data) {
+        this.getItemsFromLocalStorage();
+        this.setLocalRevisionsValue("");
         if (this.token != "" && this.fileId != "") {
             console.log("[GDDB] Save: " + data);
+            let arr = Array();
             $.ajax({
                 method: "PATCH",
                 url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
@@ -154,16 +165,50 @@ export class GDDB {
                 },
                 data: data,
                 contentType: 'text/plain',
-                processData: false
-            }).done(() => {
-                let arr = Array();
-                arr['status'] = "OK";
-                return arr;
-            }).fail(() => {
-                let arr = Array();
-                arr['status'] = "ERROR";
-                return arr;
+                processData: false,
+                async: false,
+                success: () => {
+                    arr['status'] = "OK";
+                    this.setLocalRevisionsValue(this.getRemoteRevisionsValue());
+                },
+                error: () => {
+                    arr['status'] = "ERROR";
+                }
             })
+            return arr;
         }
+    }
+
+    setLocalRevisionsValue(revisions) {
+        this.revisions = revisions;
+    }
+
+    getRemoteRevisionsValue() {
+        this.getItemsFromLocalStorage();
+        $.ajax({
+            method: "GET",
+            url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '/revisions',
+            headers: {
+                'Authorization': 'Bearer ' + this.token
+            },
+            async: false,
+            success: (data) => {
+                let rev_list = data['revisions'];
+                let rev_id = rev_list[rev_list.length - 1]['id'];
+                console.log("[GDDB] getRemoteRevisionsValue:", rev_id);
+                return rev_id;
+            },
+            error: () => {
+                return "";
+            }
+        })
+    }
+
+    isRevisionsChanged() {
+        new_rev = this.getRemoteRevisionsValue();
+        if(new_rev != "" && this.revisions != new_rev){
+            return true;
+        }
+        return false;
     }
 }

@@ -5,7 +5,7 @@ export class setting {
     }
 
     exec(stm){
-        let arr = this.db.exec(stm);
+        let arr = this.db.exec(stm, true);
         console.log(arr['status'], arr['result']);
     }
 }

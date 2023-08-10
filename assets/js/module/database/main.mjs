@@ -32,15 +32,17 @@ export class database {
     }
 
     // Execute SQL statement and return data
-    exec(stm) {
+    exec(stm, isUpdate) {
         let arr = Array();
         if (this.obj_localDB != null) {
             arr['status'] = 'OK';
             arr['result'] = this.obj_localDB.exec(stm);
+            if (isUpdate){
+                this.save();
+            }
         } else {
             arr['status'] = 'ERROR_UNINITIALIZED';
         }
-        this.save();
         return arr;
     }
 
@@ -93,6 +95,7 @@ export class database {
                                 let res = this.obj_GDDB.load();
                                 if(res['status'] == "OK"){
                                     this.obj_localDB.save(res['data']);
+                                    this.obj_localDB.load();
                                 }
                                 else if (res['status'] == "ERROR"){
                                     window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
@@ -113,5 +116,6 @@ export class database {
     GD_signout(){
         this.obj_GDDB.signout();
         localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
+        window.alert("已中斷連結Google");
     }
 }

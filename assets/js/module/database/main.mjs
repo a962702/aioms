@@ -145,6 +145,7 @@ export class database {
                 let res = this.obj_GDDB.load();
                 this.obj_localDB.save(res['data']);
                 this.obj_localDB.load();
+                this.obj_GDDB.setLocalRevisionsValue(this.obj_GDDB.getRemoteRevisionsValue());
             }
         }, 10000);
     }

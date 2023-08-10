@@ -2,14 +2,28 @@ import { database } from './module/database/main.mjs'
 import { overview } from './module/account_system/overview.mjs'
 import { plan } from './module/account_system/plan.mjs'
 import { account } from './module/account_system/account.mjs'
+import { setting } from './module/setting/main.mjs'
 
 let db = new database();
 await db.init();
 
 let ov = new overview(db);
 let acc = new account(db);
+let s = new setting(db);
 const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
 const account_modal_add = new bootstrap.Modal('#account_modal_add');
+
+$("#setting_btn_runcommand").on('click', ()=>{
+    s.exec($('#sql_statement').val());
+});
+
+$("#btn_GDDB_connect").on("click", () => {
+    db.GD_connect();
+})
+
+$("#btn_GDDB_signout").on("click", () => {
+    db.GD_signout();
+})
 
 $("#overview_add_modal_add_btn").on('click', () => {
     let acc_lists = acc.getLists();

@@ -143,6 +143,6 @@ export class database {
                 this.obj_localDB.save(res['data']);
                 this.obj_localDB.load();
             }
-        }, 5000);
+        }, 10000);
     }
 }

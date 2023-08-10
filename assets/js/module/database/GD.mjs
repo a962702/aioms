@@ -205,7 +205,7 @@ export class GDDB {
     }
 
     isRevisionsChanged() {
-        new_rev = this.getRemoteRevisionsValue();
+        let new_rev = this.getRemoteRevisionsValue();
         if(new_rev != "" && this.revisions != new_rev){
             return true;
         }

@@ -58,11 +58,11 @@ export class database {
             this.obj_localDB.save(this.obj_localDB.get_binaryArray());
         }
         if (this.get_setup_storage().includes('GD')){
-            arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
+            let arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
             if (arr['result'] == "ERROR"){
                 this.obj_GDDB.auth();
-                let arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
-                if (arr['result'] == "ERROR"){
+                let arr2 = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
+                if (arr2['result'] == "ERROR"){
                     window.alert("上傳資料庫至Google 雲端硬碟時發生錯誤");
                 }
             }

@@ -180,6 +180,7 @@ export class GDDB {
     }
 
     setLocalRevisionsValue(revisions) {
+        console.log("[GDDB] Local Revision changed from", this.revisions, "to", revisions);
         this.revisions = revisions;
     }
 

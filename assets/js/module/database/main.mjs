@@ -19,6 +19,9 @@ export class database {
         }
         else {
             this.obj_localDB.load();
+            if(this.get_setup_storage().includes('GD')){
+                this.GD_sync();
+            }
         }
     }
 

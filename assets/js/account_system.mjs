@@ -12,6 +12,7 @@ let acc = new account(db);
 let s = new setting(db);
 const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
 const account_modal_add = new bootstrap.Modal('#account_modal_add');
+const uploading_modal = new bootstrap.Modal('#uploading_modal');
 
 $("#setting_btn_runcommand").on('click', ()=>{
     s.exec($('#sql_statement').val());
@@ -59,11 +60,13 @@ $("#overview_add_modal_add_btn").on('click', () => {
 })
 
 $("#overview_modal_add_save").on('click', () => {
+    uploading_modal.show();
     ov.add($("#overview_modal_add_date").val(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
     $(".overview_modal_add_tr").each((index, element) => {
         //acc.add_transaction(element.children().eq(0).children().val(), element.children().eq(1).children().val());
     });
     overview_modal_add.hide();
+    uploading_modal.hide();
     overview_update();
 });
 
@@ -105,8 +108,11 @@ function overview_add_modal_update_total() {
 }
 
 $("#account_modal_add_save").on('click', () => {
+    uploading_modal.show();
     acc.add($("#account_modal_add_name").val(), $("#account_modal_add_description").val(),  $("#account_modal_add_amount").val());
     account_modal_add.hide();
+    uploading_modal.hide();
+    account_update();
 });
 
 function account_update(){

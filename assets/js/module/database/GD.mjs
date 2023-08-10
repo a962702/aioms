@@ -210,4 +210,26 @@ export class GDDB {
         }
         return false;
     }
+
+    getUserInfo() {
+        this.getItemsFromLocalStorage();
+        let result = Array();
+        $.ajax({
+            method: "GET",
+            url: "https://www.googleapis.com/drive/v3/about",
+            headers: {
+                'Authorization': 'Bearer ' + this.token
+            },
+            async: false,
+            success: (data) => {
+                result['status'] = "OK";
+                result['displayName'] = data['user']['displayName'];
+                result['emailAddress'] = data['user']['emailAddress'];
+            },
+            error: () => {
+                result['status'] = "ERROR";
+            }
+        })
+        return result;
+    }
 }

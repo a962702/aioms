@@ -149,4 +149,8 @@ export class database {
             }
         }, 10000);
     }
+
+    GD_getUserInfo() {
+        return this.obj_GDDB.getUserInfo();
+    }
 }

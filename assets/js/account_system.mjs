@@ -62,10 +62,10 @@ $("#overview_add_modal_add_btn").on('click', () => {
 $("#overview_modal_add_save").on('click', () => {
     uploading_modal.show();
     $("#uploading_modal").on('shown.bs.modal', () => {
-        ("#uploading_modal").off('shown.bs.modal');
+        $("#uploading_modal").off('shown.bs.modal');
         overview_modal_add.hide();
         $("#overview_modal_add").on('hidden.bs.modal', () => {
-            ("#overview_modal_add").off('hidden.bs.modal');
+            $("#overview_modal_add").off('hidden.bs.modal');
             ov.add($("#overview_modal_add_date").val(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
             $(".overview_modal_add_tr").each((index, element) => {
                 //acc.add_transaction(element.children().eq(0).children().val(), element.children().eq(1).children().val());
@@ -117,7 +117,7 @@ function overview_add_modal_update_total() {
 $("#account_modal_add_save").on('click', () => {
     uploading_modal.show();
     $("#uploading_modal").on('shown.bs.modal', () => {
-        ("#uploading_modal").off('shown.bs.modal');
+        $("#uploading_modal").off('shown.bs.modal');
         account_modal_add.hide();
         $("#account_modal_add").on('hidden.bs.modal', () => {
             $("#account_modal_add").off('hidden.bs.modal');

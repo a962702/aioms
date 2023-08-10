@@ -61,7 +61,7 @@ export class database {
             arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
             if (arr['result'] == "ERROR"){
                 this.obj_GDDB.auth();
-                arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
+                let arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
                 if (arr['result'] == "ERROR"){
                     window.alert("上傳資料庫至Google 雲端硬碟時發生錯誤");
                 }

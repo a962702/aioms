@@ -13,7 +13,7 @@ export class database {
         await this.obj_GDDB.init();
         if (!localStorage.getItem("AIOMS_DB_INIT")) {
             localStorage.setItem("AIOMS_DB_VER", "1");
-            localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
+            localStorage.setItem("AIOMS_DB_STORAGE", JSON.stringify(Array('local')));
             localStorage.setItem("AIOMS_DB_INIT", true);
             this.obj_localDB.initDB();
         }
@@ -51,7 +51,7 @@ export class database {
 
     // Get setup storage
     get_setup_storage() {
-        return localStorage.getItem("AIOMS_DB_STORAGE");
+        return JSON.parse(localStorage.getItem("AIOMS_DB_STORAGE"));
     }
 
     // Execute SQL statement and return data
@@ -160,7 +160,7 @@ export class database {
                                     this.GD_sync();
                                 }
                             }
-                            localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
+                            localStorage.setItem("AIOMS_DB_STORAGE", JSON.stringify(Array('local', 'GD')));
                         }
                     } else {
                         window.alert("GDDB.exist() ERROR");
@@ -178,7 +178,7 @@ export class database {
     // Google Drive - Signout
     GD_signout() {
         this.obj_GDDB.signout();
-        localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
+        localStorage.setItem("AIOMS_DB_STORAGE", JSON.stringify(Array('local')));
         if (this.GD_sync_inverv !== null) {
             clearInterval(this.GD_sync_inverv);
         }

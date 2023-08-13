@@ -19,9 +19,27 @@ export class database {
         }
         else {
             this.obj_localDB.load();
-            if(this.get_setup_storage().includes('GD')){
-                this.obj_GDDB.setLocalRevisionsValue(this.obj_GDDB.getRemoteRevisionsValue()); // FIXME! Should detect version changed
-                this.GD_sync();
+            if (this.get_setup_storage().includes('GD')) {  // FIXME! Should detect version changed
+                $(document).one("DB-GD-load", (e, status, data) => {
+                    if (status == "OK") {
+                        this.obj_localDB.save(data);
+                        this.obj_localDB.load();
+                        $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
+                            if (status == "OK"){
+                                this.obj_GDDB.setLocalRevisionsValue(rev_id);
+                                this.GD_sync();
+                            } else {
+                                window.alert("無法取得 revision 值");
+                            }
+                        })
+                        this.obj_GDDB.getRemoteRevisionsValue();
+                    }
+                    else {
+                        window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
+                        this.GD_signout();
+                    }
+                })
+                this.obj_GDDB.load();
             }
         }
     }
@@ -42,7 +60,7 @@ export class database {
         if (this.obj_localDB != null) {
             arr['status'] = 'OK';
             arr['result'] = this.obj_localDB.exec(stm);
-            if (isUpdate){
+            if (isUpdate) {
                 this.obj_localDB.exec("UPDATE `system` SET `ModifiedTime` = '" + Date.now() + "'");
                 this.save();
             }
@@ -55,18 +73,11 @@ export class database {
     // Save all DB
     save() {
         console.log(this.get_setup_storage(), this.get_setup_storage().includes('local'), this.get_setup_storage().includes('GD'));
-        if (this.get_setup_storage().includes('local')){
+        if (this.get_setup_storage().includes('local')) {
             this.obj_localDB.save(this.obj_localDB.get_binaryArray());
         }
-        if (this.get_setup_storage().includes('GD')){
-            let arr = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
-            if (arr['result'] == "ERROR"){
-                this.obj_GDDB.auth();
-                let arr2 = this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
-                if (arr2['result'] == "ERROR"){
-                    window.alert("上傳資料庫至Google 雲端硬碟時發生錯誤");
-                }
-            }
+        if (this.get_setup_storage().includes('GD')) {
+            this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
         }
     }
 
@@ -89,51 +100,62 @@ export class database {
 
     // Google Drive - Connect
     GD_connect() {
-        localStorage.setItem("AIOMS_GDDB_AuthStatus", "START");
-        this.obj_GDDB.auth();
-        let auth_check = setInterval(() => {
-            if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "START" || localStorage.getItem("AIOMS_GDDB_AuthStatus") == "WAIT")
-                return;
-            if(localStorage.getItem("AIOMS_GDDB_AuthStatus") == "SUCCESS"){
-                clearInterval(auth_check);
-                let arr = this.obj_GDDB.exist();
-                if(arr['status'] == "OK"){
-                    if (arr['result'] == "MULTI"){
-                    window.alert("FIXME! exist return MULTI");
-                    } else {
-                        if(arr['result'] == "NO"){
-                            this.obj_GDDB.create();
+        $(document).one("DB-GD-auth", (e, status) => {
+            if (status == "SUCCESS") {
+                $(document).one("DB-GD-exist", (e, status, result) => {
+                    if (status == "OK") {
+                        if (result == "MULTI") {
+                            window.alert("FIXME! GDDB.exist() return MULTI");
                         } else {
-                            if(window.confirm("Google 雲端硬碟中存有資料庫，是否載入?\n[是] 使用Google 雲端硬碟中的資料庫\n[否] 使用本地資料庫")){
-                                let res = this.obj_GDDB.load();
-                                if(res['status'] == "OK"){
-                                    this.obj_localDB.save(res['data']);
-                                    this.obj_localDB.load();
-                                    window.alert("從Google 雲端硬碟載入資料庫成功");
+                            if (result == "NO") {
+                                this.obj_GDDB.create();
+                            } else {
+                                if (window.confirm("Google 雲端硬碟中存有資料庫，是否載入?\n[是] 使用Google 雲端硬碟中的資料庫\n[否] 使用本地資料庫")) {
+                                    $(document).one("DB-GD-load", (e, status, data) => {
+                                        if (status == "OK") {
+                                            this.obj_localDB.save(data);
+                                            this.obj_localDB.load();
+                                            window.alert("從Google 雲端硬碟載入資料庫成功");
+                                            $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
+                                                if (status == "OK") {
+                                                    this.obj_GDDB.setLocalRevisionsValue(rev_id);
+                                                    this.GD_sync();
+                                                } else {
+                                                    window.alert("無法取得 revision 值");
+                                                }
+                                            })
+                                            this.obj_GDDB.getRemoteRevisionsValue();
+                                        }
+                                        else {
+                                            window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
+                                        }
+                                    })
+                                    this.obj_GDDB.load();
+                                } else {
+                                    this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
                                     this.GD_sync();
                                 }
-                                else if (res['status'] == "ERROR"){
-                                    window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
-                                }
                             }
+                            localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
                         }
-                        localStorage.setItem("AIOMS_DB_STORAGE", Array('local', 'GD'));
-                        this.save();
-                        this.GD_sync();
+                    } else {
+                        window.alert("GDDB.exist() ERROR");
                     }
-                }
-            } else {
-                clearInterval(auth_check);
+                })
+                this.obj_GDDB.exist();
+            }
+            else {
                 window.alert("「連結 Google 雲端硬碟」操作已被取消");
             }
-        }, 500);
+        })
+        this.obj_GDDB.auth();
     }
 
     // Google Drive - Signout
-    GD_signout(){
+    GD_signout() {
         this.obj_GDDB.signout();
         localStorage.setItem("AIOMS_DB_STORAGE", Array('local'));
-        if (this.GD_sync_inverv !== null){
+        if (this.GD_sync_inverv !== null) {
             clearInterval(this.GD_sync_inverv);
         }
         window.alert("已中斷連結Google");
@@ -142,13 +164,27 @@ export class database {
     // Google Drive - Sync
     GD_sync() {
         this.GD_sync_inverv = setInterval(() => {
-            if(this.obj_GDDB.isRevisionsChanged()){
-                let res = this.obj_GDDB.load();
-                this.obj_localDB.save(res['data']);
-                this.obj_localDB.load();
-                this.obj_GDDB.setLocalRevisionsValue(this.obj_GDDB.getRemoteRevisionsValue());
-            }
-        }, 10000);
+            $(document).one("DB-GD-isRevisionsChanged", (e, result) => {
+                if (result == "YES") {
+                    $(document).one("DB-GD-load", (e, status, data) => {
+                        if (status == "OK") {
+                            this.obj_localDB.save(data);
+                            this.obj_localDB.load();
+                            $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
+                                if (status == "OK"){
+                                    this.obj_GDDB.setLocalRevisionsValue(rev_id);
+                                } else {
+                                    window.alert("無法取得 revision 值");
+                                }
+                            })
+                            this.obj_GDDB.getRemoteRevisionsValue();
+                        }
+                    })
+                    this.obj_GDDB.load();
+                }
+            })
+            this.obj_GDDB.isRevisionsChanged();
+        }, 7500);
     }
 
     GD_getUserInfo() {

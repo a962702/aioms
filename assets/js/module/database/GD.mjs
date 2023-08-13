@@ -23,28 +23,27 @@ export class GDDB {
     }
 
     getItemsFromLocalStorage() {
-        if(localStorage.getItem("AIOMS_GDDB_token") && localStorage.getItem("AIOMS_GDDB_token") != ""){
+        if (localStorage.getItem("AIOMS_GDDB_token") && localStorage.getItem("AIOMS_GDDB_token") != "") {
             this.token = localStorage.getItem("AIOMS_GDDB_token");
         }
-        if(localStorage.getItem("AIOMS_GDDB_fileId") && localStorage.getItem("AIOMS_GDDB_fileId") != ""){
+        if (localStorage.getItem("AIOMS_GDDB_fileId") && localStorage.getItem("AIOMS_GDDB_fileId") != "") {
             this.fileId = localStorage.getItem("AIOMS_GDDB_fileId");
         }
     }
 
     auth() {
-        localStorage.setItem("AIOMS_GDDB_AuthStatus", "WAIT");
         this.tokenClient.callback = (resp) => {
             if (resp.error !== undefined) {
                 console.log(resp);
-                localStorage.setItem("AIOMS_GDDB_AuthStatus", "FAIL");
+                $(document).trigger("DB-GD-auth", ["FAIL"]);
             } else {
                 this.token = gapi.client.getToken().access_token;
                 localStorage.setItem("AIOMS_GDDB_token", this.token);
-                localStorage.setItem("AIOMS_GDDB_AuthStatus", "SUCCESS");
+                $(document).trigger("DB-GD-auth", ["SUCCESS"]);
             }
         };
         this.tokenClient.error_callback = () => {
-            localStorage.setItem("AIOMS_GDDB_AuthStatus", "FAIL");
+            $(document).trigger("DB-GD-auth", ["FAIL"]);
         }
         if (gapi.client.getToken() === null) {
             this.tokenClient.requestAccessToken({ prompt: 'consent' });
@@ -71,32 +70,28 @@ export class GDDB {
     exist() {
         this.getItemsFromLocalStorage();
         if (this.token != "") {
-            let arr = Array();
             $.ajax({
                 method: "GET",
                 url: "https://www.googleapis.com/drive/v3/files?q=name = 'AIOMS.db'&trashed=false",
                 headers: {
                     'Authorization': 'Bearer ' + this.token
                 },
-                async: false,
                 success: (data) => {
-                    arr['status'] = "OK";
                     if (data.files.length == 0) {
-                        arr['result'] = "NO";
+                        $(document).trigger("DB-GD-exist", ["OK", "NO"]);
                     }
                     else if (data.files.length == 1) {
-                        arr['result'] = "YES";
+                        $(document).trigger("DB-GD-exist", ["OK", "YES"]);
                         this.setId(data.files[0].id);
                     }
                     else {
-                        arr['result'] = "MULTI";
+                        $(document).trigger("DB-GD-exist", ["OK", "MULTI"]);
                     }
                 },
                 error: () => {
-                    arr['status'] = "ERROR";
+                    $(document).trigger("DB-GD-exist", ["ERROR"]);
                 }
             })
-            return arr;
         }
     }
 
@@ -130,24 +125,20 @@ export class GDDB {
     load() {
         this.getItemsFromLocalStorage();
         if (this.token != "" && this.fileId != "") {
-            let arr = Array();
             $.ajax({
                 method: "GET",
                 url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '?alt=media',
                 headers: {
                     'Authorization': 'Bearer ' + this.token
                 },
-                async: false,
                 success: (data) => {
                     console.log("[GDDB] Load: " + data);
-                    arr['status'] = "OK";
-                    arr['data'] = data;
+                    $(document).trigger("DB-GD-load", ["OK", data]);
                 },
                 error: () => {
-                    arr['status'] = "ERROR";
+                    $(document).trigger("DB-GD-load", ["ERROR"]);
                 }
             })
-            return arr;
         }
     }
 
@@ -156,7 +147,6 @@ export class GDDB {
         this.setLocalRevisionsValue("");
         if (this.token != "" && this.fileId != "") {
             console.log("[GDDB] Save: " + data);
-            let arr = Array();
             $.ajax({
                 method: "PATCH",
                 url: "https://www.googleapis.com/upload/drive/v3/files/" + this.fileId,
@@ -166,16 +156,19 @@ export class GDDB {
                 data: data,
                 contentType: 'text/plain',
                 processData: false,
-                async: false,
                 success: () => {
-                    arr['status'] = "OK";
-                    this.setLocalRevisionsValue(this.getRemoteRevisionsValue());
+                    $(document).trigger("DB-GD-save", ["OK"]);
+                    $(document).one("DB-GD-getRemoteRevisionsValue", function(e, status, new_rev) {
+                        if (status == "OK"){
+                            this.setLocalRevisionsValue(new_rev);
+                        }
+                    })
+                    this.getRemoteRevisionsValue();
                 },
                 error: () => {
-                    arr['status'] = "ERROR";
+                    $(document).trigger("DB-GD-save", ["ERROR"]);
                 }
             })
-            return arr;
         }
     }
 
@@ -186,29 +179,32 @@ export class GDDB {
 
     getRemoteRevisionsValue() {
         this.getItemsFromLocalStorage();
-        let rev_id = "";
         $.ajax({
             method: "GET",
             url: "https://www.googleapis.com/drive/v3/files/" + this.fileId + '/revisions',
             headers: {
                 'Authorization': 'Bearer ' + this.token
             },
-            async: false,
             success: (data) => {
                 let rev_list = data['revisions'];
-                rev_id = rev_list[rev_list.length - 1]['id'];
+                let rev_id = rev_list[rev_list.length - 1]['id'];
+                $(document).trigger("DB-GD-getRemoteRevisionsValue", ["OK", rev_id]);
                 console.log("[GDDB] getRemoteRevisionsValue:", rev_id);
+            },
+            error: () => {
+                $(document).trigger("DB-GD-getRemoteRevisionsValue", ["ERROR"]);
             }
         })
-        return rev_id;
     }
 
     isRevisionsChanged() {
-        let new_rev = this.getRemoteRevisionsValue();
-        if(this.revisions != "" && new_rev != "" && this.revisions != new_rev){
-            return true;
-        }
-        return false;
+        $(document).one("DB-GD-getRemoteRevisionsValue", function(e, status, new_rev) {
+            if (status == "OK" && this.revisions != "" && new_rev != "" && this.revisions != new_rev) {
+                $(document).trigger("DB-GD-isRevisionsChanged", ["YES"]);
+            }
+            $(document).trigger("DB-GD-isRevisionsChanged", ["NO"]);
+        })
+        this.getRemoteRevisionsValue();
     }
 
     getUserInfo() {
@@ -220,14 +216,11 @@ export class GDDB {
             headers: {
                 'Authorization': 'Bearer ' + this.token
             },
-            async: false,
             success: (data) => {
-                result['status'] = "OK";
-                result['displayName'] = data['user']['displayName'];
-                result['emailAddress'] = data['user']['emailAddress'];
+                $(document).trigger("DB-GD-getUserInfo", ["OK", data['user']['displayName'], data['user']['emailAddress']]);
             },
             error: () => {
-                result['status'] = "ERROR";
+                $(document).trigger("DB-GD-getUserInfo", ["ERROR"]);
             }
         })
         return result;

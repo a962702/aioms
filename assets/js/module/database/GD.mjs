@@ -199,6 +199,7 @@ export class GDDB {
 
     isRevisionsChanged() {
         $(document).one("DB-GD-getRemoteRevisionsValue", function(e, status, new_rev) {
+            console.log("[GD.isRevisionsChanged]", status, this.revisions, new_rev);
             if (status == "OK" && this.revisions != "" && new_rev != "" && this.revisions != new_rev) {
                 $(document).trigger("DB-GD-isRevisionsChanged", ["YES"]);
             }

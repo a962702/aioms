@@ -97,7 +97,6 @@ export class database {
             this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
         }
         let save_check = setInterval(() => {
-            console.log("?!", storage_count, this.get_setup_storage().length);
             if (storage_count == this.get_setup_storage().length){
                 clearInterval(save_check);
                 $(document).trigger("DB-save");
@@ -133,6 +132,7 @@ export class database {
                         } else {
                             if (result == "NO") {
                                 this.obj_GDDB.create();
+                                window.alert("已成功連結 Google 雲端硬碟");
                             } else {
                                 if (window.confirm("Google 雲端硬碟中存有資料庫，是否載入?\n[是] 使用Google 雲端硬碟中的資料庫\n[否] 使用本地資料庫")) {
                                     $(document).one("DB-GD-load", (e, status, data) => {

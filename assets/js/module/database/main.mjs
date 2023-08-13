@@ -78,9 +78,19 @@ export class database {
             storage_count += 1;
         }
         if (this.get_setup_storage().includes('GD')) {
+            this.obj_GDDB.setLocalRevisionsValue("");
             $(document).one('DB-GD-save', (e, status) => {
                 storage_count += 1;
-                if (status != "OK"){
+                if (status == "OK"){
+                    $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
+                        if (status == "OK"){
+                            this.obj_GDDB.setLocalRevisionsValue(rev_id);
+                        } else {
+                            window.alert("無法取得 revision 值");
+                        }
+                    })
+                    this.obj_GDDB.getRemoteRevisionsValue();
+                } else {
                     window.alert("儲存資料庫至 Google 雲端硬碟時發生錯誤!");
                 }
             })

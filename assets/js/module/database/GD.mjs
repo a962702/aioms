@@ -144,7 +144,6 @@ export class GDDB {
 
     save(data) {
         this.getItemsFromLocalStorage();
-        this.setLocalRevisionsValue("");
         if (this.token != "" && this.fileId != "") {
             console.log("[GDDB] Save: " + data);
             $.ajax({
@@ -158,12 +157,6 @@ export class GDDB {
                 processData: false,
                 success: () => {
                     $(document).trigger("DB-GD-save", ["OK"]);
-                    $(document).one("DB-GD-getRemoteRevisionsValue", function(e, status, new_rev) {
-                        if (status == "OK"){
-                            self.setLocalRevisionsValue(new_rev);
-                        }
-                    })
-                    this.getRemoteRevisionsValue();
                 },
                 error: () => {
                     $(document).trigger("DB-GD-save", ["ERROR"]);

@@ -72,13 +72,26 @@ export class database {
 
     // Save all DB
     save() {
-        console.log(this.get_setup_storage(), this.get_setup_storage().includes('local'), this.get_setup_storage().includes('GD'));
+        let storage_count = 0;
         if (this.get_setup_storage().includes('local')) {
             this.obj_localDB.save(this.obj_localDB.get_binaryArray());
+            storage_count += 1;
         }
         if (this.get_setup_storage().includes('GD')) {
+            $(document).one('DB-GD-save', (e, status) => {
+                storage_count += 1;
+                if (status != "OK"){
+                    window.alert("儲存資料庫至 Google 雲端硬碟時發生錯誤!");
+                }
+            })
             this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
         }
+        let save_check = setInterval(() => {
+            if (storage_count == this.get_setup_storage().length){
+                clearInterval(save_check);
+                $(document).trigger("DB-save");
+            }
+        }, 500);
     }
 
     // Export DB
@@ -166,7 +179,7 @@ export class database {
         this.GD_sync_inverv = setInterval(() => {
             $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
                 console.log("[GD_sync]", rev_id, this.obj_GDDB.getLocalRevisionsValue());
-                if (status == "YES" && rev_id != this.obj_GDDB.getLocalRevisionsValue()) {
+                if (status == "OK" && rev_id != this.obj_GDDB.getLocalRevisionsValue()) {
                     $(document).one("DB-GD-load", (e, status, data) => {
                         if (status == "OK") {
                             this.obj_localDB.save(data);

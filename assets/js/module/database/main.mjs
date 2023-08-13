@@ -178,8 +178,7 @@ export class database {
     GD_sync() {
         this.GD_sync_inverv = setInterval(() => {
             $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
-                console.log("[GD_sync]", rev_id, this.obj_GDDB.getLocalRevisionsValue());
-                if (status == "OK" && rev_id != this.obj_GDDB.getLocalRevisionsValue()) {
+                if (status == "OK" && this.obj_GDDB.getLocalRevisionsValue() != "" && rev_id != this.obj_GDDB.getLocalRevisionsValue()) {
                     $(document).one("DB-GD-load", (e, status, data) => {
                         if (status == "OK") {
                             this.obj_localDB.save(data);

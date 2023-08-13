@@ -160,7 +160,7 @@ export class GDDB {
                     $(document).trigger("DB-GD-save", ["OK"]);
                     $(document).one("DB-GD-getRemoteRevisionsValue", function(e, status, new_rev) {
                         if (status == "OK"){
-                            this.setLocalRevisionsValue(new_rev);
+                            self.setLocalRevisionsValue(new_rev);
                         }
                     })
                     this.getRemoteRevisionsValue();
@@ -189,7 +189,6 @@ export class GDDB {
                 let rev_list = data['revisions'];
                 let rev_id = rev_list[rev_list.length - 1]['id'];
                 $(document).trigger("DB-GD-getRemoteRevisionsValue", ["OK", rev_id]);
-                console.log("[GDDB] getRemoteRevisionsValue:", rev_id);
             },
             error: () => {
                 $(document).trigger("DB-GD-getRemoteRevisionsValue", ["ERROR"]);
@@ -198,7 +197,6 @@ export class GDDB {
     }
 
     getLocalRevisionsValue() {
-        console.log("[GDDB] getLocalRevisionsValue()", this.revisions);
         return this.revisions;
     }
 

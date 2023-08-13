@@ -97,6 +97,7 @@ export class database {
             this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
         }
         let save_check = setInterval(() => {
+            console.log("?!", storage_count, this.get_setup_storage().length);
             if (storage_count == this.get_setup_storage().length){
                 clearInterval(save_check);
                 $(document).trigger("DB-save");

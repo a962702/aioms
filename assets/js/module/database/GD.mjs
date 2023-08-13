@@ -198,6 +198,7 @@ export class GDDB {
     }
 
     getLocalRevisionsValue() {
+        console.log("[GDDB] getLocalRevisionsValue()", this.revisions);
         return this.revisions;
     }
 

@@ -164,26 +164,19 @@ export class database {
     // Google Drive - Sync
     GD_sync() {
         this.GD_sync_inverv = setInterval(() => {
-            $(document).one("DB-GD-isRevisionsChanged", (e, result) => {
-                if (result == "YES") {
+            $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
+                if (status == "YES" && rev_id != this.obj_GDDB.getLocalRevisionsValue()) {
                     $(document).one("DB-GD-load", (e, status, data) => {
                         if (status == "OK") {
                             this.obj_localDB.save(data);
                             this.obj_localDB.load();
-                            $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
-                                if (status == "OK"){
-                                    this.obj_GDDB.setLocalRevisionsValue(rev_id);
-                                } else {
-                                    window.alert("無法取得 revision 值");
-                                }
-                            })
-                            this.obj_GDDB.getRemoteRevisionsValue();
+                            this.obj_GDDB.setLocalRevisionsValue(rev_id);
                         }
                     })
                     this.obj_GDDB.load();
                 }
             })
-            this.obj_GDDB.isRevisionsChanged();
+            this.obj_GDDB.getRemoteRevisionsValue();
         }, 7500);
     }
 

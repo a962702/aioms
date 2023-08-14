@@ -198,7 +198,7 @@ export class GDDB {
         let result = Array();
         $.ajax({
             method: "GET",
-            url: "https://www.googleapis.com/drive/v3/about",
+            url: "https://www.googleapis.com/drive/v3/about?fields=user",
             headers: {
                 'Authorization': 'Bearer ' + this.token
             },

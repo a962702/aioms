@@ -6,6 +6,8 @@ export class account {
 
     add(name, description, amount) {
         this.db.exec("INSERT INTO `accountsys_account` (`name`, `description`, `amount`) VALUES ('" + name + "', '" + description + "', '" + amount + "');", true);
+        let arr = this.db.exec(" SELECT last_insert_rowid();");
+        return arr['result'][0]['values'][0];
     }
 
     add_transaction(account_id, record_id, type, amount){

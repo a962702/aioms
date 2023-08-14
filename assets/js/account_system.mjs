@@ -60,6 +60,18 @@ $("#overview_add_modal_add_btn").on('click', () => {
 })
 
 $("#overview_modal_add_save").on('click', () => {
+    if($("#overview_modal_add_date").val() == ""){
+        window.alert("請輸入日期");
+        return;
+    }
+    if($("#overview_modal_add_description").val() == ""){
+        window.alert("請輸入說明");
+        return;
+    }
+    if($("#overview_add_modal_total").text() == "0"){
+        window.alert("金額為0");
+        return;
+    }
     overview_modal_add.hide();
     $("#overview_modal_add").on('hidden.bs.modal', () => {
         $("#overview_modal_add").off('hidden.bs.modal');
@@ -70,9 +82,10 @@ $("#overview_modal_add_save").on('click', () => {
                 uploading_modal.hide();
                 overview_update();
             })
-            ov.add($("#overview_modal_add_date").val(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
+            let id = ov.add(new Date($("#overview_modal_add_date").val()).getTime(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
             $(".overview_modal_add_tr").each((index, element) => {
-                //acc.add_transaction(element.children().eq(0).children().val(), element.children().eq(1).children().val());
+                console.log(element);
+                acc.add_transaction(element.children().eq(0).children().val(), id, $("#overview_modal_add_type").val(), element.children().eq(1).children().val());
             });
         })
         
@@ -91,7 +104,7 @@ function overview_update(){
     jQuery.each(data['result'][0]['values'], (index, value) => {
         $("#overview_tbody").append(
             $("<tr>").append(
-                $("<td>").text(value[1]), // date
+                $("<td>").text(new Date(parseInt(value[1])).toDateString()), // date
                 $("<td>").text(value[2] == "1" ? "支出" : "收入"), // type
                 $("<td>").text(value[3]), // description
                 $("<td>").text(value[5]), // amount

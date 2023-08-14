@@ -84,7 +84,7 @@ $("#overview_modal_add_save").on('click', () => {
             })
             let id = ov.add(new Date($("#overview_modal_add_date").val()).getTime(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
             $(".overview_modal_add_tr").each((index, element) => {
-                acc.add_transaction($(element).children().eq(0).children().attr("id"), id, $("#overview_modal_add_type").val(), $(element).children().eq(1).children().val());
+                acc.add_transaction($(element).children().eq(0).children(":selected").attr("id"), id, $("#overview_modal_add_type").val(), $(element).children().eq(1).children().val());
             });
         })
         

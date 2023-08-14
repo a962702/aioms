@@ -5,8 +5,9 @@ export class overview {
     }
 
     add(date, type, description, invoice, amount, commit){
-        let arr = this.db.exec("INSERT INTO `accountsys_record` (`date`, `type`, `description`, `invoice`, `amount`, `commit`) VALUES ('" + date + "', '" + type + "', '" + description + "', '" + invoice + "', '" + amount + "', '" + commit + "');", true);
-        console.log(arr['status'], arr['result']);
+        this.db.exec("INSERT INTO `accountsys_record` (`date`, `type`, `description`, `invoice`, `amount`, `commit`) VALUES ('" + date + "', '" + type + "', '" + description + "', '" + invoice + "', '" + amount + "', '" + commit + "');", true);
+        let arr = this.db.exec("SELECT last_insert_rowid();", false);
+        return arr['result'][0]['values'][0];
     }
     getLists(){
         let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `invoice`, `amount`, `commit` FROM `accountsys_record`;", false);

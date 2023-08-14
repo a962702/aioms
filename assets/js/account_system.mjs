@@ -92,7 +92,7 @@ function overview_update(){
         $("#overview_tbody").append(
             $("<tr>").append(
                 $("<td>").text(value[1]), // date
-                $("<td>").text(value[2]), // type
+                $("<td>").text(value[2] == "1" ? "支出" : "收入"), // type
                 $("<td>").text(value[3]), // description
                 $("<td>").text(value[5]), // amount
                 $("<td>") // action

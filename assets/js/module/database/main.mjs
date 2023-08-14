@@ -27,7 +27,14 @@ export class database {
                         $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
                             if (status == "OK"){
                                 this.obj_GDDB.setLocalRevisionsValue(rev_id);
-                                this.GD_sync();
+                                $(document).one("DB-GD-getUserInfo", (e, status, displayName, emailAddress) => {
+                                    $("#setting_GD_status").text("已連結");
+                                    $("setting_GD_user").text(displayName + "(" + emailAddress + ")");
+                                    $("#btn_GDDB_connect").css("display", "none");
+                                    $("#btn_GDDB_signout").css("display", "block");
+                                    this.GD_sync();
+                                })
+                                this.obj_GDDB.getUserInfo();
                             } else {
                                 window.alert("無法取得 revision 值");
                             }
@@ -40,6 +47,11 @@ export class database {
                     }
                 })
                 this.obj_GDDB.load();
+            } else {
+                $("#setting_GD_status").text("未登入");
+                $("setting_GD_user").text("");
+                $("#btn_GDDB_connect").css("display", "block");
+                $("#btn_GDDB_signout").css("display", "none");
             }
         }
     }
@@ -143,7 +155,14 @@ export class database {
                                             $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
                                                 if (status == "OK") {
                                                     this.obj_GDDB.setLocalRevisionsValue(rev_id);
-                                                    this.GD_sync();
+                                                    $(document).one("DB-GD-getUserInfo", (e, status, displayName, emailAddress) => {
+                                                        $("#setting_GD_status").text("已連結");
+                                                        $("setting_GD_user").text(displayName + "(" + emailAddress + ")");
+                                                        $("#btn_GDDB_connect").css("display", "none");
+                                                        $("#btn_GDDB_signout").css("display", "block");
+                                                        this.GD_sync();
+                                                    })
+                                                    this.obj_GDDB.getUserInfo();
                                                 } else {
                                                     window.alert("無法取得 revision 值");
                                                 }
@@ -182,6 +201,10 @@ export class database {
         if (this.GD_sync_inverv !== null) {
             clearInterval(this.GD_sync_inverv);
         }
+        $("#setting_GD_status").text("未登入");
+        $("setting_GD_user").text("");
+        $("#btn_GDDB_connect").css("display", "block");
+        $("#btn_GDDB_signout").css("display", "none");
         window.alert("已中斷連結Google");
     }
 

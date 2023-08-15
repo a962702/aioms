@@ -1,8 +1,5 @@
 html, body {
     display: flex;
     flex-flow: column;
-}
-
-#pages {
     background-color:skyblue;
 }

@@ -108,9 +108,9 @@ function overview_update(){
                 $("<td>").text(value[3]), // description
                 $("<td>").text(value[5]), // amount
                 $("<td>").append(// action
-                    $("<button>").attr('type', 'button').addClass('btn btn-secondary').text("詳細"),
-                    $("<button>").attr('type', 'button').addClass('btn btn-info').text("修改"),
-                    $("<button>").attr('type', 'button').addClass('btn btn-danger').text("刪除")
+                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("詳細"),
+                    $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改"),
+                    $("<button>").attr('type', 'button').addClass('btn btn-danger m-1').text("刪除")
                 ) 
             )
         );
@@ -162,8 +162,8 @@ function account_update(){
                 $("<td>").text(value[2]), // description
                 $("<td>").text(value[3]), // amount
                 $("<td>").append(// action
-                    $("<button>").attr('type', 'button').addClass('btn btn-secondary').text("檢視紀錄"),
-                    $("<button>").attr('type', 'button').addClass('btn btn-info').text("修改")
+                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("檢視紀錄"),
+                    $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改")
                 ) 
             )
         );

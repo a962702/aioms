@@ -14,9 +14,9 @@ layout: base
 </div>
 <div id="overview" class="pages container" style="display: none">
     <p class="fs-3 text-center">總覽</p>
-    <button class="btn btn-primary" id="overview_btn_add" data-bs-toggle="modal"
+    <button class="btn btn-primary m-1" id="overview_btn_add" data-bs-toggle="modal"
         data-bs-target="#overview_modal_add">新增紀錄</button>
-    <button class="btn btn-success" id="overview_btn_update">重新整理</button>
+    <button class="btn btn-success m-1" id="overview_btn_update">重新整理</button>
     <table class="table">
         <thead>
             <tr>
@@ -87,9 +87,9 @@ layout: base
 </div>
 <div id="account" class="pages container" style="display: none">
     <p class="fs-3 text-center">帳戶管理</p>
-    <button class="btn btn-primary" id="account_btn_add" data-bs-toggle="modal"
+    <button class="btn btn-primary m-1" id="account_btn_add" data-bs-toggle="modal"
         data-bs-target="#account_modal_add">新增帳戶</button>
-    <button class="btn btn-success" id="account_btn_update">重新整理</button>
+    <button class="btn btn-success m-1" id="account_btn_update">重新整理</button>
     <table class="table">
         <thead>
             <tr>

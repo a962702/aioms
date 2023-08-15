@@ -107,7 +107,11 @@ function overview_update(){
                 $("<td>").text(value[2] == "1" ? "支出" : "收入"), // type
                 $("<td>").text(value[3]), // description
                 $("<td>").text(value[5]), // amount
-                $("<td>") // action
+                $("<td>").append(// action
+                    $("<button>").attr('type', 'button').addClass('btn btn-secondary').text("詳細"),
+                    $("<button>").attr('type', 'button').addClass('btn btn-info').text("修改"),
+                    $("<button>").attr('type', 'button').addClass('btn btn-danger').text("刪除")
+                ) 
             )
         );
     });
@@ -151,22 +155,19 @@ function account_update(){
     $('#account_tbody').html("");
     if (!data['result'][0])
         return;
-    let result = data['result'][0]['values'];
-    for (let row of result) {
-        let tr = document.createElement("tr");
-        let td_name = document.createElement("td");
-        td_name.innerText = row[1];
-        tr.appendChild(td_name);
-        let td_description = document.createElement("td");
-        td_description.innerText = row[2];
-        tr.appendChild(td_description);
-        let td_amount = document.createElement("td");
-        td_amount.innerText = row[3];
-        tr.appendChild(td_amount);
-        let td_action = document.createElement("td");
-        tr.appendChild(td_action);
-        document.getElementById('account_tbody').appendChild(tr);
-    };
+    jQuery.each(data['result'][0]['values'], (index, value) => {
+        $("#account_tbody").append(
+            $("<tr>").append(
+                $("<td>").text(value[1]), // name
+                $("<td>").text(value[2]), // description
+                $("<td>").text(value[3]), // amount
+                $("<td>").append(// action
+                    $("<button>").attr('type', 'button').addClass('btn btn-secondary').text("檢視紀錄"),
+                    $("<button>").attr('type', 'button').addClass('btn btn-info').text("修改")
+                ) 
+            )
+        );
+    });
 };
 account_update();
 

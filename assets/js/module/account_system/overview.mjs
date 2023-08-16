@@ -8,9 +8,26 @@ export class overview {
         let arr = this.db.exec("INSERT INTO `accountsys_record` (`date`, `type`, `description`, `invoice`, `amount`, `commit`) VALUES ('" + date + "', '" + type + "', '" + description + "', '" + invoice + "', '" + amount + "', '" + commit + "'); SELECT last_insert_rowid();", true);
         return arr['result'][0]['values'][0][0];
     }
-    getLists(){
-        let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `invoice`, `amount`, `commit` FROM `accountsys_record`;", false);
+
+    del(id) {
+        let arr = this.db.exec("DELETE FROM `accountsys_record` WHERE `id` = '" + id + "';", true);
+        console.log(arr['status'], arr['result']);
+    }
+
+    getDetail(id) {
+        let arr = this.db.exec("SELECT `date`, `type`, `description`, `invoice`, `amount`, `commit` FROM `accountsys_record` WHERE `id` = '" + id + "';", false);
         console.log(arr['status'], arr['result']);
         return arr;
+    }
+
+    getLists(){
+        let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `amount` FROM `accountsys_record`;", false);
+        console.log(arr['status'], arr['result']);
+        return arr;
+    }
+
+    update(id, date, type, description, invoice, amount, commit) {
+        let arr = this.db.exec("UPDATE `accountsys_record` SET `date` = '" + date + "', `type` = '" + type + "', `description` = '" + description + "', `invoice` = '" + invoice + "', `amount` = '" + amount + "', `commit` = '" + commit + "' WHERE `id` = '" + id + "';", true);
+        console.log(arr['status'], arr['result']);
     }
 }

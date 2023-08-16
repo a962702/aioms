@@ -17,4 +17,10 @@ export class account {
         console.log(arr['status'], arr['result']);
         return arr;
     }
+
+    getTransaction(account_id) {
+        let arr = this.db.exec("SELECT `record_id`, `type`, `amount` FROM `accountsys_account_transaction` WHERE `account_id` = '" + account_id + "';", false);
+        console.log(arr['status'], arr['result']);
+        return arr;
+    }
 }

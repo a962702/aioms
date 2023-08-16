@@ -106,7 +106,7 @@ function overview_update(){
                 $("<td>").text(new Date(parseInt(value[1])).toDateString()), // date
                 $("<td>").text(value[2] == "1" ? "支出" : "收入"), // type
                 $("<td>").text(value[3]), // description
-                $("<td>").text(value[5]), // amount
+                $("<td>").text(value[4]), // amount
                 $("<td>").append(// action
                     $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("詳細"),
                     $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改"),

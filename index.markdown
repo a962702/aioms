@@ -4,7 +4,7 @@ layout: base
 
 <p class="text-center fs-2">歡迎使用<br />AIOMS - 整合式管理平台</p>
 <hr />
-<div class="row row-cols-4 g-4">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
     <div class="col">
         <div class="card h-100 text-center m-2">
             <div class="card-body">

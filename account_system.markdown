@@ -141,7 +141,8 @@ layout: base
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">record_id</th>
+                                <th scope="col">日期</th>
+                                <th scope="col">說明</th>
                                 <th scope="col">類型</th>
                                 <th scope="col">金額</th>
                             </tr>
@@ -152,6 +153,34 @@ layout: base
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="account_modal_edit" tabindex="-1" aria-labelledby="account_modal_edit_label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="account_modal_edit_label">編輯 - <span id="account_modal_edit_label_name"></span></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="account_modal_add_name" class="form-label">名稱</label>
+                        <input type="text" class="form-control" id="account_modal_edit_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="account_modal_add_description" class="form-label">說明</label>
+                        <input type="text" class="form-control" id="account_modal_edit_description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="account_modal_add_amount" class="form-label">起始金額</label>
+                        <input type="number" class="form-control" id="account_modal_edit_amount">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="account_modal_edit_save">儲存</button>
                 </div>
             </div>
         </div>

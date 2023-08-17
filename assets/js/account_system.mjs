@@ -160,9 +160,10 @@ $("#account_modal_getTransaction").on('show.bs.modal', (event) => {
     jQuery.each(arr['result'][0]['values'], (index, value) => {
         $("#account_modal_getTransaction_tbody").append(
             $("<tr>").append(
-                $("<td>").text(value[0]), // record_id
-                $("<td>").text(value[1]), // type
-                $("<td>").text(value[2]) // amount
+                $("<td>").text(new Date(parseInt(value[0])).toDateString()), // date
+                $("<td>").text(value[1]), // description
+                $("<td>").text(value[2] == "1" ? "支出" : "收入"), // type
+                $("<td>").text(value[3]) // amount
             )
         );
     });
@@ -185,7 +186,7 @@ function account_update(){
                 $("<td>").text(value[3]), // amount
                 $("<td>").append(// action
                     $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("檢視紀錄").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_getTransaction").attr("data-bs-account_id", value[0]).attr("data-bs-name", value[1]),
-                    $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改")
+                    $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_edit").attr("data-bs-account_id", value[0]).attr("data-bs-name", value[1]).attr("data-bs-description", value[2]).attr("data-bs-amount", value[3])
                 ) 
             )
         );

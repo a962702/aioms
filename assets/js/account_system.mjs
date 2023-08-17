@@ -169,6 +169,33 @@ $("#account_modal_getTransaction").on('show.bs.modal', (event) => {
     });
 })
 
+$("#account_modal_edit").on('show.bs.modal', (event) => {
+    const button = event.relatedTarget;
+    const dataid = button.getAttribute('data-bs-id');
+    const name = button.getAttribute('data-bs-name');
+    const description = button.getAttribute('data-bs-description');
+    const amount = button.getAttribute('data-bs-amount');
+    $('#account_modal_edit_label_name').text(name);
+    $('#account_modal_edit_name').val(name);
+    $('#account_modal_edit_description').val(description);
+    $('#account_modal_edit_amount').val(amount);
+    $("#account_modal_edit_save").attr('dataid', dataid);
+})
+
+$("#account_modal_edit_save").on('click', () => {
+    account_modal_edit.hide();
+    $("#account_modal_edit").on('hidden.bs.modal', () => {
+        $("#account_modal_edit").off('hidden.bs.modal');
+        uploading_modal.show();
+        $("#uploading_modal").on('shown.bs.modal', () => {
+            $("#uploading_modal").off('shown.bs.modal');
+            acc.update($("#account_modal_edit_save").attr('dataid'), $("#account_modal_edit_name").val(), $("#account_modal_edit_description").val(),  $("#account_modal_edit_amount").val());
+            uploading_modal.hide();
+            account_update();
+        })
+    })
+});
+
 function account_update(){
     let data = acc.getLists();
     if (data['status'] != 'OK') {
@@ -186,7 +213,7 @@ function account_update(){
                 $("<td>").text(value[3]), // amount
                 $("<td>").append(// action
                     $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("檢視紀錄").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_getTransaction").attr("data-bs-account_id", value[0]).attr("data-bs-name", value[1]),
-                    $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_edit").attr("data-bs-account_id", value[0]).attr("data-bs-name", value[1]).attr("data-bs-description", value[2]).attr("data-bs-amount", value[3])
+                    $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_edit").attr("data-bs-id", value[0]).attr("data-bs-name", value[1]).attr("data-bs-description", value[2]).attr("data-bs-amount", value[3])
                 ) 
             )
         );

@@ -12,6 +12,7 @@ let acc = new account(db);
 let s = new setting(db);
 const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
 const account_modal_add = new bootstrap.Modal('#account_modal_add');
+const account_modal_edit = new bootstrap.Modal('#account_modal_edit');
 const uploading_modal = new bootstrap.Modal('#uploading_modal');
 
 $("#setting_btn_runcommand").on('click', ()=>{

@@ -25,7 +25,7 @@ export class account {
     }
 
     update(id, name, description, amount) {
-        let arr = this.db.exec("UPDATE `accountsys_record` SET `name` = '" + name + "', `description` = '" + description + "', `amount` = '" + amount + "' WHERE `id` = '" + id + "';", true);
+        let arr = this.db.exec("UPDATE `accountsys_account` SET `name` = '" + name + "', `description` = '" + description + "', `amount` = '" + amount + "' WHERE `id` = '" + id + "';", true);
         console.log(arr['status'], arr['result']);
     }
 }

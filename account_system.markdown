@@ -130,5 +130,31 @@ layout: base
             </div>
         </div>
     </div>
+    <div class="modal fade" id="account_modal_getTransaction" tabindex="-1" aria-labelledby="account_modal_getTransaction_label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="account_modal_getTransaction_label">檢視紀錄 - <span id="account_modal_getTransaction_label_name"></span></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">record_id</th>
+                                <th scope="col">類型</th>
+                                <th scope="col">金額</th>
+                            </tr>
+                        </thead>
+                        <tbody id="account_modal_getTransaction_tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="module" src="assets/js/account_system.mjs"></script>

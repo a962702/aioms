@@ -12,7 +12,6 @@ let acc = new account(db);
 let s = new setting(db);
 const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
 const account_modal_add = new bootstrap.Modal('#account_modal_add');
-const account_modal_getTransaction = new bootstrap.Modal('#account_modal_getTransaction');
 const uploading_modal = new bootstrap.Modal('#uploading_modal');
 
 $("#setting_btn_runcommand").on('click', ()=>{
@@ -149,7 +148,7 @@ $("#account_modal_add_save").on('click', () => {
     })
 });
 
-account_modal_getTransaction.addEventListener('show.bs.modal', (event) => {
+$("#account_modal_getTransaction").on('show.bs.modal', (event) => {
     const button = event.relatedTarget;
     const account_id = button.getAttribute('data-bs-account_id');
     const name = button.getAttribute('data-bs-name');
@@ -185,7 +184,7 @@ function account_update(){
                 $("<td>").text(value[2]), // description
                 $("<td>").text(value[3]), // amount
                 $("<td>").append(// action
-                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("檢視紀錄").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_getTransaction").attr("data-bs-account_id", value[0]).attt("data-bs-name", value[1]),
+                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("檢視紀錄").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_getTransaction").attr("data-bs-account_id", value[0]).attr("data-bs-name", value[1]),
                     $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改")
                 ) 
             )

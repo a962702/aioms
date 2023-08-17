@@ -104,7 +104,7 @@ function overview_update(){
     jQuery.each(data['result'][0]['values'], (index, value) => {
         $("#overview_tbody").append(
             $("<tr>").append(
-                $("<td>").text(new Date(parseInt(value[1])).toDateString()), // date
+                $("<td>").text(new Date(parseInt(value[1])).getFullYear() + "年" + (new Date(parseInt(value[1])).getMonth() + 1) + "月" + new Date(parseInt(value[1])).getDate() + "日"), // date
                 $("<td>").text(value[2] == "1" ? "支出" : "收入"), // type
                 $("<td>").text(value[3]), // description
                 $("<td>").text(value[4]), // amount
@@ -161,7 +161,7 @@ $("#account_modal_getTransaction").on('show.bs.modal', (event) => {
     jQuery.each(arr['result'][0]['values'], (index, value) => {
         $("#account_modal_getTransaction_tbody").append(
             $("<tr>").append(
-                $("<td>").text(new Date(parseInt(value[0])).toDateString()), // date
+                $("<td>").text(new Date(parseInt(value[0])).getFullYear() + "年" + (new Date(parseInt(value[0])).getMonth() + 1) + "月" + new Date(parseInt(value[0])).getDate() + "日"), // date
                 $("<td>").text(value[1]), // description
                 $("<td>").text(value[2] == "1" ? "支出" : "收入"), // type
                 $("<td>").text(value[3]) // amount

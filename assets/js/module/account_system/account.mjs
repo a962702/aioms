@@ -10,6 +10,14 @@ export class account {
 
     add_transaction(account_id, record_id, type, amount){
         this.db.exec("INSERT INTO `accountsys_account_transaction` (`account_id`, `record_id`, `type`, `amount`) VALUES ('" + account_id + "', '" + record_id + "', '" + type + "', '" + amount + "');", true);
+        let arr = this.db.exec("SELECT `amount` FROM `accountsys_account` WHERE `id` = '" + account_id + "';", false);
+        let new_amount = arr['result'][0]['values'][0];
+        if(type == "1") {
+            new_amount -= amount;
+        } else {
+            new_amount += amount;
+        }
+        this.db.exec("UPDATE `accountsys_account` SET `amount` = '" + new_amount + "' WHERE `id` = '" + account_id + "';", true);
     }
 
     getLists() {
@@ -25,7 +33,6 @@ export class account {
     }
 
     update(id, name, description, amount) {
-        let arr = this.db.exec("UPDATE `accountsys_account` SET `name` = '" + name + "', `description` = '" + description + "', `amount` = '" + amount + "' WHERE `id` = '" + id + "';", true);
-        console.log(arr['status'], arr['result']);
+        this.db.exec("UPDATE `accountsys_account` SET `name` = '" + name + "', `description` = '" + description + "', `amount` = '" + amount + "' WHERE `id` = '" + id + "';", true);
     }
 }

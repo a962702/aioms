@@ -74,11 +74,9 @@ $("#overview_modal_add_save").on('click', () => {
         return;
     }
     overview_modal_add.hide();
-    $("#overview_modal_add").on('hidden.bs.modal', () => {
-        $("#overview_modal_add").off('hidden.bs.modal');
+    $("#overview_modal_add").one('hidden.bs.modal', () => {
         uploading_modal.show();
-        $("#uploading_modal").on('shown.bs.modal', () => {
-            $("#uploading_modal").off('shown.bs.modal');
+        $("#uploading_modal").one('shown.bs.modal', () => {
             $(document).one('DB-save', () => {
                 uploading_modal.hide();
                 overview_update();
@@ -117,7 +115,6 @@ function overview_update(){
         );
     });
 }
-overview_update();
 
 $("#overview_btn_update").on('click', () => {
     overview_update();
@@ -137,11 +134,9 @@ function overview_add_modal_update_total() {
 
 $("#account_modal_add_save").on('click', () => {
     account_modal_add.hide();
-    $("#account_modal_add").on('hidden.bs.modal', () => {
-        $("#account_modal_add").off('hidden.bs.modal');
+    $("#account_modal_add").one('hidden.bs.modal', () => {
         uploading_modal.show();
-        $("#uploading_modal").on('shown.bs.modal', () => {
-            $("#uploading_modal").off('shown.bs.modal');
+        $("#uploading_modal").one('shown.bs.modal', () => {
             acc.add($("#account_modal_add_name").val(), $("#account_modal_add_description").val(),  $("#account_modal_add_amount").val());
             uploading_modal.hide();
             account_update();
@@ -220,7 +215,6 @@ function account_update(){
         );
     });
 };
-account_update();
 
 $("#account_btn_update").on('click', () => {
     account_update();
@@ -234,9 +228,11 @@ function chg_page() {
     $(".pages").css("display", "none");
     if (location.hash === "#overview") {
         $("#overview").css("display", "block");
+        overview_update();
     }
     else if (location.hash === "#account") {
         $("#account").css("display", "block");
+        account_update();
     }
 }
 chg_page();

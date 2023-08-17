@@ -3,3 +3,7 @@ html, body {
     flex-flow: column;
     background-color:skyblue;
 }
+
+td {
+    vertical-align: middle;
+}

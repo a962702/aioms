@@ -90,6 +90,34 @@ $("#overview_modal_add_save").on('click', () => {
     })
 });
 
+$("#overview_modal_getDetail").on('show.bs.modal', (event) => {
+    const button = event.relatedTarget;
+    const id = button.getAttribute('data-bs-id');
+    let arr = ov.getDetail(id);
+    const date = arr['result'][0]['values'][0][0];
+    const type = arr['result'][0]['values'][0][1];
+    const description = arr['result'][0]['values'][0][2];
+    const invoice = arr['result'][0]['values'][0][3];
+    const amount = arr['result'][0]['values'][0][4];
+    const commit = arr['result'][0]['values'][0][5];
+    document.getElementById("overview_modal_getDetail_date").valueAsDate = new Date(parseInt(date));
+    $('#overview_modal_getDetail_type').val(type);
+    $('#overview_modal_getDetail_description').val(description);
+    $('#overview_modal_getDetail_invoice').val(invoice);
+    $('#overview_modal_getDetail_total').text(amount);
+    $('#overview_modal_getDetail_commit').val(commit);
+    let arr2 = acc.getRecordTransaction(id);
+    $('#overview_modal_getDetail_tbody').html("");
+    jQuery.each(arr2['result'][0]['values'], (index, value) => {
+        $("#overview_modal_getDetail_tbody").append(
+            $("<tr>").append(
+                $("<td>").text(value[0]), // name
+                $("<td>").text(value[1]) // amount
+            )
+        );
+    });
+})
+
 function overview_update(){
     let data = ov.getLists();
     if (data['status'] != 'OK') {
@@ -107,9 +135,9 @@ function overview_update(){
                 $("<td>").text(value[3]), // description
                 $("<td>").text(value[4]), // amount
                 $("<td>").append(// action
-                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("詳細"),
+                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("詳細").attr("data-bs-toggle", "modal").attr("data-bs-target", "#overview_modal_getDetail").attr("data-bs-id", value[0])/*,
                     $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改"),
-                    $("<button>").attr('type', 'button').addClass('btn btn-danger m-1').text("刪除")
+                    $("<button>").attr('type', 'button').addClass('btn btn-danger m-1').text("刪除")*/
                 ) 
             )
         );

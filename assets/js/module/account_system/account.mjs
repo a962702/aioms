@@ -26,6 +26,12 @@ export class account {
         return arr;
     }
 
+    getRecordTransaction(record_id) {
+        let arr = this.db.exec("SELECT accountsys_account.`name`, accountsys_account_transaction.`amount` FROM accountsys_account_transaction INNER JOIN accountsys_account ON accountsys_account_transaction.`account_id` = accountsys_account.`id` WHERE accountsys_account_transaction.`record_id` = '" + record_id + "';", false);
+        console.log(arr['status'], arr['result']);
+        return arr;
+    }
+
     getTransaction(account_id) {
         let arr = this.db.exec("SELECT accountsys_record.`date`, accountsys_record.`description`, accountsys_account_transaction.`type`, accountsys_account_transaction.`amount` FROM accountsys_account_transaction INNER JOIN accountsys_record ON accountsys_account_transaction.`record_id` = accountsys_record.`id` WHERE accountsys_account_transaction.`account_id` = '" + account_id + "';", false);
         console.log(arr['status'], arr['result']);

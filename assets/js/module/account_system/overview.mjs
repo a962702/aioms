@@ -20,8 +20,8 @@ export class overview {
         return arr;
     }
 
-    getLists(){
-        let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `amount` FROM `accountsys_record`;", false);
+    getLists(start_date, end_date){
+        let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `amount` FROM `accountsys_record` WHERE `date` BETWEEN '" + start_date + "' AND '" + end_date + "';", false);
         console.log(arr['status'], arr['result']);
         return arr;
     }

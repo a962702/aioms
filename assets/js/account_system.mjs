@@ -27,6 +27,19 @@ $("#btn_GDDB_signout").on("click", () => {
     db.GD_signout();
 })
 
+/***** Account System - overview *****/
+
+let today = new Date(Date.now());
+document.getElementById("overview_start_date").valueAsDate = new Date(today.getFullYear(), today.getMonth(), 1);
+$("#overview_start_date").on('change', () => {
+    overview_update();
+})
+
+document.getElementById("overview_end_date").valueAsDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+$("#overview_end_date").on('change', () => {
+    overview_update();
+})
+
 $("#overview_add_modal_add_btn").on('click', () => {
     let acc_lists = acc.getLists();
     if (!acc_lists['result'][0]) {
@@ -119,7 +132,9 @@ $("#overview_modal_getDetail").on('show.bs.modal', (event) => {
 })
 
 function overview_update(){
-    let data = ov.getLists();
+    let start_date = new Date($("#overview_start_date").val()).getTime();
+    let end_date = new Date($("#overview_end_date").val()).getTime();
+    let data = ov.getLists(start_date, end_date);
     if (data['status'] != 'OK') {
         window.alert("取得資料發生錯誤");
         return;

@@ -14,9 +14,17 @@ layout: base
 </div>
 <div id="overview" class="pages container" style="display: none">
     <p class="fs-3 text-center">總覽</p>
-    <button class="btn btn-primary m-1" id="overview_btn_add" data-bs-toggle="modal"
-        data-bs-target="#overview_modal_add">新增紀錄</button>
-    <button class="btn btn-success m-1" id="overview_btn_update">重新整理</button>
+    <div class="mb-3">
+        <button class="btn btn-primary m-1" id="overview_btn_add" data-bs-toggle="modal"
+            data-bs-target="#overview_modal_add">新增紀錄</button>
+        <button class="btn btn-success m-1" id="overview_btn_update">重新整理</button>
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text">顯示範圍</span>
+        <input type="date" class="form-control" id="overview_start_date">
+        <span class="input-group-text">至</span>
+        <input type="date" class="form-control"  id="overview_end_date">
+    </div>
     <table class="table">
         <thead>
             <tr>

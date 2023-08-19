@@ -157,6 +157,7 @@ function overview_update(){
         );
     });
 }
+overview_update();
 
 $("#overview_btn_update").on('click', () => {
     overview_update();
@@ -259,6 +260,7 @@ function account_update(){
         );
     });
 };
+account_update();
 
 $("#account_btn_update").on('click', () => {
     account_update();

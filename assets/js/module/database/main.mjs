@@ -75,6 +75,7 @@ export class database {
             if (isUpdate) {
                 this.obj_localDB.exec("UPDATE `system` SET `ModifiedTime` = '" + Date.now() + "'");
                 this.save();
+                $(document).trigger("DB-changed");
             }
         } else {
             arr['status'] = 'ERROR_UNINITIALIZED';
@@ -161,6 +162,7 @@ export class database {
                                                         $("#btn_GDDB_connect").css("display", "none");
                                                         $("#btn_GDDB_signout").css("display", "block");
                                                         this.GD_sync();
+                                                        $(document).trigger("DB-changed");
                                                     })
                                                     this.obj_GDDB.getUserInfo();
                                                 } else {
@@ -218,6 +220,7 @@ export class database {
                             this.obj_localDB.save(data);
                             this.obj_localDB.load();
                             this.obj_GDDB.setLocalRevisionsValue(rev_id);
+                            $(document).trigger("DB-changed");
                         }
                     })
                     this.obj_GDDB.load();

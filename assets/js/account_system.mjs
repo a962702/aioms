@@ -92,7 +92,6 @@ $("#overview_modal_add_save").on('click', () => {
         $("#uploading_modal").one('shown.bs.modal', () => {
             $(document).one('DB-save', () => {
                 uploading_modal.hide();
-                overview_update();
             })
             let id = ov.add(new Date($("#overview_modal_add_date").val()).getTime(), $("#overview_modal_add_type").val(), $("#overview_modal_add_description").val(), $("#overview_modal_add_invoice").val(), $("#overview_add_modal_total").text(), $("#overview_modal_add_commit").val());
             $(".overview_modal_add_tr").each((index, element) => {
@@ -163,6 +162,10 @@ $("#overview_btn_update").on('click', () => {
     overview_update();
 });
 
+$(document).on('DB-changed', () => {
+    overview_update();
+})
+
 function overview_add_modal_update_total() {
     let total = 0;
     $(".overview_modal_add_tr").each((index, element) => {
@@ -182,7 +185,6 @@ $("#account_modal_add_save").on('click', () => {
         $("#uploading_modal").one('shown.bs.modal', () => {
             acc.add($("#account_modal_add_name").val(), $("#account_modal_add_description").val(),  $("#account_modal_add_amount").val());
             uploading_modal.hide();
-            account_update();
         })
     })
 });
@@ -230,7 +232,6 @@ $("#account_modal_edit_save").on('click', () => {
             $("#uploading_modal").off('shown.bs.modal');
             acc.update($("#account_modal_edit_save").attr('dataid'), $("#account_modal_edit_name").val(), $("#account_modal_edit_description").val(),  $("#account_modal_edit_amount").val());
             uploading_modal.hide();
-            account_update();
         })
     })
 });
@@ -263,6 +264,10 @@ $("#account_btn_update").on('click', () => {
     account_update();
 });
 
+$(document).on('DB-changed', () => {
+    account_update();
+})
+
 /***** General *****/
 
 function chg_page() {
@@ -271,11 +276,9 @@ function chg_page() {
     $(".pages").css("display", "none");
     if (location.hash === "#overview") {
         $("#overview").css("display", "block");
-        overview_update();
     }
     else if (location.hash === "#account") {
         $("#account").css("display", "block");
-        account_update();
     }
 }
 chg_page();

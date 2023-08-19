@@ -17,3 +17,19 @@ $("#btn_GDDB_connect").on("click", () => {
 $("#btn_GDDB_signout").on("click", () => {
     db.GD_signout();
 })
+
+/***** General *****/
+
+function chg_page() {
+    if (location.hash === "#" || location.hash === "")
+        location.hash = "#overview";
+    $(".pages").css("display", "none");
+    if (location.hash === "#overview") {
+        $("#overview").css("display", "block");
+    }
+}
+chg_page();
+
+$(window).on('hashchange', () => {
+    chg_page();
+});

@@ -55,7 +55,6 @@ export class GDDB {
     signout() {
         this.getItemsFromLocalStorage();
         if (this.token != "") {
-            google.accounts.oauth2.revoke(this.token);
             gapi.client.setToken('');
             this.token = "";
             localStorage.setItem("AIOMS_GDDB_token", "");

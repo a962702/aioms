@@ -7,3 +7,24 @@ html, body {
 td {
     vertical-align: middle;
 }
+
+.spinner-animation {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: -0.125em;
+    animation-name: rainbow;
+    animation-direction: reverse;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+    0%   {background-color: red; transform: scale(0);}
+    20%  {background-color: orange; transform: none;}
+    40%  {background-color: yellow; transform: scale(0);}
+    60% {background-color: green; transform: none;}
+    80% {background-color: blue; transform: scale(0);}
+    100% {background-color: indigo; transform: none;}
+  }

@@ -6,7 +6,7 @@ layout: base
 <hr />
 <div class="pages">
     <div class="text-center">
-        <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
+        <div class="spinner-animation" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
         <p class="fs-2">準備中...</p>

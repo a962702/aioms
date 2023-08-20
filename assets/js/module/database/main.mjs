@@ -214,16 +214,18 @@ export class database {
     GD_sync() {
         this.GD_sync_inverv = setInterval(() => {
             $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
-                if (status == "OK" && this.obj_GDDB.getLocalRevisionsValue() != "" && rev_id != this.obj_GDDB.getLocalRevisionsValue()) {
-                    $(document).one("DB-GD-load", (e, status, data) => {
-                        if (status == "OK") {
-                            this.obj_localDB.save(data);
-                            this.obj_localDB.load();
-                            this.obj_GDDB.setLocalRevisionsValue(rev_id);
-                            $(document).trigger("DB-changed");
-                        }
-                    })
-                    this.obj_GDDB.load();
+                if (status == "OK") {
+                    if (this.obj_GDDB.getLocalRevisionsValue() != "" && rev_id != this.obj_GDDB.getLocalRevisionsValue()) {
+                        $(document).one("DB-GD-load", (e, status, data) => {
+                            if (status == "OK") {
+                                this.obj_localDB.save(data);
+                                this.obj_localDB.load();
+                                this.obj_GDDB.setLocalRevisionsValue(rev_id);
+                                $(document).trigger("DB-changed");
+                            }
+                        })
+                        this.obj_GDDB.load();
+                    }
                 } else {
                     window.alert("存取用 Token 過期，請重新登入\n提示：這是個已知的 [BUG] ，將於未來版本修復!");
                     this.GD_signout();

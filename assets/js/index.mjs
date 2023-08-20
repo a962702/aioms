@@ -6,7 +6,7 @@ await db.init();
 
 let s = new setting(db);
 
-$("#setting_btn_runcommand").on('click', ()=>{
+$("#setting_btn_runcommand").on('click', () => {
     s.exec($('#sql_statement').val());
 });
 

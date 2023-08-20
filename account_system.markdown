@@ -23,7 +23,7 @@ layout: base
         <span class="input-group-text">顯示範圍</span>
         <input type="date" class="form-control" id="overview_start_date">
         <span class="input-group-text">至</span>
-        <input type="date" class="form-control"  id="overview_end_date">
+        <input type="date" class="form-control" id="overview_end_date">
     </div>
     <table class="table">
         <thead>
@@ -38,7 +38,8 @@ layout: base
         <tbody id="overview_tbody">
         </tbody>
     </table>
-    <div class="modal fade" id="overview_modal_add" tabindex="-1" aria-labelledby="overview_modal_add_label" aria-hidden="true">
+    <div class="modal fade" id="overview_modal_add" tabindex="-1" aria-labelledby="overview_modal_add_label"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -69,15 +70,16 @@ layout: base
                         <table class="table">
                             <thead>
                                 <tr>
-                                <th scope="col">帳戶</th>
-                                <th scope="col">金額</th>
-                                <th scope="col">刪除</th>
+                                    <th scope="col">帳戶</th>
+                                    <th scope="col">金額</th>
+                                    <th scope="col">刪除</th>
                                 </tr>
                             </thead>
                             <tbody id="overview_add_modal_tbody">
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-info" id="overview_add_modal_add_btn"><i class="bi bi-plus-circle"></i>新增</button>
+                        <button type="button" class="btn btn-info" id="overview_add_modal_add_btn"><i
+                                class="bi bi-plus-circle"></i>新增</button>
                         <p>總金額：<span id="overview_add_modal_total">0</span></p>
                     </div>
                     <div class="mb-3">
@@ -92,7 +94,8 @@ layout: base
             </div>
         </div>
     </div>
-    <div class="modal fade" id="overview_modal_getDetail" tabindex="-1" aria-labelledby="overview_modal_getDetail_label" aria-hidden="true">
+    <div class="modal fade" id="overview_modal_getDetail" tabindex="-1" aria-labelledby="overview_modal_getDetail_label"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -106,25 +109,25 @@ layout: base
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_type" class="form-label">類型</label>
-                        <select class="form-select" id="overview_modal_getDetail_type"  disabled>
+                        <select class="form-select" id="overview_modal_getDetail_type" disabled>
                             <option value="1" selected>支出</option>
                             <option value="2">收入</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_description" class="form-label">說明</label>
-                        <input type="text" class="form-control" id="overview_modal_getDetail_description"  disabled>
+                        <input type="text" class="form-control" id="overview_modal_getDetail_description" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_invoice" class="form-label">發票號碼</label>
-                        <input type="text" class="form-control" id="overview_modal_getDetail_invoice"  disabled>
+                        <input type="text" class="form-control" id="overview_modal_getDetail_invoice" disabled>
                     </div>
                     <div class="mb-3">
                         <table class="table">
                             <thead>
                                 <tr>
-                                <th scope="col">帳戶</th>
-                                <th scope="col">金額</th>
+                                    <th scope="col">帳戶</th>
+                                    <th scope="col">金額</th>
                                 </tr>
                             </thead>
                             <tbody id="overview_modal_getDetail_tbody">
@@ -134,7 +137,7 @@ layout: base
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_commit" class="form-label">備註</label>
-                        <input type="text" class="form-control" id="overview_modal_getDetail_commit"  disabled>
+                        <input type="text" class="form-control" id="overview_modal_getDetail_commit" disabled>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -161,7 +164,8 @@ layout: base
         <tbody id="account_tbody">
         </tbody>
     </table>
-    <div class="modal fade" id="account_modal_add" tabindex="-1" aria-labelledby="account_modal_add_label" aria-hidden="true">
+    <div class="modal fade" id="account_modal_add" tabindex="-1" aria-labelledby="account_modal_add_label"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -189,11 +193,13 @@ layout: base
             </div>
         </div>
     </div>
-    <div class="modal fade" id="account_modal_getTransaction" tabindex="-1" aria-labelledby="account_modal_getTransaction_label" aria-hidden="true">
+    <div class="modal fade" id="account_modal_getTransaction" tabindex="-1"
+        aria-labelledby="account_modal_getTransaction_label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="account_modal_getTransaction_label">檢視紀錄 - <span id="account_modal_getTransaction_label_name"></span></h1>
+                    <h1 class="modal-title fs-5" id="account_modal_getTransaction_label">檢視紀錄 - <span
+                            id="account_modal_getTransaction_label_name"></span></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -216,11 +222,13 @@ layout: base
             </div>
         </div>
     </div>
-    <div class="modal fade" id="account_modal_edit" tabindex="-1" aria-labelledby="account_modal_edit_label" aria-hidden="true">
+    <div class="modal fade" id="account_modal_edit" tabindex="-1" aria-labelledby="account_modal_edit_label"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="account_modal_edit_label">編輯 - <span id="account_modal_edit_label_name"></span></h1>
+                    <h1 class="modal-title fs-5" id="account_modal_edit_label">編輯 - <span
+                            id="account_modal_edit_label_name"></span></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

@@ -1,6 +1,6 @@
 export class plan {
     db = null;
-    constructor(db){
+    constructor(db) {
         this.db = db;
     }
 }

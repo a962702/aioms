@@ -25,7 +25,7 @@ export class database {
                         this.obj_localDB.save(data);
                         this.obj_localDB.load();
                         $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
-                            if (status == "OK"){
+                            if (status == "OK") {
                                 this.obj_GDDB.setLocalRevisionsValue(rev_id);
                                 $(document).one("DB-GD-getUserInfo", (e, status, displayName, emailAddress) => {
                                     $("#setting_GD_status").text("已連結");
@@ -94,9 +94,9 @@ export class database {
             this.obj_GDDB.setLocalRevisionsValue("");
             $(document).one('DB-GD-save', (e, status) => {
                 storage_count += 1;
-                if (status == "OK"){
+                if (status == "OK") {
                     $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
-                        if (status == "OK"){
+                        if (status == "OK") {
                             this.obj_GDDB.setLocalRevisionsValue(rev_id);
                         } else {
                             window.alert("無法取得 revision 值");
@@ -110,7 +110,7 @@ export class database {
             this.obj_GDDB.save(this.obj_localDB.get_binaryArray());
         }
         let save_check = setInterval(() => {
-            if (storage_count == this.get_setup_storage().length){
+            if (storage_count == this.get_setup_storage().length) {
                 clearInterval(save_check);
                 $(document).trigger("DB-save");
             }

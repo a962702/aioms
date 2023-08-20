@@ -1,7 +1,8 @@
-html, body {
+html,
+body {
     display: flex;
     flex-flow: column;
-    background-color:skyblue;
+    background-color: skyblue;
 }
 
 td {
@@ -21,10 +22,33 @@ td {
 }
 
 @keyframes rainbow {
-    0%   {background-color: red; transform: scale(0);}
-    20%  {background-color: orange; transform: none;}
-    40%  {background-color: yellow; transform: scale(0);}
-    60% {background-color: green; transform: none;}
-    80% {background-color: blue; transform: scale(0);}
-    100% {background-color: indigo; transform: none;}
-  }
+    0% {
+        background-color: red;
+        transform: scale(0);
+    }
+
+    20% {
+        background-color: orange;
+        transform: none;
+    }
+
+    40% {
+        background-color: yellow;
+        transform: scale(0);
+    }
+
+    60% {
+        background-color: green;
+        transform: none;
+    }
+
+    80% {
+        background-color: blue;
+        transform: scale(0);
+    }
+
+    100% {
+        background-color: indigo;
+        transform: none;
+    }
+}

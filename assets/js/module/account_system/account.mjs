@@ -8,11 +8,11 @@ export class account {
         this.db.exec("INSERT INTO `accountsys_account` (`name`, `description`, `amount`) VALUES ('" + name + "', '" + description + "', '" + amount + "');", true);
     }
 
-    add_transaction(account_id, record_id, type, amount){
+    add_transaction(account_id, record_id, type, amount) {
         this.db.exec("INSERT INTO `accountsys_account_transaction` (`account_id`, `record_id`, `type`, `amount`) VALUES ('" + account_id + "', '" + record_id + "', '" + type + "', '" + amount + "');", true);
         let arr = this.db.exec("SELECT `amount` FROM `accountsys_account` WHERE `id` = '" + account_id + "';", false);
         let new_amount = parseInt(arr['result'][0]['values'][0]);
-        if(type == "1") {
+        if (type == "1") {
             new_amount -= parseInt(amount);
         } else {
             new_amount += parseInt(amount);

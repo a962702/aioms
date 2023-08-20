@@ -1,10 +1,10 @@
 export class overview {
     db = null;
-    constructor(db){
+    constructor(db) {
         this.db = db;
     }
 
-    add(date, type, description, invoice, amount, commit){
+    add(date, type, description, invoice, amount, commit) {
         let arr = this.db.exec("INSERT INTO `accountsys_record` (`date`, `type`, `description`, `invoice`, `amount`, `commit`) VALUES ('" + date + "', '" + type + "', '" + description + "', '" + invoice + "', '" + amount + "', '" + commit + "'); SELECT last_insert_rowid();", true);
         return arr['result'][0]['values'][0][0];
     }
@@ -20,7 +20,7 @@ export class overview {
         return arr;
     }
 
-    getLists(start_date, end_date){
+    getLists(start_date, end_date) {
         let arr = this.db.exec("SELECT `id`, `date`, `type`, `description`, `amount` FROM `accountsys_record` WHERE `date` BETWEEN '" + start_date + "' AND '" + end_date + "';", false);
         console.log(arr['status'], arr['result']);
         return arr;

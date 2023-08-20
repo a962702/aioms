@@ -2,129 +2,135 @@
 <html>
 
 <head>
-  <meta charset="UTF-8" />
-  <title>AIOMS - 整合式管理平台</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.min.js"
-    integrity="sha512-VYs2RuvWreNg7oouVhZ/9bEvdPgyd5L2iCPCB8+8Qks/PHbmnc82TQOEctYoEKPveJGML8s+3NGcUEZYJrFIqg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"
-    integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
-    integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
-    integrity="sha512-ZnR2wlLbSbr8/c9AgLg3jQPAattCUImNsae6NHYnS9KrIwRdcY9DxFotXhNAKIKbAXlRnujIqUWoXXwqyFOeIQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-    integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.3/chart.min.js"
-    integrity="sha512-fMPPLjF/Xr7Ga0679WgtqoSyfUoQgdt8IIxJymStR5zV3Fyb6B3u/8DcaZ6R6sXexk5Z64bCgo2TYyn760EdcQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script async defer src="https://apis.google.com/js/api.js"></script>
-  <script async defer src="https://accounts.google.com/gsi/client"></script>
-  <link rel="stylesheet" href="assets/css/main.css">
+    <meta charset="UTF-8" />
+    <title>AIOMS - 整合式管理平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.min.js"
+        integrity="sha512-VYs2RuvWreNg7oouVhZ/9bEvdPgyd5L2iCPCB8+8Qks/PHbmnc82TQOEctYoEKPveJGML8s+3NGcUEZYJrFIqg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"
+        integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+        integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
+        integrity="sha512-ZnR2wlLbSbr8/c9AgLg3jQPAattCUImNsae6NHYnS9KrIwRdcY9DxFotXhNAKIKbAXlRnujIqUWoXXwqyFOeIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.3/chart.min.js"
+        integrity="sha512-fMPPLjF/Xr7Ga0679WgtqoSyfUoQgdt8IIxJymStR5zV3Fyb6B3u/8DcaZ6R6sXexk5Z64bCgo2TYyn760EdcQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+    <script async defer src="https://accounts.google.com/gsi/client"></script>
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg bg-info">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">AIOMS - 整合式管理平台</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              帳務系統
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="account_system.html#overview">總覽</a></li>
-              <li><a class="dropdown-item" href="account_system.html#account">帳戶管理</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              倉儲系統
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="warehouse_system.html#overview">總覽</a></li>
-              <li><a class="dropdown-item" href="warehouse_system.html#manage">倉位管理</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              發票系統
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="invoice_system.html#overview">總覽</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              財產系統
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="property_system.html#overview">總覽</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="d-flex">
-          <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#setting_modal">系統設定</button>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <div class="modal fade" id="setting_modal" tabindex="-1" aria-labelledby="setting_modal_label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="setting_modal_label">系統設定</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Build: {{ site.time }}</p>
-          <hr />
-          <p>狀態：<span id="setting_GD_status"></span></p>
-          <p>使用者：<span id="setting_GD_user"></span></p>
-          <button type="button" class="btn btn-warning" id="btn_GDDB_connect">連結 Google</button>
-          <button type="button" class="btn btn-warning" id="btn_GDDB_signout">中斷連結</button>
-          <hr />
-          <div class="mb-3">
-            <label for="sql_statement" class="form-label">SQL指令執行</label>
-            <textarea class="form-control" id="sql_statement"></textarea>
-            <button class="btn" id="setting_btn_runcommand">RUN COMMAND</button>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="uploading_modal" data-bs-backdrop="static" tabindex="-1"
-    aria-labelledby="uploading_modal_label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="text-center">
-            <div class="spinner-animation" role="status">
-                <span class="visually-hidden">Loading...</span>
+    <nav class="navbar sticky-top navbar-expand-lg bg-info">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AIOMS - 整合式管理平台</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            帳務系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="account_system.html#overview">總覽</a></li>
+                            <li><a class="dropdown-item" href="account_system.html#account">帳戶管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            倉儲系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="warehouse_system.html#overview">總覽</a></li>
+                            <li><a class="dropdown-item" href="warehouse_system.html#manage">倉位管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            發票系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="invoice_system.html#overview">總覽</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            財產系統
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="property_system.html#overview">總覽</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#setting_modal">系統設定</button>
+                </div>
             </div>
-            <p class="fs-2">正在寫入資料庫...</p>
-          </div>
         </div>
-      </div>
+    </nav>
+    <div class="modal fade" id="setting_modal" tabindex="-1" aria-labelledby="setting_modal_label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="setting_modal_label">系統設定</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Build: {{ site.time }}</p>
+                    <hr />
+                    <p>狀態：<span id="setting_GD_status"></span></p>
+                    <p>使用者：<span id="setting_GD_user"></span></p>
+                    <button type="button" class="btn btn-warning" id="btn_GDDB_connect">連結 Google</button>
+                    <button type="button" class="btn btn-warning" id="btn_GDDB_signout">中斷連結</button>
+                    <hr />
+                    <div class="mb-3">
+                        <label for="sql_statement" class="form-label">SQL指令執行</label>
+                        <textarea class="form-control" id="sql_statement"></textarea>
+                        <button class="btn" id="setting_btn_runcommand">RUN COMMAND</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="" id="pages">
-    {{ content }}
-  </div>
+    <div class="modal fade" id="uploading_modal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="uploading_modal_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="spinner-animation" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="fs-2">正在寫入資料庫...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" id="pages">
+        {{ content }}
+    </div>
 </body>
 
 </html>

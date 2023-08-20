@@ -11,7 +11,7 @@ export class localDB {
 
     /***** Execute Command *****/
     exec(stm) {
-        while(!this.SQL);
+        while (!this.SQL);
         console.log("[localDB] exec: ", stm);
         let result = this.db.exec(stm);
         return result;
@@ -56,7 +56,7 @@ export class localDB {
     /***** Load Database *****/
     load() {
         console.log("[localDB] load");
-        if(!localStorage.getItem("AIOMS_DB_local_data")){
+        if (!localStorage.getItem("AIOMS_DB_local_data")) {
             console.log("[localDB] load: Error while getItem('AIOMS_DB_local_data')");
             return;
         }

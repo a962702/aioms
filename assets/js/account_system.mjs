@@ -15,7 +15,7 @@ const account_modal_add = new bootstrap.Modal('#account_modal_add');
 const account_modal_edit = new bootstrap.Modal('#account_modal_edit');
 const uploading_modal = new bootstrap.Modal('#uploading_modal');
 
-$("#setting_btn_runcommand").on('click', ()=>{
+$("#setting_btn_runcommand").on('click', () => {
     s.exec($('#sql_statement').val());
 });
 
@@ -47,7 +47,7 @@ $("#overview_add_modal_add_btn").on('click', () => {
         return;
     }
     $("#overview_add_modal_tbody").append(
-        $("<tr>" ).addClass("overview_modal_add_tr").append(
+        $("<tr>").addClass("overview_modal_add_tr").append(
             $("<td>").append(
                 $("<select>").addClass("form-select")
             ),
@@ -74,15 +74,15 @@ $("#overview_add_modal_add_btn").on('click', () => {
 })
 
 $("#overview_modal_add_save").on('click', () => {
-    if($("#overview_modal_add_date").val() == ""){
+    if ($("#overview_modal_add_date").val() == "") {
         window.alert("請輸入日期");
         return;
     }
-    if($("#overview_modal_add_description").val() == ""){
+    if ($("#overview_modal_add_description").val() == "") {
         window.alert("請輸入說明");
         return;
     }
-    if($("#overview_add_modal_total").text() == "0"){
+    if ($("#overview_add_modal_total").text() == "0") {
         window.alert("金額為0");
         return;
     }
@@ -98,7 +98,7 @@ $("#overview_modal_add_save").on('click', () => {
                 acc.add_transaction($(element).children().eq(0).children().children(":selected").attr("id"), id, $("#overview_modal_add_type").val(), $(element).children().eq(1).children().val());
             });
         })
-        
+
     })
 });
 
@@ -130,7 +130,7 @@ $("#overview_modal_getDetail").on('show.bs.modal', (event) => {
     });
 })
 
-function overview_update(){
+function overview_update() {
     let start_date = new Date($("#overview_start_date").val()).getTime();
     let end_date = new Date($("#overview_end_date").val()).getTime();
     let data = ov.getLists(start_date, end_date);
@@ -152,7 +152,7 @@ function overview_update(){
                     $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("詳細").attr("data-bs-toggle", "modal").attr("data-bs-target", "#overview_modal_getDetail").attr("data-bs-id", value[0])/*,
                     $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改"),
                     $("<button>").attr('type', 'button').addClass('btn btn-danger m-1').text("刪除")*/
-                ) 
+                )
             )
         );
     });
@@ -170,7 +170,7 @@ $(document).on('DB-changed', () => {
 function overview_add_modal_update_total() {
     let total = 0;
     $(".overview_modal_add_tr").each((index, element) => {
-        if (element.childNodes[1].childNodes[0].value != ""){
+        if (element.childNodes[1].childNodes[0].value != "") {
             total += parseInt(element.childNodes[1].childNodes[0].value);
         }
     });
@@ -184,7 +184,7 @@ $("#account_modal_add_save").on('click', () => {
     $("#account_modal_add").one('hidden.bs.modal', () => {
         uploading_modal.show();
         $("#uploading_modal").one('shown.bs.modal', () => {
-            acc.add($("#account_modal_add_name").val(), $("#account_modal_add_description").val(),  $("#account_modal_add_amount").val());
+            acc.add($("#account_modal_add_name").val(), $("#account_modal_add_description").val(), $("#account_modal_add_amount").val());
             uploading_modal.hide();
         })
     })
@@ -231,13 +231,13 @@ $("#account_modal_edit_save").on('click', () => {
         uploading_modal.show();
         $("#uploading_modal").on('shown.bs.modal', () => {
             $("#uploading_modal").off('shown.bs.modal');
-            acc.update($("#account_modal_edit_save").attr('dataid'), $("#account_modal_edit_name").val(), $("#account_modal_edit_description").val(),  $("#account_modal_edit_amount").val());
+            acc.update($("#account_modal_edit_save").attr('dataid'), $("#account_modal_edit_name").val(), $("#account_modal_edit_description").val(), $("#account_modal_edit_amount").val());
             uploading_modal.hide();
         })
     })
 });
 
-function account_update(){
+function account_update() {
     let data = acc.getLists();
     if (data['status'] != 'OK') {
         window.alert("取得資料發生錯誤");
@@ -255,7 +255,7 @@ function account_update(){
                 $("<td>").append(// action
                     $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("檢視紀錄").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_getTransaction").attr("data-bs-account_id", value[0]).attr("data-bs-name", value[1]),
                     $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改").attr("data-bs-toggle", "modal").attr("data-bs-target", "#account_modal_edit").attr("data-bs-id", value[0]).attr("data-bs-name", value[1]).attr("data-bs-description", value[2]).attr("data-bs-amount", value[3])
-                ) 
+                )
             )
         );
     });

@@ -224,6 +224,9 @@ export class database {
                         }
                     })
                     this.obj_GDDB.load();
+                } else {
+                    window.alert("存取用 Token 過期，請重新登入\n提示：這是個已知的 [BUG] ，將於未來版本修復!");
+                    this.GD_signout();
                 }
             })
             this.obj_GDDB.getRemoteRevisionsValue();

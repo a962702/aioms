@@ -66,6 +66,10 @@ export class GDDB {
         localStorage.setItem("AIOMS_GDDB_fileId", this.fileId);
     }
 
+    getId() {
+        return this.fileId;
+    }
+
     exist() {
         this.getItemsFromLocalStorage();
         if (this.token != "") {

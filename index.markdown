@@ -50,4 +50,19 @@ layout: base
         </div>
     </div>
 </div>
+<div class="modal fade" id="loading_modal" data-bs-backdrop="static" tabindex="-1"
+    aria-labelledby="loading_modal_label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <div class="spinner-animation" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="fs-2">正在準備資料庫連線...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="module" src="assets/js/index.mjs"></script>

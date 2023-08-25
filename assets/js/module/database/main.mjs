@@ -29,9 +29,10 @@ export class database {
                                 this.obj_GDDB.setLocalRevisionsValue(rev_id);
                                 $(document).one("DB-GD-getUserInfo", (e, status, displayName, emailAddress) => {
                                     $("#setting_GD_status").text("已連結");
-                                    $("#setting_GD_user").text(displayName + "(" + emailAddress + ")");
+                                    $("#setting_GD_user").text(displayName + " (" + emailAddress + ")");
                                     $("#btn_GDDB_connect").css("display", "none");
                                     $("#btn_GDDB_signout").css("display", "block");
+                                    $("#input_GDShareLink").val("https://a962702.github.io/aioms/index.html?dbtype=GD&fileid=" + this.obj_GDDB.getId());
                                     this.GD_sync();
                                 })
                                 this.obj_GDDB.getUserInfo();
@@ -52,6 +53,7 @@ export class database {
                 $("#setting_GD_user").text("");
                 $("#btn_GDDB_connect").css("display", "block");
                 $("#btn_GDDB_signout").css("display", "none");
+                $("#input_GDShareLink").val("");
             }
         }
     }
@@ -161,6 +163,7 @@ export class database {
                                                         $("#setting_GD_user").text(displayName + "(" + emailAddress + ")");
                                                         $("#btn_GDDB_connect").css("display", "none");
                                                         $("#btn_GDDB_signout").css("display", "block");
+                                                        $("#input_GDShareLink").val("https://a962702.github.io/aioms/index.html?dbtype=GD&fileid=" + this.obj_GDDB.getId());
                                                         this.GD_sync();
                                                         $(document).trigger("DB-changed");
                                                     })
@@ -196,6 +199,48 @@ export class database {
         this.obj_GDDB.auth();
     }
 
+    // Google Drive - Custom fileId for Database sharing
+    GD_load(fileId) {
+        this.obj_GDDB.setId(fileId);
+        $(document).one("DB-GD-auth", (e, status) => {
+            if (status == "SUCCESS") {
+                $(document).one("DB-GD-load", (e, status, data) => {
+                    if (status == "OK") {
+                        this.obj_localDB.save(data);
+                        this.obj_localDB.load();
+                        window.alert("從Google 雲端硬碟載入資料庫成功");
+                        $(document).one("DB-GD-getRemoteRevisionsValue", (e, status, rev_id) => {
+                            if (status == "OK") {
+                                this.obj_GDDB.setLocalRevisionsValue(rev_id);
+                                $(document).one("DB-GD-getUserInfo", (e, status, displayName, emailAddress) => {
+                                    $("#setting_GD_status").text("已連結");
+                                    $("#setting_GD_user").text(displayName + "(" + emailAddress + ")");
+                                    $("#btn_GDDB_connect").css("display", "none");
+                                    $("#btn_GDDB_signout").css("display", "block");
+                                    $("#input_GDShareLink").val("https://a962702.github.io/aioms/index.html?dbtype=GD&fileid=" + this.obj_GDDB.getId());
+                                    this.GD_sync();
+                                    $(document).trigger("DB-changed");
+                                    $(document).trigger("DB-GD_load", ['OK']);
+                                })
+                                this.obj_GDDB.getUserInfo();
+                            } else {
+                                window.alert("無法取得 revision 值");
+                            }
+                        })
+                        this.obj_GDDB.getRemoteRevisionsValue();
+                    }
+                    else {
+                        window.alert("從Google 雲端硬碟下載資料庫時發生錯誤");
+                    }
+                })
+                this.obj_GDDB.load();
+            } else {
+                $(document).trigger("DB-GD_load", ['FAIL']);
+            }
+        })
+        this.obj_GDDB.auth();
+    }
+
     // Google Drive - Signout
     GD_signout() {
         this.obj_GDDB.signout();
@@ -207,6 +252,7 @@ export class database {
         $("#setting_GD_user").text("");
         $("#btn_GDDB_connect").css("display", "block");
         $("#btn_GDDB_signout").css("display", "none");
+        $("#input_GDShareLink").val("");
         window.alert("已中斷連結Google");
     }
 

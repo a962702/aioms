@@ -16,7 +16,7 @@ td {
     display: inline-block;
     vertical-align: -0.125em;
     animation-name: rainbow;
-    animation-direction: reverse;
+    animation-direction: alternate;
     animation-duration: 2.5s;
     animation-iteration-count: infinite;
 }

@@ -50,16 +50,27 @@ layout: base
         </div>
     </div>
 </div>
-<div class="modal fade" id="loading_modal" data-bs-backdrop="static" tabindex="-1"
-    aria-labelledby="loading_modal_label" aria-hidden="true">
+<div class="modal fade" id="load_GDDB_modal" data-bs-backdrop="static" tabindex="-1"
+    aria-labelledby="load_GDDB_modal_label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="text-center">
-                    <div class="spinner-animation" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                    <div id="load_GDDB_modal_step1">
+                        <p class="fs-2">AIOMS - 整合式管理平台</p>
+                        <hr />
+                        <p class="fs-1">歡迎!</p>
+                        <p class="fs-3">您已受邀使用本系統，請登入獲授權的 Google 帳戶</p>
+                        <p class="fs-4">資料庫來源：Google 雲端硬碟</p>
+                        <p class="fs-4">檔案 ID：<span id="load_GDDB_fileid"></span></p>
+                        <button type="button" class="btn btn-primary" id="load_GDDB_btn">確定</button>
                     </div>
-                    <p class="fs-2">正在準備資料庫連線...</p>
+                    <div id="load_GDDB_modal_step2" style="display: none;">
+                        <div class="spinner-animation" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="fs-2">正在準備資料庫連線...</p>
+                    </div>
                 </div>
             </div>
         </div>

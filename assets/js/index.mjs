@@ -5,7 +5,7 @@ let db = new database();
 await db.init();
 
 let s = new setting(db);
-const loading_modal = new bootstrap.Modal('#loading_modal');
+const load_GDDB_modal = new bootstrap.Modal('#load_GDDB_modal');
 
 $("#setting_btn_runcommand").on('click', () => {
     s.exec($('#sql_statement').val());
@@ -24,16 +24,16 @@ let params = new URL(document.location).searchParams;
 //  -> Google Drive
 if (params.get("dbtype") == "GD"){
     if (params.get("fileid") != null){
-        $("#loading_modal").one('shown.bs.modal', () => {
-            $(document).one('DB-GD_load', (status) => {
-                if (status == "FAIL"){
-                    window.alert("Google 驗證過程發生錯誤");
-                }
-                loading_modal.hide();
+        $("#load_GDDB_fileid").text(params.get("fileid"));
+        load_GDDB_modal.show();
+        $("#load_GDDB_btn").on('click', () => {
+            $("#load_GDDB_modal_step1").css("display", "none");
+            $("#load_GDDB_modal_step2").css("display", "block");
+            db.GD_load($("#load_GDDB_fileid").text());
+            $(document).one('DB-GD_load', () => {
+                load_GDDB_modal.hide();
             })
-            db.GD_load(params.get("fileid"));
         })
-        loading_modal.show();
     } else {
         window.alert("連結有誤! 缺少 fileid 欄位");
     }

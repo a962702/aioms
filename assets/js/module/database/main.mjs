@@ -218,6 +218,7 @@ export class database {
                                     $("#btn_GDDB_connect").css("display", "none");
                                     $("#btn_GDDB_signout").css("display", "block");
                                     $("#input_GDShareLink").val("https://a962702.github.io/aioms/index.html?dbtype=GD&fileid=" + this.obj_GDDB.getId());
+                                    localStorage.setItem("AIOMS_DB_STORAGE", JSON.stringify(Array('local', 'GD')));
                                     this.GD_sync();
                                     $(document).trigger("DB-changed");
                                     $(document).trigger("DB-GD_load", ['OK']);

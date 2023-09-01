@@ -11,6 +11,7 @@ let ov = new overview(db);
 let acc = new account(db);
 let s = new setting(db);
 const overview_modal_add = new bootstrap.Modal('#overview_modal_add');
+const overview_modal_getDetail = new bootstrap.Modal('#overview_modal_getDetail');
 const account_modal_add = new bootstrap.Modal('#account_modal_add');
 const account_modal_edit = new bootstrap.Modal('#account_modal_edit');
 const uploading_modal = new bootstrap.Modal('#uploading_modal');
@@ -118,6 +119,7 @@ $("#overview_modal_getDetail").on('show.bs.modal', (event) => {
     $('#overview_modal_getDetail_invoice').val(invoice);
     $('#overview_modal_getDetail_total').text(amount);
     $('#overview_modal_getDetail_commit').val(commit);
+    $('#overview_modal_getDetail_save').attr("dataid", id);
     let arr2 = acc.getRecordTransaction(id);
     $('#overview_modal_getDetail_tbody').html("");
     jQuery.each(arr2['result'][0]['values'], (index, value) => {
@@ -128,6 +130,28 @@ $("#overview_modal_getDetail").on('show.bs.modal', (event) => {
             )
         );
     });
+})
+
+$("#overview_modal_getDetail_save").on('click', () => {
+    if ($("#overview_modal_getDetail_date").val() == "") {
+        window.alert("請輸入日期");
+        return;
+    }
+    if ($("#overview_modal_getDetail_description").val() == "") {
+        window.alert("請輸入說明");
+        return;
+    }
+    overview_modal_getDetail.hide();
+    $("#overview_modal_getDetail").one('hidden.bs.modal', () => {
+        uploading_modal.show();
+        $("#uploading_modal").one('shown.bs.modal', () => {
+            $(document).one('DB-save', () => {
+                uploading_modal.hide();
+            })
+            ov.update($('#overview_modal_getDetail_save').attr("dataid"), new Date($("#overview_modal_getDetail_date").val()).getTime(), $("#overview_modal_getDetail_type").val(), $("#overview_modal_getDetail_description").val(), $("#overview_modal_getDetail_invoice").val(), $("#overview_modal_getDetail_total").text(), $("#overview_modal_getDetail_commit").val());
+        })
+
+    })
 })
 
 function overview_update() {
@@ -149,7 +173,7 @@ function overview_update() {
                 $("<td>").text(value[3]), // description
                 $("<td>").text(value[4]), // amount
                 $("<td>").append(// action
-                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("詳細").attr("data-bs-toggle", "modal").attr("data-bs-target", "#overview_modal_getDetail").attr("data-bs-id", value[0])/*,
+                    $("<button>").attr('type', 'button').addClass('btn btn-secondary m-1').text("檢視/修改").attr("data-bs-toggle", "modal").attr("data-bs-target", "#overview_modal_getDetail").attr("data-bs-id", value[0])/*,
                     $("<button>").attr('type', 'button').addClass('btn btn-info m-1').text("修改"),
                     $("<button>").attr('type', 'button').addClass('btn btn-danger m-1').text("刪除")*/
                 )

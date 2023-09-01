@@ -105,7 +105,7 @@ layout: base
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_date" class="form-label">日期</label>
-                        <input type="date" class="form-control" id="overview_modal_getDetail_date" disabled>
+                        <input type="date" class="form-control" id="overview_modal_getDetail_date">
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_type" class="form-label">類型</label>
@@ -116,11 +116,11 @@ layout: base
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_description" class="form-label">說明</label>
-                        <input type="text" class="form-control" id="overview_modal_getDetail_description" disabled>
+                        <input type="text" class="form-control" id="overview_modal_getDetail_description">
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_invoice" class="form-label">發票號碼</label>
-                        <input type="text" class="form-control" id="overview_modal_getDetail_invoice" disabled>
+                        <input type="text" class="form-control" id="overview_modal_getDetail_invoice">
                     </div>
                     <div class="mb-3">
                         <table class="table">
@@ -137,10 +137,11 @@ layout: base
                     </div>
                     <div class="mb-3">
                         <label for="overview_modal_getDetail_commit" class="form-label">備註</label>
-                        <input type="text" class="form-control" id="overview_modal_getDetail_commit" disabled>
+                        <input type="text" class="form-control" id="overview_modal_getDetail_commit">
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="overview_modal_getDetail_save">儲存</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
                 </div>
             </div>

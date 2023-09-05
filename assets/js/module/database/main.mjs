@@ -69,16 +69,11 @@ export class database {
     }
 
     // Execute SQL statement and return data
-    exec(stm, isUpdate) {
+    exec(stm) {
         let arr = Array();
         if (this.obj_localDB != null) {
             arr['status'] = 'OK';
             arr['result'] = this.obj_localDB.exec(stm);
-            if (isUpdate) {
-                this.obj_localDB.exec("UPDATE `system` SET `ModifiedTime` = '" + Date.now() + "'");
-                this.save();
-                $(document).trigger("DB-changed");
-            }
         } else {
             arr['status'] = 'ERROR_UNINITIALIZED';
         }
@@ -87,6 +82,7 @@ export class database {
 
     // Save all DB
     save() {
+        this.obj_localDB.exec("UPDATE `system` SET `ModifiedTime` = '" + Date.now() + "'");
         let storage_count = 0;
         if (this.get_setup_storage().includes('local')) {
             this.obj_localDB.save(this.obj_localDB.get_binaryArray());
@@ -114,6 +110,7 @@ export class database {
         let save_check = setInterval(() => {
             if (storage_count == this.get_setup_storage().length) {
                 clearInterval(save_check);
+                $(document).trigger("DB-changed");
                 $(document).trigger("DB-save");
             }
         }, 500);
